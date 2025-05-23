@@ -4,6 +4,7 @@ local system = require "system"
 local self = {}
 
 self.version = "0.3.2"
+self.dependencies = {pkg "ports.readline"}
 self.sources = {
     { "source", "http://ftp.barfooze.de/pub/sabotage/tarballs/netbsd-curses-" .. self.version .. ".tar.xz" }
 }

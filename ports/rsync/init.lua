@@ -3,6 +3,7 @@ local tools = require "tools"
 local self = {}
 
 self.version = "3.4.1"
+self.dependencies = {pkg "ports.attr", pkg "ports.acl", pkg "ports.popt"}
 self.sources = {
     { "source", "https://download.samba.org/pub/rsync/src/rsync-" .. self.version .. ".tar.gz" }
 }

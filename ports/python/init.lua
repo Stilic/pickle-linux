@@ -3,6 +3,7 @@ local tools = require "tools"
 local self = {}
 
 self.version = "3.13.3"
+self.dev_dependencies = {pkg "ports.perl"}
 self.sources = {
     { "source", "https://www.python.org/ftp/python/" .. self.version .. "/Python-" .. self.version .. ".tar.xz" }
 }
