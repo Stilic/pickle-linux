@@ -5,7 +5,7 @@ local tools = require "tools"
 local self = {}
 
 self.version = "6.14.2"
-self.dev_dependencies = { pkg "ports.bzip2", pkg "ports.flex", require "ports.bison", pkg "ports.elfutils",
+self.dev_dependencies = { pkg "ports.bzip2", pkg "ports.flex", pkg "ports.bison", pkg "ports.elfutils",
     pkg "ports.dosfstools" }
 self.sources = {
     { "source", "https://cdn.kernel.org/pub/linux/kernel/v"
