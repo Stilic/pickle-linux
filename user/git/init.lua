@@ -4,7 +4,7 @@ local tools = require "tools"
 local self = {}
 
 self.version = "2.49.0"
-self.dependencies = { pkg "ports.expat", pkg "ports.libiconv", pkg "ports.libxml2" }
+self.dependencies = { pkg "user.expat", pkg "user.libiconv", pkg "user.libxml2" }
 self.sources = {
     { "source", "https://www.kernel.org/pub/software/scm/git/git-" .. self.version .. ".tar.xz" }
 }

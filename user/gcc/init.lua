@@ -4,8 +4,8 @@ local system = require "system"
 local self = {}
 
 self.version = "14.2.0"
-self.dependencies = {pkg "ports.gmp", pkg "ports.mpfr", pkg "ports.mpc"}
-self.dev_dependencies = {pkg "ports.binutils"}
+self.dependencies = { pkg "user.gmp", pkg "user.mpfr", pkg "user.mpc" }
+self.dev_dependencies = { pkg "user.binutils" }
 self.sources = {
     { "source", "https://ftp.gnu.org/gnu/gcc/gcc-" .. self.version .. "/gcc-" .. self.version .. ".tar.xz" }
 }
