@@ -1,10 +1,10 @@
 #!/bin/sh
 
 case "$1" in
-    start) exec /usr/bin/udevadm --daemon ;;
-    stop) /usr/bin/udevadm control -e; exit 0 ;;
-    settle) exec /usr/bin/udevadm settle ;;
-    trigger) exec /usr/bin/udevadm trigger --action=add ;;
+    start) exec /bin/udevadm --daemon ;;
+    stop) /bin/udevadm control -e; exit 0 ;;
+    settle) exec /bin/udevadm settle ;;
+    trigger) exec /bin/udevadm trigger --action=add ;;
 esac
 
 echo "unknown action: $1"
