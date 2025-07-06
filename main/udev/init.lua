@@ -23,7 +23,7 @@ function self.pack()
     os.execute(
         "rm -r usr etc/systemd lib/*systemd* lib/pkgconfig/libsystemd.pc share/dbus-1 share/pkgconfig/systemd.pc share/polkit-1 bin/bootctl share/man/man1/bootctl.1 share/man/man1/ukify.1 share/man/man5/loader.conf.5 share/man/man7/linux* share/man/man7/*-boot.7 share/man/man7/*-stub.7")
 
-    -- TODO: add tmpfiles and service
+    -- TODO: add tmpfiles
     os.execute("cp ../../80-net-name-slot.rules lib/udev/rules.d")
 
     os.execute("ln -s ../bin/udevadm lib/udevd")
