@@ -8,6 +8,10 @@ self.sources = {
 }
 
 self.build = tools.build_gnu_configure("", "--enable-shared --enable-lastlog --disable-static --with-acl --with-attr --with-libpam --without-libbsd --without-selinux --without-nscd --disable-nls --enable-subordinate-ids --disable-account-tools-setuid")
-self.pack = tools.pack_default()
+
+function self.pack()
+    tools.pack_default()()
+    os.execute("rm -r filesystem/etc/pam.d")
+end
 
 return self
