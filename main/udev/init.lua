@@ -26,7 +26,7 @@ function self.pack()
     -- TODO: add tmpfiles
     os.execute("cp ../../80-net-name-slot.rules lib/udev/rules.d")
 
-    os.execute("ln -s ../bin/udevadm lib/udevd")
+    lfs.link("../bin/udevadm", "lib/udevd", true)
 
     os.execute("cp ../../udevd.wrapper lib")
     os.execute("cp ../../dinit-devd lib")

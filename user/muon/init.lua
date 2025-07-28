@@ -25,8 +25,9 @@ end
 function self.pack()
     lfs.mkdir("filesystem/usr")
     os.execute("cp -ra source/_install/usr/local/bin filesystem/usr")
-    os.execute("ln -s muon filesystem/usr/bin/meson")
-    os.execute("ln -s muon filesystem/usr/bin/ninja")
+    for _, path in ipairs({ "filesystem/usr/bin/meson", "filesystem/usr/bin/ninja" }) do
+        lfs.link("muon", path, true)
+    end
 end
 
 return self

@@ -1,3 +1,4 @@
+local lfs = require "lfs"
 local tools = require "tools"
 
 local self = {}
@@ -10,7 +11,7 @@ self.sources = {
 self.build = tools.build_gnu_configure("", "--disable-nls --without-bash-malloc")
 function self.pack()
     tools.pack_default()()
-    os.execute("ln -s bash filesystem/bin/sh")
+    lfs.link("bash", "filesystem/bin/sh", true)
 end
 
 return self

@@ -21,9 +21,9 @@ end
 function self.pack()
     os.execute("cp -ra source/_install/* filesystem")
     os.execute("cp source/libbz2.so." .. self.version .. " filesystem/lib")
-    os.execute("ln -s libbz2.so." .. self.version .. " filesystem/lib/libbz2.so")
-    os.execute("ln -s libbz2.so." .. self.version .. " filesystem/lib/libbz2.so.1")
-    os.execute("ln -s libbz2.so." .. self.version .. " filesystem/lib/libbz2.so.1.0")
+    for _, path in ipairs({ "filesystem/lib/libbz2.so", "filesystem/lib/libbz2.so.1", "filesystem/lib/libbz2.so.1.0" }) do
+        lfs.link("libbz2.so." .. self.version, path, true)
+    end
 end
 
 return self

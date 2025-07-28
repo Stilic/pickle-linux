@@ -18,8 +18,8 @@ end
 function self.pack()
     lfs.mkdir("filesystem/usr")
     os.execute("cp -ra source/install/* filesystem/usr")
-    os.execute("ln -s /usr/bin/lua filesystem/usr/bin/lua" ..
-        self.version:sub(1, self.version:find(".", self.version:find(".", 1, true) + 1, true) - 1))
+    lfs.link("/usr/bin/lua", "filesystem/usr/bin/lua" ..
+        self.version:sub(1, self.version:find(".", self.version:find(".", 1, true) + 1, true) - 1), true)
 end
 
 return self

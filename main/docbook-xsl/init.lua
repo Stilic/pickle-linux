@@ -34,8 +34,8 @@ function self.pack()
             end
         end
 
-        os.execute("ln -s xsl-stylesheets-" ..
-            self.version .. namespace .. " filesystem/share/xml/docbook/xsl-stylesheets" .. namespace)
+        lfs.link("xsl-stylesheets-" ..
+            self.version .. namespace, "filesystem/share/xml/docbook/xsl-stylesheets" .. namespace, true)
     end
 
     os.execute("install -Dm644 source/COPYING -t filesystem/share/licenses/" .. self.name)
