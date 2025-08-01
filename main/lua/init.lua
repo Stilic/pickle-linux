@@ -24,7 +24,7 @@ end
 
 function self.pack()
     tools.pack_default("source/install")()
-    lfs.link("/bin/lua", "filesystem/bin/lua" ..
+    lfs.link("lua", "filesystem/bin/lua" ..
         self.version:sub(1, self.version:find(".", self.version:find(".", 1, true) + 1, true) - 1), true)
 end
 

@@ -3,6 +3,7 @@ local tools = require "tools"
 local self = {}
 
 self.version = "1.17"
+self.dependencies = { pkg "user.perl" }
 self.sources = {
     { "source", "https://ftp.gnu.org/gnu/automake/automake-" .. self.version .. ".tar.xz" }
 }

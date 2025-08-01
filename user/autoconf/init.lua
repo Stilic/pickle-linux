@@ -3,6 +3,7 @@ local tools = require "tools"
 local self = {}
 
 self.version = "2.72"
+self.dependencies = { pkg "user.perl" }
 self.sources = {
     { "source", "https://ftp.gnu.org/gnu/autoconf/autoconf-" .. self.version .. ".tar.xz" }
 }
