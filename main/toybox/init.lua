@@ -16,10 +16,6 @@ end
 function self.pack()
     os.execute("cp -ra source/install/bin source/install/sbin filesystem")
     os.execute("cp -ra source/install/usr/bin source/install/usr/sbin filesystem")
-
-    lfs.mkdir("filesystem/usr")
-    lfs.mkdir("filesystem/usr/bin")
-    lfs.link("../../bin/env", "filesystem/usr/bin/env", true)
 end
 
 return self
