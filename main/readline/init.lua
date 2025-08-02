@@ -8,7 +8,7 @@ self.sources = {
     { "source", "https://ftp.gnu.org/gnu/readline/readline-" .. self.version .. ".tar.gz" }
 }
 
-self.build = tools.build_gnu_configure(nil, "--with-curses bash_cv_termcap_lib=libcurses")
+self.build = tools.build_gnu_configure("", "--with-curses bash_cv_termcap_lib=libcurses")
 function self.pack()
     tools.pack_default()()
     lfs.rmdir("filesystem/usr/bin")

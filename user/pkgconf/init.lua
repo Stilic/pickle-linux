@@ -8,7 +8,7 @@ self.sources = {
     { "source", "https://distfiles.ariadne.space/pkgconf/pkgconf-" .. self.version .. ".tar.xz" }
 }
 
-self.build = tools.build_gnu_configure()
+self.build = tools.build_gnu_configure(nil, "--with-pkg-config-dir=/usr/lib/pkgconfig:/usr/share/pkgconfig:/lib/pkgconfig:/share/pkgconfig")
 function self.pack()
     tools.pack_default()()
     lfs.link("pkgconf", "filesystem/usr/bin/pkg-config", true)

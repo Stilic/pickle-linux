@@ -1,10 +1,9 @@
 local lfs = require "lfs"
-local system = require "system"
+local tools = require "tools"
 
 local self = {}
 
 self.version = "0.3.2"
-self.dependencies = { pkg "user.readline" }
 self.sources = {
     { "source", "http://ftp.barfooze.de/pub/sabotage/tarballs/netbsd-curses-" .. self.version .. ".tar.xz" }
 }
@@ -12,14 +11,13 @@ self.sources = {
 function self.build()
     lfs.chdir("source")
     lfs.mkdir("_install")
-    os.execute('make CFLAGS="-O2" PREFIX=/usr DESTDIR="' ..
-        lfs.currentdir() .. '/_install"' .. system.get_make_jobs() .. ' all install')
+    tools.make("", 'PREFIX= DESTDIR="' .. lfs.currentdir() .. '/_install" all install')
 end
 
 function self.pack()
-    os.execute("cp -ra source/_install/* filesystem")
+    tools.pack_default()()
     -- TODO: check if this fixes compat everywhere
-    lfs.chdir("filesystem/usr/lib")
+    lfs.chdir("filesystem/lib")
     lfs.link("libterminfo.so", "libtinfo.so", true)
     lfs.link("libterminfo.so", "libtinfow.so", true)
     for file in lfs.dir(".") do

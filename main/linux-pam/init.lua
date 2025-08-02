@@ -12,12 +12,8 @@ self.sources = {
     { "source", "https://github.com/linux-pam/linux-pam/releases/download/v" .. self.version .. "/Linux-PAM-" .. self.version .. ".tar.xz" }
 }
 
-self.build = tools.build_meson("/", "-Ddocdir=/share/doc/pam -Dvendordir=/share/pam -Dnis=disabled -Daudit=disabled -Dselinux=disabled")
-
-function self.pack()
-    tools.pack_default()()
-
-    os.execute("rm -r filesystem/lib/systemd")
-end
+-- TODO: add docbook 5 for docs
+self.build = tools.build_meson("/", "-Ddocdir=/share/doc/pam -Dvendordir=/share/pam -Ddocs=disabled -Dnis=disabled -Daudit=disabled -Dselinux=disabled")
+self.pack = tools.pack_default()
 
 return self

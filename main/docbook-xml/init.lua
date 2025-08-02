@@ -1,5 +1,4 @@
 local lfs = require "lfs"
-local tools = require "tools"
 
 local self = {}
 
@@ -58,9 +57,6 @@ function self.pack()
     end
 
     os.execute("install -Dt filesystem/share/licenses/" .. self.name .. " -m644 ../license-from-upstream")
-
-    os.execute("find filesystem -type f -exec chmod -c a-x {} +")
-    os.execute("chmod -Rc u=rwX,go=rX filesystem")
 end
 
 return self
