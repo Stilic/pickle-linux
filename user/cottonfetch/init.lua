@@ -1,8 +1,8 @@
 local self = {}
 
-self.version = "1.7.5"
+self.version = "1.8"
 self.sources = {
-    { "source", "https://github.com/servalx4/cottonfetch/archive/refs/tags/release.tar.gz" }
+    { "source", "https://github.com/servalx4/cottonfetch/archive/refs/tags/holy-shit-why-do-i-have-to-keep-making-tags-bro-who-needs-ts.tar.gz" }
 }
 
 function self.pack()
