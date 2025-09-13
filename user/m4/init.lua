@@ -1,10 +1,11 @@
 local tools = require "tools"
+local config = require "neld.config"
 
 local self = {}
 
 self.version = "1.4.19"
 self.sources = {
-    { "source", "https://ftp.gnu.org/gnu/m4/m4-" .. self.version .. ".tar.xz" }
+    { "source", config.gnu_site .. "/m4/m4-" .. self.version .. ".tar.xz" }
 }
 
 self.build = tools.build_gnu_configure()

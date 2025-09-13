@@ -1,10 +1,11 @@
 local tools = require "tools"
+local config = require "neld.config"
 
 local self = {}
 
 self.version = "1.3"
 self.sources = {
-    { "source", "https://ftp.gnu.org/gnu/libunistring/libunistring-" .. self.version .. ".tar.gz" }
+    { "source", config.gnu_site .. "/libunistring/libunistring-" .. self.version .. ".tar.gz" }
 }
 
 self.build = tools.build_gnu_configure()

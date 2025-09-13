@@ -1,10 +1,11 @@
 local tools = require "tools"
+local config = require "neld.config"
 
 local self = {}
 
 self.version = "2.44"
 self.sources = {
-    { "source", "https://ftp.gnu.org/gnu/binutils/binutils-" .. self.version .. ".tar.xz" }
+    { "source", config.gnu_site .. "/binutils/binutils-" .. self.version .. ".tar.xz" }
 }
 
 self.build = tools.build_gnu_configure(nil, "--disable-nls")

@@ -1,11 +1,12 @@
 local tools = require "tools"
+local config = require "neld.config"
 
 local self = {}
 
 self.version = "1.17"
 self.dependencies = { pkg "user.perl" }
 self.sources = {
-    { "source", "https://ftp.gnu.org/gnu/automake/automake-" .. self.version .. ".tar.xz" }
+    { "source", config.gnu_site .. "/automake/automake-" .. self.version .. ".tar.xz" }
 }
 
 self.build = tools.build_gnu_configure()

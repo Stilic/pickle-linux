@@ -1,10 +1,11 @@
 local tools = require "tools"
+local config = require "neld.config"
 
 local self = {}
 
 self.version = "1.18"
 self.sources = {
-    { "source", "https://ftp.gnu.org/pub/gnu/libiconv/libiconv-" .. self.version .. ".tar.gz" }
+    { "source", config.gnu_site .. "/libiconv/libiconv-" .. self.version .. ".tar.gz" }
 }
 
 self.build = tools.build_gnu_configure()

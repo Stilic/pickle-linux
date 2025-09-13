@@ -1,5 +1,6 @@
 local lfs = require "lfs"
 local system = require "system"
+local config = require "neld.config"
 
 local self = {}
 
@@ -7,7 +8,7 @@ self.version = "14.2.0"
 self.dependencies = { pkg "user.gmp", pkg "user.mpfr", pkg "user.mpc" }
 self.dev_dependencies = { pkg "user.binutils" }
 self.sources = {
-    { "source", "https://ftp.gnu.org/gnu/gcc/gcc-" .. self.version .. "/gcc-" .. self.version .. ".tar.xz" }
+    { "source", config.gnu_site .. "/gcc/gcc-" .. self.version .. "/gcc-" .. self.version .. ".tar.xz" }
 }
 
 function self.build()

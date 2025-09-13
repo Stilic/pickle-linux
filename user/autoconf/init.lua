@@ -1,11 +1,12 @@
 local tools = require "tools"
+local config = require "neld.config"
 
 local self = {}
 
 self.version = "2.72"
 self.dependencies = { pkg "user.perl" }
 self.sources = {
-    { "source", "https://ftp.gnu.org/gnu/autoconf/autoconf-" .. self.version .. ".tar.xz" }
+    { "source", config.gnu_site .. "/autoconf/autoconf-" .. self.version .. ".tar.xz" }
 }
 
 self.build = tools.build_gnu_configure()

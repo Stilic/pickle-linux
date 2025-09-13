@@ -1,10 +1,11 @@
 local tools = require "tools"
+local config = require "neld.config"
 
 local self = {}
 
 self.version = "3.12"
 self.sources = {
-    { "source", "https://ftp.gnu.org/gnu/diffutils/diffutils-" .. self.version .. ".tar.xz" }
+    { "source", config.gnu_site .. "/diffutils/diffutils-" .. self.version .. ".tar.xz" }
 }
 
 self.build = tools.build_gnu_configure("")

@@ -1,10 +1,11 @@
 local tools = require "tools"
+local config = require "neld.config"
 
 local self = {}
 
 self.version = "4.4.1"
 self.sources = {
-    { "source", "https://ftp.gnu.org/gnu/make/make-" .. self.version .. ".tar.gz" }
+    { "source", config.gnu_site .. "/make/make-" .. self.version .. ".tar.gz" }
 }
 
 self.build = tools.build_gnu_configure()

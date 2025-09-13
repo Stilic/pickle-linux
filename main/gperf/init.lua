@@ -1,10 +1,11 @@
 local tools = require "tools"
+local config = require "neld.config"
 
 local self = {}
 
 self.version = "3.3"
 self.sources = {
-    { "source", "http://ftp.gnu.org/pub/gnu/gperf/gperf-" .. self.version .. ".tar.gz" }
+    { "source", config.gnu_site .. "/gperf/gperf-" .. self.version .. ".tar.gz" }
 }
 
 self.build = tools.build_gnu_configure("")
