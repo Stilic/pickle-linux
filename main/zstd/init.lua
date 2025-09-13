@@ -1,4 +1,3 @@
-local lfs = require "lfs"
 local tools = require "tools"
 
 local self = {}
@@ -8,10 +7,8 @@ self.sources = {
     { "source", "https://github.com/facebook/zstd/releases/download/v" .. self.version .. "/zstd-" .. self.version .. ".tar.zst" }
 }
 
+-- weird build system, using defaults is fine
 self.build = tools.build_gnu_configure()
-function self.pack()
-    lfs.mkdir("filesystem/usr")
-    os.execute("cp -ra source/_install/usr/local/* filesystem/usr")
-end
+self.pack = tools.pack_default("source/_install/usr/local")
 
 return self
