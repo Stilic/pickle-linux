@@ -6,7 +6,7 @@ local self = {}
 
 self.version = "3.0"
 self.sources = {
-    { "source", "https://downloads.sourceforge.net/infozip/zip" .. self.version:gsub("%.", "") .. ".tar.gz" }
+    { "source", "https://github.com/thejoshwolfe/info-zip-zip/archive/refs/tags/" .. self.version .. ".tar.gz" }
 }
 
 function self.build()
