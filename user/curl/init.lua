@@ -3,6 +3,7 @@ local tools = require "tools"
 local self = {}
 
 self.version = "8.13.0"
+self.dependencies = { pkg "user.libpsl" }
 self.sources = {
     { "source", "https://curl.se/download/curl-" .. self.version .. ".tar.xz" }
 }
