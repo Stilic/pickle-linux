@@ -11,9 +11,16 @@ self.sources = {
 
 function self.build()
     lfs.chdir("source")
+
+    -- fix man path and generate relative paths
+    os.execute([[sed -i -e "s:\$(PREFIX)/man:\$(PREFIX)/share/man:g" -e "s:ln -s -f $(PREFIX)/bin/:ln -s :" Makefile]])
+    -- fix version stuff
+    os.execute([[sed -i -e "s:1\.0\.4:]] .. self.version .. ':" bzip2.1 bzip2.txt Makefile-libbz2_so manual.*')
+
     local cflags = ' CFLAGS="' .. tools.DEFAULT_CFLAGS .. '" '
     os.execute("make libbz2.a bzip2 bzip2recover" .. cflags .. system.get_make_jobs())
     os.execute("make" .. cflags .. "-f Makefile-libbz2_so" .. system.get_make_jobs())
+
     lfs.mkdir("_install")
     os.execute('make install PREFIX="' .. lfs.currentdir() .. '/_install"')
 end
