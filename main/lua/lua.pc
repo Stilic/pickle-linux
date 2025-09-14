@@ -1,0 +1,19 @@
+V=5.4
+R=5.4.7
+
+INSTALL_BIN=/bin
+INSTALL_INC=/include
+INSTALL_LIB=/lib
+INSTALL_MAN=/share/man/man1
+INSTALL_LMOD=/share/lua/${V}
+INSTALL_CMOD=/lib/lua/${V}
+libdir=/lib
+includedir=/include/lua${V}
+
+Name: Lua
+Description: An Extensible Extension Language
+Version: ${R}
+Requires: 
+Libs: -L${libdir} -llua${V}
+Libs.private: -lm -ldl
+Cflags: -I${includedir}
