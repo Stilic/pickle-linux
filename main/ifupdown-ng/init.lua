@@ -2,8 +2,8 @@ local lfs = require "lfs"
 local system = require "system"
 local tools = require "tools"
 
+-- TODO: build docs
 local self = {}
-
 self.version = "0.12.1"
 self.sources = {
     { "source", "https://github.com/ifupdown-ng/ifupdown-ng/archive/refs/tags/ifupdown-ng-" .. self.version .. ".tar.gz" }
@@ -12,9 +12,9 @@ self.sources = {
 function self.build()
     lfs.chdir("source")
     -- TODO: see if we can add cflags there
-    os.execute('make EXECUTOR_PATH="libexec/ifupdown-ng"' .. system.get_make_jobs())
+    os.execute('make' .. system.get_make_jobs())
     lfs.mkdir("_install")
-    os.execute('make install DESTDIR="' .. lfs.currentdir() .. '/_install"')
+    os.execute('make install EXECUTOR_PATH=libexec/ifupdown-ng DESTDIR="' .. lfs.currentdir() .. '/_install"')
 end
 
 self.pack = tools.pack_default()
