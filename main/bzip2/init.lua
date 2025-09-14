@@ -13,7 +13,7 @@ function self.build()
     lfs.chdir("source")
 
     -- fix man path and generate relative paths
-    os.execute([[sed -i -e "s:\$(PREFIX)/man:\$(PREFIX)/share/man:g" -e "s:ln -s -f $(PREFIX)/bin/:ln -s :" Makefile]])
+    os.execute([[sed -i -e 's:\$(PREFIX)/man:\$(PREFIX)/share/man:g' -e 's:ln -s -f $(PREFIX)/bin/:ln -s :' Makefile]])
     -- fix version stuff
     os.execute([[sed -i -e "s:1\.0\.4:]] .. self.version .. ':" bzip2.1 bzip2.txt Makefile-libbz2_so manual.*')
 
