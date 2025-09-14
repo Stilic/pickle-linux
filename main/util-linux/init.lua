@@ -7,7 +7,7 @@ self.sources = {
     { "source", "https://www.kernel.org/pub/linux/utils/util-linux/v" .. self.version .. "/util-linux-" .. self.version .. ".tar.xz" }
 }
 
-self.build = tools.build_gnu_configure("", "--enable-newgrp --disable-more --disable-kill --disable-nologin")
+self.build = tools.build_gnu_configure("", "--enable-newgrp --disable-more --disable-kill --disable-nologin --disable-liblastlog2 --disable-pam-lastlog2")
 self.pack = tools.pack_default()
 
 return self

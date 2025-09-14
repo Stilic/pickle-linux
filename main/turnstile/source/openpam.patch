@@ -1,0 +1,100 @@
+diff -ura a/src/exec_utils.cc b/src/exec_utils.cc
+--- a/src/exec_utils.cc	2025-09-14 19:54:14.249622447 +0000
++++ b/src/exec_utils.cc	2025-09-14 19:56:37.221000000 +0000
+@@ -153,7 +153,7 @@
+         return;
+     }
+     /* end with success */
+-    pam_end(pamh, PAM_SUCCESS | PAM_DATA_SILENT);
++    pam_end(pamh, PAM_SUCCESS | PAM_SILENT);
+ }
+ 
+ static int sigpipe[2] = {-1, -1};
+diff -ura a/src/pam_turnstile.cc b/src/pam_turnstile.cc
+--- a/src/pam_turnstile.cc	2025-09-14 19:54:14.249622447 +0000
++++ b/src/pam_turnstile.cc	2025-09-14 19:58:34.319000000 +0000
+@@ -27,8 +27,7 @@
+ #include <sys/un.h>
+ 
+ #include <security/pam_modules.h>
+-#include <security/pam_misc.h>
+-#include <security/pam_ext.h>
++#include <security/pam_appl.h>
+ 
+ #include "protocol.hh"
+ #include "utils.hh"
+@@ -61,10 +60,6 @@
+     char *&ebuf,
+     bool debug
+ ) {
+-    if (debug) {
+-        pam_syslog(pamh, LOG_DEBUG, "open session");
+-    }
+-
+     int *sock = static_cast<int *>(std::malloc(sizeof(int)));
+     if (!sock) {
+         return false;
+@@ -252,9 +247,6 @@
+ 
+ /* this may get used later for something */
+ static int open_session_turnstiled(pam_handle_t *pamh, bool debug) {
+-    if (debug) {
+-        pam_syslog(pamh, LOG_DEBUG, "pam_turnstile init session");
+-    }
+     return PAM_SUCCESS;
+ }
+ 
+@@ -345,8 +337,6 @@
+             }
+             continue;
+         }
+-        /* unknown */
+-        pam_syslog(pamh, LOG_WARNING, "unknown parameter '%s'", argv[i]);
+     }
+ }
+ 
+@@ -373,11 +363,6 @@
+     /* parse the args */
+     parse_args(pamh, argc, argv, debug, in_sess, &pclass, &pdesktop, &ptype);
+ 
+-    /* debug */
+-    if (debug) {
+-        pam_syslog(pamh, LOG_DEBUG, "pam_turnstile init");
+-    }
+-
+     /* dual purpose */
+     if (in_sess) {
+         return open_session_turnstiled(pamh, debug);
+@@ -386,12 +371,10 @@
+     /* obtain the user */
+     char const *puser = nullptr;
+     if (pam_get_user(pamh, &puser, nullptr) != PAM_SUCCESS) {
+-        pam_syslog(pamh, LOG_ERR, "could not get PAM user");
+         return PAM_SESSION_ERR;
+     }
+     passwd *pwd = getpwnam(puser);
+     if (!pwd) {
+-        pam_syslog(pamh, LOG_ERR, "getpwnam failed (%s)", strerror(errno));
+         return PAM_SESSION_ERR;
+     }
+ 
+@@ -405,10 +388,6 @@
+             }
+             return true;
+         }
+-        pam_syslog(
+-            pamh, LOG_ERR, "could not get PAM item: %s (%s)",
+-            name, pam_strerror(pamh, r)
+-        );
+         return false;
+     };
+     char const *service = nullptr;
+@@ -416,7 +395,7 @@
+         return PAM_SESSION_ERR;
+     }
+     char const *display = nullptr;
+-    if (!get_pamitem(PAM_XDISPLAY, "PAM_XDISPLAY", &display)) {
++    if (!get_pamitem(11, "PAM_XDISPLAY", &display)) {
+         return PAM_SESSION_ERR;
+     }
+     char const *tty = nullptr;
