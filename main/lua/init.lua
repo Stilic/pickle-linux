@@ -16,7 +16,7 @@ function self.build()
 
     -- TODO: see if we can add cflags there + readline support
     os.execute("make linux" .. system.get_make_jobs())
-    os.execute("make local")
+    os.execute("make INSTALL_TOP=../install/share/man/man1 local")
 
     lfs.mkdir("install/lib/pkgconfig")
     local pc = io.open("install/lib/pkgconfig/lua" .. SHORT_VERSION .. ".pc", "w")
