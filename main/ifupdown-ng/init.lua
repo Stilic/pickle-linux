@@ -13,7 +13,7 @@ function self.build()
     lfs.chdir("source")
     -- TODO: see if we can add cflags there
     lfs.mkdir("_install")
-    os.execute('make all EXECUTOR_PATH=/libexec/ifupdown-ng DESTDIR="' .. lfs.currentdir() .. '/_install"' .. system.get_make_jobs())
+    os.execute('make all install EXECUTOR_PATH=/libexec/ifupdown-ng DESTDIR="' .. lfs.currentdir() .. '/_install"' .. system.get_make_jobs())
 end
 
 self.pack = tools.pack_default()
