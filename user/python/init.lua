@@ -4,7 +4,6 @@ local self = {}
 
 self.version = "3.13.3"
 self.dev_dependencies = { pkg "user.perl" }
-self.dependencies = { pkg "user.expat" }
 self.sources = {
     { "source", "https://www.python.org/ftp/python/" .. self.version .. "/Python-" .. self.version .. ".tar.xz" }
 }
