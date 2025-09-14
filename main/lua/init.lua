@@ -18,7 +18,8 @@ function self.build()
     os.execute("make linux" .. system.get_make_jobs())
     os.execute("make INSTALL_MAN=../install/share/man/man1 local")
 
-    os.execute("install -Dt install/lib/pkgconfig/lua" .. SHORT_VERSION .. ".pc -m644 ../../lua.pc")
+    os.execute("mkdir -p install/lib/pkgconfig")
+    os.execute("cp ../../lua.pc install/lib/pkgconfig/lua" .. SHORT_VERSION .. ".pc")
 end
 
 function self.pack()
