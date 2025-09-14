@@ -12,9 +12,8 @@ self.sources = {
 function self.build()
     lfs.chdir("source")
     -- TODO: see if we can add cflags there
-    os.execute('make' .. system.get_make_jobs())
     lfs.mkdir("_install")
-    os.execute('make install EXECUTOR_PATH=/libexec/ifupdown-ng DESTDIR="' .. lfs.currentdir() .. '/_install"')
+    os.execute('make all EXECUTOR_PATH=/libexec/ifupdown-ng DESTDIR="' .. lfs.currentdir() .. '/_install"' .. system.get_make_jobs())
 end
 
 self.pack = tools.pack_default()
