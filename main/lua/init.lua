@@ -9,6 +9,8 @@ self.sources = {
     { "source", "https://www.lua.org/ftp/lua-" .. self.version .. ".tar.gz" }
 }
 
+local SHORT_VERSION = self.version:sub(1, self.version:find(".", self.version:find(".", 1, true) + 1, true) - 1)
+
 function self.build()
     lfs.chdir("source")
 
@@ -17,15 +19,14 @@ function self.build()
     os.execute("make local")
 
     lfs.mkdir("install/lib/pkgconfig")
-    local pc = io.open("install/lib/pkgconfig/lua5.4.pc", "w")
+    local pc = io.open("install/lib/pkgconfig/lua" .. SHORT_VERSION .. ".pc", "w")
     pc:write(system.capture("make pc"))
     pc:close()
 end
 
 function self.pack()
     tools.pack_default("source/install")()
-    lfs.link("lua", "filesystem/bin/lua" ..
-        self.version:sub(1, self.version:find(".", self.version:find(".", 1, true) + 1, true) - 1), true)
+    lfs.link("lua", "filesystem/bin/lua" .. SHORT_VERSION, true)
 end
 
 return self
