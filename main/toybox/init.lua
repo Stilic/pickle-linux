@@ -1,3 +1,4 @@
+local lfs = require "lfs"
 local tools = require "tools"
 
 local self = {}
@@ -15,6 +16,7 @@ end
 function self.pack()
     os.execute("cp -ra source/install/bin source/install/sbin filesystem")
     os.execute("cp -ra source/install/usr/bin source/install/usr/sbin filesystem")
+    lfs.link("../../bin/env", "filesystem/usr/bin/env", true)
 end
 
 return self
