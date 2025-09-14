@@ -1,0 +1,9 @@
+diff -ura a/Configure b/Configure
+--- a/Configure	2025-09-14 10:35:27.637000000 +0000
++++ b/Configure	2025-09-14 10:36:52.152000000 +0000
+@@ -1,4 +1,4 @@
+-#! /usr/bin/env perl
++#! /bin/env perl
+ # -*- mode: perl; -*-
+ # Copyright 2016-2025 The OpenSSL Project Authors. All Rights Reserved.
+ #
