@@ -2,7 +2,7 @@
 
 The Pickle Linux repositories.
 
-[Installation instructions](https://github.com/Stilic/pkh)
+[Check here for installation instructions.](https://github.com/Stilic/pkh?tab=readme-ov-file#bootstraping-pickle-linux)
 
 ## `main`
 
