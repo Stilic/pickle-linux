@@ -2,6 +2,8 @@
 
 The Pickle Linux repositories.
 
+[Installation instructions](https://github.com/Stilic/pkh)
+
 ## `main`
 
 This is the repository holding all the essential packages needed for the distribution to function correctly.
