@@ -140,6 +140,7 @@ CONFIG_IP=y
 # CONFIG_IPCS is not set
 # CONFIG_KLOGD is not set
 # CONFIG_LAST is not set
+# CONFIG_LSOF is not set
 # CONFIG_MAN is not set
 # CONFIG_MDEV is not set
 # CONFIG_MDEV_CONF is not set
