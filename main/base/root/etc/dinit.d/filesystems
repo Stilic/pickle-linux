@@ -7,6 +7,5 @@ logfile = /var/log/dinit-filesystems.log
 start-timeout = 1200   # 20 minutes
 
 depends-on: udevd
-depends-on: rootrw
 waits-for: auxfscheck
 waits-for: udev-settle
