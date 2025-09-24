@@ -26,7 +26,7 @@ function self.pack()
         "ZSTD_CLEVEL=19 make INSTALL_MOD_PATH=../filesystem INSTALL_MOD_STRIP=1 DEPMOD=/doesnt/exist modules_install")
     os.remove(path .. "/build")
 
-    os.execute("make mrproper headers")
+    os.execute("make headers")
     os.execute("cp -ra usr/include ../filesystem")
     os.execute("rm -r ../filesystem/include/drm")
     os.execute("find ../filesystem/include ! -name *.h -type f -delete")
