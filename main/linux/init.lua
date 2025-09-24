@@ -21,7 +21,7 @@ function self.pack()
     os.execute("mkdir -p " .. path)
     os.execute("cp -ra " .. system.capture("make -s image_name") .. " " .. path .. "/vmlinuz")
     os.execute(
-        "ZSTD_CLEVEL=19 make INSTALL_MOD_PATH=../filesystem INSTALL_MOD_STRIP=1 DEPMOD=/doesnt/exist modules_install")
+        "ZSTD_CLEVEL=19 make ARCH=x86_64 INSTALL_MOD_PATH=../filesystem INSTALL_MOD_STRIP=1 DEPMOD=/doesnt/exist modules_install")
     os.remove(path .. "/build")
 
     -- TODO: put headers in a different package
