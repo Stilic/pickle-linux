@@ -4,8 +4,8 @@ local tools = require "tools"
 local self = {}
 
 self.version = "1.2.2.post1"
---self.dependencies = { pkg "user.python-packaging", pkg "user.python-pyproject-hooks" }
---self.dev_dependencies = { pkg "user.python-flit-core", pkg "user.python-installer" }
+self.dependencies = { pkg "user.python-packaging", pkg "user.python-pyproject-hooks" }
+self.dev_dependencies = { pkg "user.python-flit-core", pkg "user.python-installer", pkg "user.python-gpep517" }
 self.sources = {
     { "source", "https://github.com/pypa/build/archive/refs/tags/" .. self.version .. ".tar.gz" }
 }
