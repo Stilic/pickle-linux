@@ -1,6 +1,4 @@
-local lfs = require "lfs"
-local system = require "system"
-local tools  = require "tools"
+local tools = require "tools"
 
 local self = {}
 
