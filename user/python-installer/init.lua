@@ -10,7 +10,7 @@ self.dependencies = { pkg "user.python" }
 self.dev_dependencies = { pkg "user.python-flit-core" }
 self.sources = {
     { "source", "https://github.com/pypa/installer/archive/refs/tags/" .. self.version .. ".tar.gz" },
-    { "flit",   flit_core.sources[1][1] }
+    { "flit",   flit_core.sources[1][2] }
 }
 
 self.build = tools.build_flit()
