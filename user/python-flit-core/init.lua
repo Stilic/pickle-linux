@@ -9,7 +9,7 @@ self.sources = {
     { "source", "https://github.com/pypa/flit/archive/refs/tags/" .. self.version .. ".tar.gz" }
 }
 
-self.build = tools.build_flit()
+self.build = tools.build_flit("source/flit_core")
 function self.pack()
     lfs.chdir("source/flit_core")
 
