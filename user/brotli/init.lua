@@ -9,9 +9,6 @@ self.sources = {
 }
 
 self.build = tools.build_cmake()
-function self.pack()
-    tools.pack_default()()
-    os.execute("mv filesystem/usr/lib64 filesystem/usr/lib")
-end
+self.pack = tools.pack_default()
 
 return self
