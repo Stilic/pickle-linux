@@ -11,12 +11,9 @@ self.sources = {
 
 function self.pack()
     local install_dir = "filesystem/usr/lib/python" .. python.short_version .. "/site-packages"
-
     os.execute("mkdir -p " .. install_dir)
-    lfs.chdir("source")
-
-    os.execute("cp -a installer* ../" .. install_dir)
-    os.execute("python3 -m compileall ../" .. install_dir)
+    os.execute("cp -ra source/gpep517 " .. install_dir)
+    os.execute("python3 -m compileall " .. install_dir)
 end
 
 return self
