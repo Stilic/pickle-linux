@@ -4,7 +4,7 @@ local tools = require "tools"
 local self = {}
 
 self.version = "1.16.2"
-self.dev_dependencies = { pkg "user.muon", pkg "user.pkgconf", pkg "user.xmlto" }
+self.dev_dependencies = { pkg "user.meson", pkg "user.pkgconf", pkg "user.xmlto" }
 self.sources = {
     { "source", "https://dbus.freedesktop.org/releases/dbus/dbus-" .. self.version .. ".tar.xz" }
 }

@@ -5,7 +5,7 @@ local self = {}
 
 -- TODO: add scdoc
 self.version = "0.1.10"
-self.dev_dependencies = { pkg "user.muon", pkg "user.pkgconf" }
+self.dev_dependencies = { pkg "user.meson", pkg "user.pkgconf" }
 self.sources = {
     { "source", "https://github.com/chimera-linux/turnstile/archive/refs/tags/v" .. self.version .. ".tar.gz" }
 }

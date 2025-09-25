@@ -5,7 +5,7 @@ local self = {}
 
 self.version = "256.11"
 self.dev_dependencies = {
-    pkg "user.muon", pkg "user.pkgconf", pkg "user.perl",
+    pkg "user.meson", pkg "user.pkgconf", pkg "user.perl",
     pkg "user.python-Jinja"
 }
 self.sources = {
