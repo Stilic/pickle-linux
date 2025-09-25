@@ -11,10 +11,10 @@ self.sources = {
 
 self.build = tools.build_flit()
 function self.pack()
-    lfs.chdir("source")
+    lfs.chdir("source/flit_core")
 
-    os.execute("python bootstrap_install.py --installdir ../filesystem dist/*.whl")
-    os.execute("install -Dm644 LICENSE -t ../filesystem/usr/share/licenses/" .. self.name)
+    os.execute("python bootstrap_install.py --installdir ../../filesystem dist/*.whl")
+    os.execute("install -Dm644 LICENSE -t ../../filesystem/usr/share/licenses/" .. self.name)
 end
 
 return self
