@@ -1,5 +1,6 @@
 local lfs = require "lfs"
 local tools = require "tools"
+local python = pkg "user.python"
 
 local self = {}
 
@@ -13,7 +14,9 @@ self.build = tools.build_flit("source/flit_core")
 function self.pack()
     lfs.chdir("source/flit_core")
 
-    os.execute("python bootstrap_install.py --installdir ../../filesystem dist/*.whl")
+    os.execute("python bootstrap_install.py --installdir ../../filesystem/usr/lib/python" ..
+        python.version:sub(1, python.version:find(".", python.version:find(".", 1, true) + 1, true) - 1) ..
+        "/site-packages dist/*.whl")
     os.execute("install -Dm644 LICENSE -t ../../filesystem/usr/share/licenses/" .. self.name)
 end
 
