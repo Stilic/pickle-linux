@@ -13,7 +13,7 @@ self.build = tools.build_flit()
 function self.pack()
     lfs.chdir("source")
 
-    os.execute("python -m installer --destdir ../filesystem dist/*.whl")
+    os.execute("python bootstrap_install.py --installdir ../filesystem dist/*.whl")
     os.execute("install -Dm644 LICENSE -t ../filesystem/usr/share/licenses/" .. self.name)
 end
 
