@@ -4,7 +4,7 @@ local tools = require "tools"
 local self = {}
 
 self.version = "80.9.0"
-self.dependencies = { pkg "user.python" }
+self.dependencies = { pkg "user.python", pkg "user.python-packaging" }
 self.sources = {
     { "source", "https://github.com/pypa/setuptools/archive/refs/tags/v" .. self.version .. ".tar.gz" }
 }
