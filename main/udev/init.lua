@@ -30,7 +30,7 @@ function self.pack()
     os.execute("cp -r ../source/_install/etc/udev etc")
 
     lfs.mkdir("include")
-    os.execute("cp ../source/_install/etc/* include")
+    os.execute("cp ../source/_install/include/* include")
 
     lfs.mkdir("lib")
     os.execute("cp ../source/_install/lib/* lib")
