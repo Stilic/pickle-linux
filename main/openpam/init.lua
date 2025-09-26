@@ -1,3 +1,4 @@
+local lfs = require "lfs"
 local tools = require "tools"
 
 local self = {}
@@ -8,6 +9,10 @@ self.sources = {
 }
 
 self.build = tools.build_gnu_configure("")
-self.pack = tools.pack_default()
+function self.pack()
+    tools.pack_default()()
+    lfs.mkdir("filesystem/lib/pkgconfig")
+    os.execute("cp ../pam.pc filesystem/lib/pkgconfig")
+end
 
 return self
