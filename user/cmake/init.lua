@@ -18,7 +18,7 @@ function self.build()
         bootstrap_cmd = bootstrap_cmd .. " --parallel=" .. system.build_cores
     end
     os.execute(bootstrap_cmd)
-    os.execute("CPATH=:/include make" .. system.get_make_jobs())
+    os.execute("make" .. system.get_make_jobs())
     lfs.mkdir("_install")
     os.execute('make install DESTDIR="' .. lfs.currentdir() .. '/_install"')
 end
