@@ -33,8 +33,7 @@ function self.pack()
     os.execute("cp ../source/_install/include/* include")
 
     lfs.mkdir("lib")
-    os.execute("cp ../source/_install/lib/* lib")
-    os.execute("cp -r ../source/_install/lib/udev lib")
+    os.execute("cp -r ../source/_install/lib/udev* lib")
 
     os.execute("mkdir -p share/bash-completion/completions")
     os.execute("cp -r ../source/_install/share/pkgconfig share")
