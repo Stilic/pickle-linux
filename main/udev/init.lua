@@ -24,7 +24,7 @@ function self.pack()
 
     lfs.chdir("filesystem")
     os.execute(
-        "rm -r usr etc/systemd lib/*systemd* lib/pkgconfig/libsystemd.pc share/dbus-1 share/pkgconfig/systemd.pc share/polkit-1 bin/bootctl")
+        "rm -r etc/systemd lib/*systemd* lib/pkgconfig/libsystemd.pc share/dbus-1 share/pkgconfig/systemd.pc share/polkit-1 bin/bootctl")
 
     -- TODO: add tmpfiles
     os.execute("cp ../../80-net-name-slot.rules lib/udev/rules.d")
