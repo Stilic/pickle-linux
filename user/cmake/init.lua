@@ -11,7 +11,7 @@ self.sources = {
 
 function self.build()
     lfs.chdir("source")
-    local bootstrap_cmd = './bootstrap CFLAGS="' ..
+    local bootstrap_cmd = './bootstrap CPATH=/include:/usr/include CFLAGS="' ..
         tools.DEFAULT_CFLAGS ..
         '" --prefix=/usr --mandir=/share/man --datadir=/share/' .. self.name .. ' --docdir=/share/doc/' .. self.name
     if system.build_cores ~= 1 then
