@@ -13,7 +13,7 @@ self.sources = {
 }
 
 function self.build()
-    local build_dir = lfs.chdir()
+    local build_dir = lfs.currentdir()
     lfs.chdir("source")
 
     os.execute([[
