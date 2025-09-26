@@ -3,7 +3,7 @@ local tools = require "tools"
 
 local self = {}
 
-self.version = "258"
+self.version = "257.4"
 self.dev_dependencies = {
     pkg "user.meson", pkg "user.pkgconf", pkg "user.perl",
     pkg "user.python-Jinja"
@@ -12,36 +12,82 @@ self.sources = {
     { "source", "https://github.com/systemd/systemd/archive/refs/tags/v" .. self.version .. ".tar.gz" }
 }
 
--- from https://www.linuxfromscratch.org/lfs/view/stable/chapter08/udev.html
-function self.build()
-    local build_dir = lfs.currentdir()
-    lfs.chdir("source")
+-- TODO: try to fix manpages
+self.build = tools.build_meson("/", [[
+    -Dmode=release
+	-Dsysvinit-path=
+    -Dacl=enabled
 
-    os.execute([[find . -type f | xargs sed -i 's/#!\/usr\/bin\/env/#!\/bin\/env/g']])
-    os.execute([[
-        sed -e 's/GROUP="render"/GROUP="video"/' \
-            -e 's/GROUP="sgx", //'               \
-            -i rules.d/50-udev-default.rules.in
-    ]])
-    os.execute("sed -i '/systemd-sysctl/s/^/#/' rules.d/99-systemd.rules.in")
-    os.execute([[
-        sed -e '/NETWORK_DIRS/s/systemd/udev/' \
-            -i src/libsystemd/sd-network/network-util.h
-    ]])
-
-    os.execute(tools.get_flags() .. " meson setup build --buildtype=release --prefix=/ -D mode=release -D dev-kvm-mode=0660 -D link-udev-shared=false -D logind=false -D vconsole=false")
-
-    lfs.chdir("build")
-    os.execute([[
-        ninja udevadm systemd-hwdb                                         \
-            $(ninja -n | grep -Eo '(src/(lib)?udev|rules.d|hwdb.d)/[^ ]*') \
-            $(realpath libudev.so --relative-to .)                         \
-            $(grep "'name' :" ../src/udev/meson.build | \
-                      awk '{print $3}' | tr -d ",'" | grep -v 'udevadm')
-    ]])
-
-    os.execute('DESTDIR="' .. build_dir .. '/_install" meson install -C build')
-end
+    -Dadm-group=false
+	-Danalyze=false
+	-Dapparmor=disabled
+	-Daudit=disabled
+	-Dbacklight=false
+	-Dbinfmt=false
+	-Dbpf-framework=disabled
+	-Dbzip2=disabled
+	-Dcoredump=false
+	-Ddbus=disabled
+	-Delfutils=disabled
+	-Denvironment-d=false
+	-Dfdisk=disabled
+	-Dgcrypt=disabled
+	-Dglib=disabled
+	-Dgshadow=false
+	-Dgnutls=disabled
+	-Dhibernate=false
+	-Dhostnamed=false
+	-Didn=false
+	-Dima=false
+	-Dinitrd=false
+	-Dfirstboot=false
+	-Dldconfig=false
+	-Dlibcryptsetup=disabled
+	-Dlibcurl=disabled
+	-Dlibfido2=disabled
+	-Dlibidn=disabled
+	-Dlibidn2=disabled
+	-Dlibiptc=disabled
+	-Dlocaled=false
+	-Dlogind=false
+	-Dlz4=disabled
+	-Dmachined=false
+	-Dmicrohttpd=disabled
+	-Dnetworkd=false
+	-Dnscd=false
+	-Dnss-myhostname=false
+	-Dnss-resolve=disabled
+	-Dnss-systemd=false
+	-Doomd=false
+	-Dopenssl=disabled
+	-Dp11kit=disabled
+	-Dpam=disabled
+	-Dpcre2=disabled
+	-Dpolkit=disabled
+	-Dportabled=false
+	-Dpstore=false
+	-Dpwquality=disabled
+	-Drandomseed=false
+	-Dresolve=false
+	-Drfkill=false
+	-Dseccomp=disabled
+	-Dsmack=false
+	-Dsysext=false
+	-Dtimedated=false
+	-Dtimesyncd=false
+	-Dtpm=false
+	-Dqrencode=disabled
+	-Dquotacheck=false
+	-Duserdb=false
+	-Dutmp=false
+	-Dvconsole=false
+	-Dwheel-group=false
+	-Dxdg-autostart=false
+	-Dxkbcommon=disabled
+	-Dxz=disabled
+	-Dzlib=disabled
+	-Dzstd=disabled
+]], nil, nil, "-D__UAPI_DEF_ETHHDR=0")
 
 function self.pack()
     tools.pack_default()()
@@ -58,6 +104,8 @@ function self.pack()
 
     os.execute("cp ../../udevd.wrapper lib")
     os.execute("cp ../../dinit-devd lib")
+
+    os.execute("bin/systemd-hwdb --root=. update")
 end
 
 return self
