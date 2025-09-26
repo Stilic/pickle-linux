@@ -39,6 +39,8 @@ function self.build()
             $(grep "'name' :" ../src/udev/meson.build | \
                       awk '{print $3}' | tr -d ",'" | grep -v 'udevadm')
     ]])
+
+    os.execute('DESTDIR="' .. build_dir .. '/_install" meson install -C build')
 end
 
 function self.pack()
