@@ -1,4 +1,3 @@
-local lfs = require "lfs"
 local tools = require "tools"
 
 local self = {}
@@ -9,9 +8,6 @@ self.sources = {
 }
 
 self.build = tools.build_gnu_configure()
-function self.pack()
-    tools.pack_default()()
-    lfs.link("slibtool", "filesystem/usr/bin/libtool", true)
-end
+self.pack = tools.pack_default()
 
 return self
