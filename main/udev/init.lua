@@ -12,6 +12,7 @@ self.sources = {
     { "source", "https://github.com/systemd/systemd/archive/refs/tags/v" .. self.version .. ".tar.gz" }
 }
 
+-- from https://gitweb.gentoo.org/repo/gentoo.git/tree/sys-apps/systemd-utils/files?id=8c128ff779a89ca0f9559f72e23a43db15058583
 function self.build()
     os.execute([[find source -type f | xargs sed -i 's/#!\/usr\/bin\/env/#!\/bin\/env/g']])
     tools.build_meson("/",
@@ -20,11 +21,24 @@ function self.build()
 end
 
 function self.pack()
-    tools.pack_default()()
-
     lfs.chdir("filesystem")
-    os.execute(
-        "rm -r etc/systemd lib/*systemd* lib/pkgconfig/libsystemd.pc share/dbus-1 share/pkgconfig/systemd.pc share/polkit-1 bin/bootctl")
+
+    lfs.mkdir("bin")
+    os.execute("cp ../source/_install/bin/udevadm bin")
+
+    lfs.mkdir("etc")
+    os.execute("cp -r ../source/_install/etc/udev etc")
+
+    lfs.mkdir("include")
+    os.execute("cp ../source/_install/etc/* include")
+
+    lfs.mkdir("lib")
+    os.execute("cp ../source/_install/lib/* lib")
+    os.execute("cp -r ../source/_install/lib/udev lib")
+
+    os.execute("mkdir -p share/bash-completion/completions")
+    os.execute("cp -r ../source/_install/share/pkgconfig share")
+    os.execute("cp ../source/_install/share/bash-completion/completions/udevadm share/bash-completion/completions")
 
     -- TODO: add tmpfiles
     os.execute("cp ../../80-net-name-slot.rules lib/udev/rules.d")
