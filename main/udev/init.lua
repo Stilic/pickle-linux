@@ -30,10 +30,10 @@ function self.pack()
     os.execute("cp -r ../source/_install/etc/udev etc")
 
     lfs.mkdir("include")
-    os.execute("cp ../source/_install/include/* include")
+    os.execute("cp ../source/_install/include/libudev.h include")
 
     lfs.mkdir("lib")
-    os.execute("cp -r ../source/_install/lib/udev* lib")
+    os.execute("cp -r ../source/_install/lib/*udev* lib")
 
     os.execute("mkdir -p share/bash-completion/completions")
     os.execute("cp -r ../source/_install/share/pkgconfig share")
