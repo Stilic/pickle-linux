@@ -2,9 +2,9 @@ local tools = require "tools"
 
 local self = {}
 
-self.version = "2.5.4"
+self.version = "0.7.3"
 self.sources = {
-    { "source", "https://ftpmirror.gnu.org/libtool/libtool-" .. self.version .. ".tar.gz" }
+    { "source", "https://dev.midipix.org/cross/slibtool/archive/v" .. self.archive .. "/slibtool-v" .. self.version .. ".tar.gz" }
 }
 
 self.build = tools.build_gnu_configure()
