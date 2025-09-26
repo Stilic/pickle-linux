@@ -12,10 +12,12 @@ self.sources = {
     { "source", "https://github.com/systemd/systemd/archive/refs/tags/v" .. self.version .. ".tar.gz" }
 }
 
+-- from https://www.linuxfromscratch.org/lfs/view/stable/chapter08/udev.html
 function self.build()
     local build_dir = lfs.currentdir()
     lfs.chdir("source")
 
+    os.execute([[find . -type f | xargs sed -i 's/#!\/usr\/bin\/env/#!\/bin\/env/g']])
     os.execute([[
         sed -e 's/GROUP="render"/GROUP="video"/' \
             -e 's/GROUP="sgx", //'               \
@@ -27,7 +29,7 @@ function self.build()
             -i src/libsystemd/sd-network/network-util.h
     ]])
     os.execute(tools.get_flags() .. " meson setup build --buildtype=release --prefix=/ -D mode=release -D dev-kvm-mode=0660 -D link-udev-shared=false -D logind=false -D vconsole=false")
-    os.execute([[[
+    os.execute([[
         ninja udevadm systemd-hwdb                                         \
             $(ninja -n | grep -Eo '(src/(lib)?udev|rules.d|hwdb.d)/[^ ]*') \
             $(realpath libudev.so --relative-to .)                         \
