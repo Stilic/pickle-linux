@@ -35,7 +35,7 @@ function self.pack()
     lfs.mkdir("lib")
     os.execute("cp ../source/_install/lib/* lib")
     os.execute("cp -r ../source/_install/lib/udev lib")
-    lfs.link("libsystemd.so", "lib/libsystemd-shared-" .. self.version:sub(1, self.version:find(".", 1, true)) .. ".so", true)
+    lfs.link("libsystemd.so", "lib/libsystemd-shared-" .. self.version:sub(1, self.version:find(".", 1, true) - 1) .. ".so", true)
 
     os.execute("mkdir -p share/bash-completion/completions")
     os.execute("cp -r ../source/_install/share/pkgconfig share")
