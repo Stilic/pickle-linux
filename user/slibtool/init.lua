@@ -11,7 +11,7 @@ self.sources = {
 self.build = tools.build_gnu_configure()
 function self.pack()
     tools.pack_default()()
-    lfs.link("slibtool", "filesystem/bin/libtool", true)
+    lfs.link("slibtool", "filesystem/usr/bin/libtool", true)
 end
 
 return self
