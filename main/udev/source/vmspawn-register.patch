@@ -1,0 +1,10 @@
+diff -ura a/src/vmspawn/vmspawn-register.c b/src/vmspawn/vmspawn-register.c
+--- a/src/vmspawn/vmspawn-register.c	2025-09-26 17:52:30.469908271 +0000
++++ b/src/vmspawn/vmspawn-register.c	2025-09-26 17:53:01.500853854 +0000
+@@ -1,5 +1,5 @@
+ /* SPDX-License-Identifier: LGPL-2.1-or-later */
+-
++#include <unistd.h>
+ #include "sd-bus.h"
+ #include "sd-id128.h"
+ #include "sd-json.h"

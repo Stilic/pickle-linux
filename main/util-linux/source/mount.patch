@@ -1,0 +1,23 @@
+diff -ura a/meson.build b/meson.build
+--- a/meson.build	2025-09-26 11:35:52.556516114 +0000
++++ b/meson.build	2025-09-26 11:36:38.905516114 +0000
+@@ -111,18 +111,7 @@
+ conf.set('HAVE_STRUCT_STATX_STX_MNT_ID', have ? 1 : false)
+ 
+ 
+-have_statmount = cc.has_type('struct statmount', prefix : '#include <linux/mount.h>')
+-have_listmount = cc.has_header_symbol('linux/mount.h', 'LSMT_ROOT')
+-
+-# kernel headers provides the syscall, but there is not SYS_xxx yet
+-if have_statmount and not cc.has_header_symbol('bits/syscall.h', 'SYS_statmount')
+-  conf.set('SYS_statmount', '__NR_statmount')
+-endif
+-if have_listmount and not cc.has_header_symbol('bits/syscall.h', 'SYS_listmount')
+-  conf.set('SYS_listmount', '__NR_listmount')
+-endif
+-
+-conf.set('HAVE_STATMOUNT_API', have_statmount and have_listmount ? 1 : false)
++conf.set('HAVE_STATMOUNT_API', false)
+ 
+ 
+ have_sys_vfs_header = cc.has_header('sys/vfs.h')

@@ -1,0 +1,13 @@
+diff -ura a/meson.build b/meson.build
+--- a/meson.build	2025-09-26 17:04:50.179002648 +0000
++++ b/meson.build	2025-09-26 17:05:14.177853854 +0000
+@@ -656,9 +656,6 @@
+         conf.set_quoted(name, path)
+ endforeach
+ 
+-if run_command(ln, '--relative', '--help', check : false).returncode() != 0
+-        error('ln does not support --relative (added in coreutils 8.16)')
+-endif
+ 
+ #####################################################################
+ 
