@@ -28,7 +28,10 @@ function self.build()
         sed -e '/NETWORK_DIRS/s/systemd/udev/' \
             -i src/libsystemd/sd-network/network-util.h
     ]])
+
     os.execute(tools.get_flags() .. " meson setup build --buildtype=release --prefix=/ -D mode=release -D dev-kvm-mode=0660 -D link-udev-shared=false -D logind=false -D vconsole=false")
+
+    lfs.chdir("build")
     os.execute([[
         ninja udevadm systemd-hwdb                                         \
             $(ninja -n | grep -Eo '(src/(lib)?udev|rules.d|hwdb.d)/[^ ]*') \
@@ -36,7 +39,6 @@ function self.build()
             $(grep "'name' :" ../src/udev/meson.build | \
                       awk '{print $3}' | tr -d ",'" | grep -v 'udevadm')
     ]])
-    os.execute('DESTDIR="' .. build_dir .. '/_install" meson install -C build')
 end
 
 function self.pack()
