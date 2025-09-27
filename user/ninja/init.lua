@@ -11,7 +11,7 @@ self.sources = {
 
 function self.build()
     lfs.chdir("source")
-    os.execute("python configure.py --bootstrap")
+    os.execute(tools.get_flags() .. " python configure.py --bootstrap")
 end
 function self.pack()
     os.execute("mkdir -p filesystem/usr/bin")
