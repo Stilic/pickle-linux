@@ -1,6 +1,7 @@
 local lfs = require "lfs"
 local system = require "system"
 local tools = require "tools"
+local gcc = pkg "user.gcc"
 
 local self = {}
 
@@ -18,7 +19,7 @@ function self.build()
         bootstrap_cmd = bootstrap_cmd .. " --parallel=" .. system.build_cores
     end
     os.execute(bootstrap_cmd)
-    os.execute("make" .. system.get_make_jobs())
+    os.execute("CPLUS_INCLUDE_PATH=/usr/include/c++/" .. gcc.version .. " make" .. system.get_make_jobs())
     lfs.mkdir("_install")
     os.execute('make install DESTDIR="' .. lfs.currentdir() .. '/_install"')
 end
