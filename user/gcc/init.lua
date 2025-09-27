@@ -13,17 +13,22 @@ self.sources = {
 }
 
 function self.build()
-    lfs.mkdir("obj")
-    lfs.chdir("obj")
+    lfs.chdir("source")
+
+    local install_dir = lfs.currentdir() .. "/_install"
+
+    lfs.mkdir("build")
+    lfs.chdir("build")
+
     os.execute(tools.get_flags() ..
-        " ../source/configure --prefix=/usr --disable-multilib --disable-nls --with-system-zlib --with-native-system-header-dir=/include --enable-default-pie --enable-default-ssp --enable-host-pie --enable-languages=c,c++")
+        " ../configure --prefix=/usr --disable-multilib --disable-nls --with-system-zlib --with-native-system-header-dir=/include --enable-default-pie --enable-default-ssp --enable-host-pie --enable-languages=c,c++")
     os.execute("make" .. system.get_make_jobs())
-    lfs.mkdir("_install")
-    os.execute('make install-strip DESTDIR="' .. lfs.currentdir() .. '/_install"')
+
+    os.execute('make install-strip DESTDIR="' .. install_dir .. '"')
 end
 
 function self.pack()
-    os.execute("cp -ra obj/_install/* filesystem")
+    tools.pack_default()()
     os.execute("mv filesystem/usr/lib64/* filesystem/usr/lib")
     os.execute("rm -r filesystem/usr/lib64")
     lfs.link("gcc", "filesystem/usr/bin/cc", true)
