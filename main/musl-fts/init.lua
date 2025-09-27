@@ -10,7 +10,7 @@ self.sources = {
 
 function self.build()
     lfs.chdir("source")
-    os.execute("./bootstrap.sh")
+    os.execute("LIBTOOL=slibtool ./bootstrap.sh")
     tools.build_gnu_configure("", nil, "")()
 end
 
