@@ -1,4 +1,3 @@
-local lfs = require "lfs"
 local tools = require "tools"
 
 local self = {}
@@ -8,12 +7,7 @@ self.sources = {
     { "source", "https://github.com/void-linux/musl-obstack/archive/refs/tags/v" .. self.version .. ".tar.gz" }
 }
 
-function self.build()
-    lfs.chdir("source")
-    os.execute("LIBTOOL=slibtool ./bootstrap.sh")
-    tools.build_gnu_configure("", nil, "")()
-end
-
+self.build = tools.build_autotools("")
 self.pack = tools.pack_default()
 
 return self
