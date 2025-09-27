@@ -22,7 +22,7 @@ function self.build()
 
     os.execute(tools.get_flags() ..
         " ../configure --prefix=/usr --disable-multilib --disable-nls --with-system-zlib --with-native-system-header-dir=/include --enable-default-pie --enable-default-ssp --enable-host-pie --enable-languages=c,c++")
-    os.execute("make" .. system.get_make_jobs())
+    os.execute("CPATH=/usr/include make" .. system.get_make_jobs())
 
     os.execute('make install-strip DESTDIR="' .. install_dir .. '"')
 end
