@@ -5,7 +5,7 @@ local self = {}
 self.version = "0.0.29"
 self.dev_dependencies = { pkg "user.automake", pkg "user.flex", pkg "user.docbook-xsl" }
 self.sources = {
-    { "source", "https://releases.pagure.org/xmlto/xmlto-" .. self.version .. ".tar.bz2" }
+    { "source", "https://www.pagure.io/xmlto/archive/" .. self.version .. "/xmlto-" .. self.version .. ".tar.gz" }
 }
 
 self.build = tools.build_autotools()
