@@ -24,28 +24,28 @@ function self.pack()
     lfs.chdir("filesystem")
 
     lfs.mkdir("bin")
-    os.execute("cp ../source/_install/bin/udevadm bin")
+    os.execute("cp -a ../source/_install/bin/udevadm bin")
 
     lfs.mkdir("etc")
-    os.execute("cp -r ../source/_install/etc/udev etc")
+    os.execute("cp -ra ../source/_install/etc/udev etc")
 
     lfs.mkdir("include")
-    os.execute("cp ../source/_install/include/libudev.h include")
+    os.execute("cp -a ../source/_install/include/libudev.h include")
 
     lfs.mkdir("lib")
-    os.execute("cp -r ../source/_install/lib/*udev* lib")
+    os.execute("cp -ra ../source/_install/lib/*udev* lib")
 
     os.execute("mkdir -p share/bash-completion/completions")
-    os.execute("cp -r ../source/_install/share/pkgconfig share")
-    os.execute("cp ../source/_install/share/bash-completion/completions/udevadm share/bash-completion/completions")
+    os.execute("cp -ra ../source/_install/share/pkgconfig share")
+    os.execute("cp -a ../source/_install/share/bash-completion/completions/udevadm share/bash-completion/completions")
 
     -- TODO: add tmpfiles
-    os.execute("cp ../../80-net-name-slot.rules lib/udev/rules.d")
+    os.execute("cp -a ../../80-net-name-slot.rules lib/udev/rules.d")
 
     lfs.link("../bin/udevadm", "lib/udevd", true)
 
-    os.execute("cp ../../udevd.wrapper lib")
-    os.execute("cp ../../dinit-devd lib")
+    os.execute("cp -a ../../udevd.wrapper lib")
+    os.execute("cp -a ../../dinit-devd lib")
 end
 
 return self

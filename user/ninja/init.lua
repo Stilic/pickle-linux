@@ -13,6 +13,9 @@ function self.build()
     lfs.chdir("source")
     os.execute("python configure.py --bootstrap")
 end
-self.pack = tools.pack_default()
+function self.pack()
+    os.execute("mkdir -p filesystem/usr/bin")
+    os.execute("cp -a source/ninja filesystem/usr/bin")
+end
 
 return self
