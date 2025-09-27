@@ -14,8 +14,8 @@ self.sources = {
 function self.build()
     lfs.mkdir("obj")
     lfs.chdir("obj")
-    os.execute(
-        '../source/configure CFLAGS="-O2" --prefix=/usr --disable-multilib --disable-nls --with-system-zlib --with-native-system-header-dir=/include --enable-languages=c,c++')
+    os.execute(self.get_flags() ..
+        " LIBTOOL=slibtool ../source/configure --prefix=/usr --disable-multilib --disable-nls --with-system-zlib --with-native-system-header-dir=/include --enable-languages=c,c++")
     os.execute("make" .. system.get_make_jobs())
     lfs.mkdir("_install")
     os.execute('make install-strip DESTDIR="' .. lfs.currentdir() .. '/_install"')
