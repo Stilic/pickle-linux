@@ -3,10 +3,9 @@ local config = require "neld.config"
 
 local self = {}
 
-self.version = "2.5.4"
-self.dev_dependencies = { pkg "user.help2man" }
+self.version = "1.49.3"
 self.sources = {
-    { "source", config.gnu_site .. "/libtool/libtool-" .. self.version .. ".tar.xz" }
+    { "source", config.gnu_site .. "/help2man/help2man-" .. self.version .. ".tar.xz" }
 }
 
 self.build = tools.build_gnu_configure()
