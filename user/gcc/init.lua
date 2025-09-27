@@ -1,5 +1,6 @@
 local lfs = require "lfs"
 local system = require "system"
+local tools = require "tools"
 local config = require "neld.config"
 
 local self = {}
@@ -14,7 +15,7 @@ self.sources = {
 function self.build()
     lfs.mkdir("obj")
     lfs.chdir("obj")
-    os.execute(self.get_flags() ..
+    os.execute(tools.get_flags() ..
         " LIBTOOL=slibtool ../source/configure --prefix=/usr --disable-multilib --disable-nls --with-system-zlib --with-native-system-header-dir=/include --enable-languages=c,c++")
     os.execute("make" .. system.get_make_jobs())
     lfs.mkdir("_install")
