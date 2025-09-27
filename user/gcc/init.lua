@@ -16,7 +16,7 @@ function self.build()
     lfs.mkdir("obj")
     lfs.chdir("obj")
     os.execute(tools.get_flags() ..
-        " LIBTOOL=slibtool ../source/configure --prefix=/usr --disable-multilib --disable-nls --with-system-zlib --with-native-system-header-dir=/include --enable-languages=c,c++")
+        " LIBTOOL=slibtool ../source/configure --prefix=/usr --disable-multilib --disable-nls --with-system-zlib --disable-fixincludes --with-native-system-header-dir=/include --enable-default-pie --enable-default-ssp --enable-host-pie --enable-languages=c,c++")
     os.execute("make" .. system.get_make_jobs())
     lfs.mkdir("_install")
     os.execute('make install-strip DESTDIR="' .. lfs.currentdir() .. '/_install"')
