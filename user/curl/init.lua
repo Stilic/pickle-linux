@@ -8,7 +8,7 @@ self.sources = {
     { "source", "https://curl.se/download/curl-" .. self.version .. ".tar.xz" }
 }
 
-self.build = tools.build_gnu_configure(nil, "--with-openssl")
+self.build = tools.build_gnu_configure()
 self.pack = tools.pack_default()
 
 return self
