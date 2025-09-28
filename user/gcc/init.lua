@@ -29,9 +29,18 @@ end
 
 function self.pack()
     tools.pack_default()()
-    os.execute("mv filesystem/usr/lib64/* filesystem/usr/lib")
-    os.execute("rm -r filesystem/usr/lib64")
+    os.execute("rm -r filesystem/usr/lib filesystem/usr/lib64")
     lfs.link("gcc", "filesystem/usr/bin/cc", true)
 end
+
+self.variants = {
+    libs = {
+        pack = function()
+            lfs.mkdir("filesystem-libs/usr")
+            os.execute("cp -ra source/_install/usr/lib filesystem-libs/usr")
+            os.execute("cp -ra source/_install/usr/lib64/* filesystem-libs/usr/lib")
+        end
+    }
+}
 
 return self
