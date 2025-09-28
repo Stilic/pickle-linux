@@ -1,9 +1,0 @@
-diff -ura a/libtoolize.in b/libtoolize.in
---- a/libtoolize.in	2025-09-27 20:21:31.199304358 +0000
-+++ b/libtoolize.in	2025-09-27 20:21:42.945304358 +0000
-@@ -1,4 +1,4 @@
--#! /usr/bin/env sh
-+#! /bin/sh
- 
- # Prepare a package to use libtool.
- # Written by Gary V. Vaughan <gary@gnu.org>, 2003
