@@ -13,8 +13,7 @@ self.sources = {
 function self.build()
     lfs.chdir("source")
 
-    -- TODO: see if we can add cflags there + readline support
-    os.execute("make linux" .. system.get_make_jobs())
+    os.execute(tools.get_flags() .. " make linux" .. system.get_make_jobs())
     os.execute("make INSTALL_MAN=../install/share/man/man1 local")
 
     os.execute("mkdir -p install/lib/pkgconfig")
