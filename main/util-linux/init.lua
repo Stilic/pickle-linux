@@ -8,7 +8,7 @@ self.sources = {
 }
 
 self.build = tools.build_meson("/",
-    "-Dbuild-libmount=enabled -Dbuild-newgrp=disabled -Dbuild-more=disabled -Dbuild-kill=disabled -Dbuild-nologin=disabled -Dbuild-liblastlog2=disabled -Dbuild-pam-lastlog2=disabled")
+    "-Dbuild-newgrp=disabled -Dbuild-more=disabled -Dbuild-kill=disabled -Dbuild-nologin=disabled -Dbuild-liblastlog2=disabled -Dbuild-pam-lastlog2=disabled")
 self.pack = tools.pack_default()
 
 return self
