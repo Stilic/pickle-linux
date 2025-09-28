@@ -8,7 +8,10 @@ self.sources = {
     { "source", "https://curl.se/download/curl-" .. self.version .. ".tar.xz" }
 }
 
-self.build = tools.build_gnu_configure(nil, "--with-openssl")
+function self.build()
+    os.execute([[find source -type f | xargs sed -i 's/#!\/usr\/bin\/env/#!\/bin\/env/g']])
+    tools.build_gnu_configure(nil, "--with-openssl")()
+end
 self.pack = tools.pack_default()
 
 return self
