@@ -3,7 +3,7 @@ local lua = pkg "main.lua"
 
 local self = {}
 
-self.version = "v1_8_0"
+self.version = "1.8.0"
 self.sources = {
     { "source", "https://github.com/lunarmodules/luafilesystem/archive/refs/tags/v" .. self.version:gsub("%_", ".") .. ".tar.gz" }
 }
