@@ -9,9 +9,6 @@ self.sources = {
 }
 
 self.build = tools.build_gnu_configure("--disable-nls")
-function self.pack()
-    os.execute(
-        "cp -ra source/_install/usr/lib source/_install/usr/include source/_install/usr/share source/_install/usr/bin filesystem")
-end
+self.pack = tools.pack_default()
 
 return self
