@@ -7,7 +7,7 @@ self.sources = {
     { "source", "https://github.com/shadow-maint/shadow/releases/download/" .. self.version .. "/shadow-" .. self.version .. ".tar.xz" }
 }
 
-self.build = tools.build_gnu_configure("", "--enable-shared --enable-lastlog --disable-static --with-acl --with-attr --without-libpam --without-libbsd --without-selinux --without-nscd --disable-nls --enable-subordinate-ids --disable-account-tools-setuid")
+self.build = tools.build_gnu_configure("--enable-shared --enable-lastlog --disable-static --with-acl --with-attr --without-libpam --without-libbsd --without-selinux --without-nscd --disable-nls --enable-subordinate-ids --disable-account-tools-setuid")
 
 function self.pack()
     tools.pack_default()()

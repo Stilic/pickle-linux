@@ -17,11 +17,11 @@ function self.pack()
     local major_version = self.version:sub(1, 1)
 
     for _, v in ipairs({ "python" .. major_version, "idle" .. major_version, "pydoc" .. major_version }) do
-        lfs.link(v, "filesystem/usr/bin/" .. v:sub(1, -2), true)
+        lfs.link(v, "filesystem/bin/" .. v:sub(1, -2), true)
     end
 
-    lfs.link("python" .. major_version .. "-config", "filesystem/usr/bin/python-config", true)
-    lfs.link("python" .. major_version .. ".1", "filesystem/usr/share/man/man1/python.1", true)
+    lfs.link("python" .. major_version .. "-config", "filesystem/bin/python-config", true)
+    lfs.link("python" .. major_version .. ".1", "filesystem/share/man/man1/python.1", true)
 end
 
 return self

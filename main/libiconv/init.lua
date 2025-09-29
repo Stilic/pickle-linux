@@ -8,7 +8,7 @@ self.sources = {
     { "source", config.gnu_site .. "/libiconv/libiconv-" .. self.version .. ".tar.gz" }
 }
 
-self.build = tools.build_gnu_configure("")
+self.build = tools.build_gnu_configure()
 self.pack = tools.pack_default()
 
 return self

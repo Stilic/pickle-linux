@@ -9,7 +9,7 @@ self.sources = {
     { "source", config.gnu_site .. "/bash/bash-" .. self.version .. ".tar.gz" }
 }
 
-self.build = tools.build_gnu_configure("", "--disable-nls --without-bash-malloc")
+self.build = tools.build_gnu_configure("--disable-nls --without-bash-malloc")
 function self.pack()
     tools.pack_default()()
     lfs.link("bash", "filesystem/bin/sh", true)

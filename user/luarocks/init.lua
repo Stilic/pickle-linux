@@ -16,11 +16,11 @@ end
 
 function self.pack()
     -- TODO: rework this
-    os.execute("mkdir -p filesystem/etc/luarocks filesystem/usr/bin filesystem/usr/share/lua/" .. lua.short_version)
+    os.execute("mkdir -p filesystem/etc/luarocks filesystem/bin filesystem/share/lua/" .. lua.short_version)
     os.execute("cp -ra source/build/config*.lua filesystem/etc/luarocks")
     os.execute("chmod +x source/build/luarocks*")
-    os.execute("cp -ra source/build/luarocks* filesystem/usr/bin")
-    os.execute("cp -ra source/src/luarocks filesystem/usr/share/lua/" .. lua.short_version)
+    os.execute("cp -ra source/build/luarocks* filesystem/bin")
+    os.execute("cp -ra source/src/luarocks filesystem/share/lua/" .. lua.short_version)
 end
 
 return self

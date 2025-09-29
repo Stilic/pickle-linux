@@ -8,7 +8,7 @@ self.sources = {
     { "source", "https://download.gnome.org/sources/libxml2/" .. self.version:sub(1, 4) .. "/libxml2-" .. self.version .. ".tar.xz" }
 }
 
-self.build = tools.build_gnu_configure("", "--enable-static --with-zlib")
+self.build = tools.build_gnu_configure("--enable-static --with-zlib")
 function self.pack()
     tools.pack_default()()
 

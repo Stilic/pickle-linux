@@ -8,7 +8,7 @@ self.sources = {
     { "source", config.gnu_site .. "/binutils/binutils-" .. self.version .. ".tar.xz" }
 }
 
-self.build = tools.build_gnu_configure(nil, "--disable-nls")
+self.build = tools.build_gnu_configure("--disable-nls")
 function self.pack()
     os.execute(
         "cp -ra source/_install/usr/lib source/_install/usr/include source/_install/usr/share source/_install/usr/bin filesystem")

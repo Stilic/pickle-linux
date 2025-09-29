@@ -16,7 +16,7 @@ function self.pack()
         if dir ~= "source" then
             namespace = "-" .. dir
         end
-        local pkg_root = "filesystem/usr/share/xml/docbook/xsl-stylesheets-" .. self.version .. namespace
+        local pkg_root = "filesystem/share/xml/docbook/xsl-stylesheets-" .. self.version .. namespace
 
         os.execute("install -Dt " .. pkg_root .. " -m644 " .. dir .. "/VERSION " .. dir .. "/VERSION.xsl")
 
@@ -34,10 +34,10 @@ function self.pack()
         end
 
         lfs.link("xsl-stylesheets-" ..
-            self.version .. namespace, "filesystem/usr/share/xml/docbook/xsl-stylesheets" .. namespace, true)
+            self.version .. namespace, "filesystem/share/xml/docbook/xsl-stylesheets" .. namespace, true)
     end
 
-    os.execute("install -Dm644 source/COPYING -t filesystem/usr/share/licenses/" .. self.name)
+    os.execute("install -Dm644 source/COPYING -t filesystem/share/licenses/" .. self.name)
 end
 
 return self

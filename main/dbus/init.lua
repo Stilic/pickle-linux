@@ -9,7 +9,7 @@ self.sources = {
     { "source", "https://dbus.freedesktop.org/releases/dbus/dbus-" .. self.version .. ".tar.xz" }
 }
 
-self.build = tools.build_meson("/",
+self.build = tools.build_meson(
     "-Dasserts=false -Ddbus_user=dbus -Ddoxygen_docs=disabled -Depoll=enabled -Dinotify=enabled -Dselinux=disabled -Dsystem_pid_file=/run/dbus/pid -Dsystem_socket=/run/dbus/system_bus_socket -Dsystemd=disabled -Duser_session=false -Dtraditional_activation=true -Dxml_docs=disabled -Dmodular_tests=disabled")
 function self.pack()
     tools.pack_default()()

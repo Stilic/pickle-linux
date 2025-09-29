@@ -10,7 +10,7 @@ self.sources = {
 }
 
 function self.pack()
-    local install_dir = "filesystem/usr/lib/python" .. python.short_version .. "/site-packages"
+    local install_dir = "filesystem/lib/python" .. python.short_version .. "/site-packages"
     os.execute("mkdir -p " .. install_dir)
     os.execute("cp -ra source/installer " .. install_dir)
     os.execute("python3 -m compileall " .. install_dir)

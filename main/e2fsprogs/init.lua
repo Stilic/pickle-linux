@@ -8,7 +8,7 @@ self.sources = {
     self.version .. "/e2fsprogs-" .. self.version .. ".tar.xz" }
 }
 
-self.build = tools.build_gnu_configure(nil, nil, nil, "-Wno-implicit-function-declaration")
+self.build = tools.build_gnu_configure(nil, nil, "-Wno-implicit-function-declaration")
 self.pack = tools.pack_default()
 
 return self

@@ -14,14 +14,14 @@ function self.pack()
     os.execute("mkdir -p filesystem/etc/xml")
     os.execute("xmlcatalog --noout --create filesystem/etc/xml/docbook-xml")
 
-    os.execute("mkdir -p filesystem/usr/share/xml/docbook")
+    os.execute("mkdir -p filesystem/share/xml/docbook")
     for _, source in ipairs(self.sources) do
         local dir = source[1]
 
         lfs.chdir(dir)
 
-        lfs.mkdir("../filesystem/usr/share/xml/docbook/xml-dtd-" .. dir)
-        os.execute("cp -dr docbook.cat *.dtd ent *.mod ../filesystem/usr/share/xml/docbook/xml-dtd-" .. dir)
+        lfs.mkdir("../filesystem/share/xml/docbook/xml-dtd-" .. dir)
+        os.execute("cp -dr docbook.cat *.dtd ent *.mod ../filesystem/share/xml/docbook/xml-dtd-" .. dir)
 
         lfs.chdir("..")
 
@@ -51,12 +51,12 @@ function self.pack()
         end
 
         os.execute("xmlcatalog --noout --add rewriteSystem " ..
-            base_url .. " /usr/usr/share/xml/docbook/xml-dtd-" .. dir .. " " .. target_dir)
+            base_url .. " /share/xml/docbook/xml-dtd-" .. dir .. " " .. target_dir)
         os.execute("xmlcatalog --noout --add rewriteURI " ..
-            base_url .. " /usr/usr/share/xml/docbook/xml-dtd-" .. dir .. " " .. target_dir)
+            base_url .. " /share/xml/docbook/xml-dtd-" .. dir .. " " .. target_dir)
     end
 
-    os.execute("install -Dt filesystem/usr/share/licenses/" .. self.name .. " -m644 ../license-from-upstream")
+    os.execute("install -Dt filesystem/share/licenses/" .. self.name .. " -m644 ../license-from-upstream")
 end
 
 return self

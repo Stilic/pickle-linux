@@ -8,7 +8,7 @@ self.sources = {
     { "source", "https://openpam.des.dev/downloads/openpam-" .. self.version .. ".tar.gz" }
 }
 
-self.build = tools.build_gnu_configure("")
+self.build = tools.build_gnu_configure()
 function self.pack()
     tools.pack_default()()
     lfs.mkdir("filesystem/lib/pkgconfig")

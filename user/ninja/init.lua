@@ -14,8 +14,8 @@ function self.build()
     os.execute(tools.get_flags() .. " python configure.py --bootstrap")
 end
 function self.pack()
-    os.execute("mkdir -p filesystem/usr/bin")
-    os.execute("cp -a source/ninja filesystem/usr/bin")
+    lfs.mkdir("filesystem/bin")
+    os.execute("cp -a source/ninja filesystem/bin")
 end
 
 return self

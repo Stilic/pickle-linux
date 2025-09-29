@@ -1,3 +1,5 @@
+local lfs = require "lfs"
+
 local self = {}
 
 self.version = "1.8.0.0.1"
@@ -6,9 +8,9 @@ self.sources = {
 }
 
 function self.pack()
-    os.execute("mkdir -p filesystem/usr/bin")
-    os.execute("cp source/cottonfetch filesystem/usr/bin")
-    os.execute("chmod +x filesystem/usr/bin/*")
+    lfs.mkdir("filesystem/bin")
+    os.execute("cp source/cottonfetch filesystem/bin")
+    os.execute("chmod +x filesystem/bin/*")
 end
 
 return self

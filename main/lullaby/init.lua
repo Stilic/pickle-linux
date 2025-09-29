@@ -8,7 +8,7 @@ self.sources = {
     { "source", "https://github.com/Stilic/lullaby/archive/refs/tags/v" .. self.version .. ".tar.gz" }
 }
 
-self.build = tools.build_gnu_configure("", "CC=gcc version=" .. lua.short_version)
+self.build = tools.build_gnu_configure("CC=gcc version=" .. lua.short_version)
 self.pack = tools.pack_default()
 
 return self

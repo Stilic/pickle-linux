@@ -8,7 +8,7 @@ self.sources = {
     { "source", "https://github.com/argp-standalone/argp-standalone/archive/refs/tags/" .. self.version .. ".tar.gz" }
 }
 
-self.build = tools.build_autotools("")
+self.build = tools.build_autotools()
 function self.pack()
     lfs.mkdir("filesystem/include")
     os.execute("cp source/argp.h filesystem/include/argp.h")

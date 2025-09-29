@@ -10,7 +10,7 @@ self.sources = {
     { "source", "https://github.com/chimera-linux/turnstile/archive/refs/tags/v" .. self.version .. ".tar.gz" }
 }
 
-self.build = tools.build_meson("/", "-Ddinit=enabled -Drunit=disabled -Dpam_moddir=/lib/security -Dmanage_rundir=true -Dman=false")
+self.build = tools.build_meson("-Ddinit=enabled -Drunit=disabled -Dpam_moddir=/lib/security -Dmanage_rundir=true -Dman=false")
 function self.pack()
     tools.pack_default()()
 

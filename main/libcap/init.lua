@@ -11,7 +11,7 @@ self.sources = {
 function self.build()
     lfs.chdir("source")
 
-    tools.make("", "GOLANG=no")
+    tools.make("GOLANG=no")
     os.execute(
         'make install PKGCONFIGDIR=/lib/pkgconfig SBINDIR=/bin LIBDIR=/lib RAISE_SETFCAP=no DESTDIR="' ..
         lfs.currentdir() .. '/_install"')
