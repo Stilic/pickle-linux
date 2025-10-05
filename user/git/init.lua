@@ -11,9 +11,9 @@ self.sources = {
 function self.build()
     lfs.chdir("source")
     os.execute("make configure")
-    tools.build_gnu_configure("NO_TCLTK=YesPlease", "")()
+    tools.build_gnu_configure("--prefix=/usr NO_TCLTK=YesPlease", "")()
 end
 
-self.pack = tools.pack_default()
+self.pack = tools.pack_default("source/_install/usr")
 
 return self
