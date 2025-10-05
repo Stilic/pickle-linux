@@ -12,12 +12,12 @@ self.sources = {
 function self.build()
     lfs.chdir("source")
     os.execute(
-        './Configure -des -Dprefix=/ -Dman1ext=1p -Dman3ext=3p -Dman1dir=/share/man/man1 -Dman3dir=/share/man/man3 -Dccflags="' ..
+        './Configure -des -Dprefix=/usr -Dman1ext=1p -Dman3ext=3p -Dman1dir=/share/man/man1 -Dman3dir=/share/man/man3 -Dccflags="' ..
         tools.DEFAULT_CFLAGS .. ' -Wno-implicit-function-declaration"')
     os.execute("make" .. system.get_make_jobs())
     os.execute("make install DESTDIR='" .. lfs.currentdir() .. "/_install'")
 end
 
-self.pack = tools.pack_default()
+self.pack = tools.pack_default("source/_install/usr")
 
 return self
