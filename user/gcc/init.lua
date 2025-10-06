@@ -21,7 +21,7 @@ function self.build()
     lfs.chdir("build")
 
     os.execute(tools.get_flags() ..
-        " ../configure --prefix=/usr --includedir=/include --libdir=/lib --disable-multilib --disable-nls --with-system-zlib --enable-default-pie --enable-default-ssp --enable-host-pie --enable-languages=c,c++")
+        " ../configure --prefix=/usr --libdir=/lib --includedir=/include --disable-multilib --disable-nls --with-system-zlib --enable-default-pie --enable-default-ssp --enable-host-pie --enable-languages=c,c++")
     os.execute("CPATH=/usr/include make" .. system.get_make_jobs())
 
     os.execute('make install-strip DESTDIR="' .. install_dir .. '"')
@@ -35,7 +35,7 @@ end
 self.variants = {
     libs = {
         pack = function()
-            os.execute("cp -ra source/_install/lib filesystem-libs")
+            os.execute("cp -ra source/_install/{lib,include} filesystem-libs")
             os.execute("cp -ra source/_install/lib64/* filesystem-libs/lib")
         end
     }
