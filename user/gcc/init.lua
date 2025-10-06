@@ -20,6 +20,7 @@ function self.build()
     lfs.mkdir("build")
     lfs.chdir("build")
 
+    -- TODO: remove /include workaround
     os.execute(tools.get_flags() ..
         " ../configure --prefix=/usr --libdir=/lib --with-native-system-header-dir=/include --disable-multilib --disable-nls --with-system-zlib --enable-default-pie --enable-default-ssp --enable-host-pie --enable-languages=c,c++")
     os.execute("CPATH=/usr/include make" .. system.get_make_jobs())
