@@ -7,7 +7,7 @@ self.sources = {
     { "source", "https://github.com/chimera-linux/musl-fts/archive/refs/tags/v" .. self.version .. ".tar.gz" }
 }
 
-self.build = tools.build_gnu_configure()
+self.build = tools.build_gnu_configure("PREFIX=/")
 self.pack = tools.pack_default()
 
 return self
