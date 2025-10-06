@@ -11,7 +11,7 @@ self.sources = {
 function self.build()
     lfs.chdir("source")
     lfs.mkdir("_install")
-    tools.make("", 'PREFIX=/ DESTDIR="' .. lfs.currentdir() .. '/_install" all install')
+    tools.make("", 'DESTDIR="' .. lfs.currentdir() .. '/_install" all install')
 end
 
 function self.pack()
