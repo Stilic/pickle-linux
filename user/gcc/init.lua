@@ -21,7 +21,7 @@ function self.build()
     lfs.chdir("build")
 
     os.execute(tools.get_flags() ..
-        " ../configure --prefix= --disable-multilib --disable-nls --with-system-zlib --enable-default-pie --enable-default-ssp --enable-host-pie --enable-languages=c,c++")
+        " ../configure --prefix= --disable-multilib --disable-nls --with-system-zlib --with-native-system-header-dir=/include --enable-default-pie --enable-default-ssp --enable-host-pie --enable-languages=c,c++")
     os.execute("CPATH=/usr/include make" .. system.get_make_jobs())
 
     os.execute('make install-strip DESTDIR="' .. install_dir .. '"')
