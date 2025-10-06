@@ -35,7 +35,7 @@ end
 self.variants = {
     libs = {
         pack = function()
-            os.execute("cp -ra source/_install/{lib,include} filesystem-libs")
+            os.execute("cp -ra source/_install/lib source/_install/include filesystem-libs")
             os.execute("cp -ra source/_install/lib64/* filesystem-libs/lib")
         end
     }
