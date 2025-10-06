@@ -11,12 +11,11 @@ self.sources = {
 function self.build()
     lfs.chdir("source")
     lfs.mkdir("_install")
-    tools.make('DESTDIR="' .. lfs.currentdir() .. '/_install" all install')
+    tools.make('PREFIX= DESTDIR="' .. lfs.currentdir() .. '/_install" all install')
 end
 
 function self.pack()
     tools.pack_default()()
-    -- TODO: check if this fixes compat everywhere
     lfs.chdir("filesystem/lib")
     lfs.link("libterminfo.so", "libtinfo.so", true)
     lfs.link("libterminfo.so", "libtinfow.so", true)
