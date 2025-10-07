@@ -7,7 +7,7 @@ self.sources = {
     { "source", "https://www.oberhumer.com/opensource/lzo/download/lzo-" .. self.version .. ".tar.gz" }
 }
 
-self.build = tools.build_gnu_configure("", "--enable-shared")
+self.build = tools.build_gnu_configure("--enable-shared")
 self.pack = tools.pack_default()
 
 return self
