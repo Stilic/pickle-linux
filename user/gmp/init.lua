@@ -7,7 +7,7 @@ self.sources = {
     { "source", "https://gmplib.org/download/gmp/gmp-" .. self.version .. ".tar.xz" }
 }
 
-self.build = tools.build_gnu_configure("--prefix=/usr")
-self.pack = tools.pack_default("source/_install/usr")
+self.build = tools.build_gnu_configure()
+self.pack = tools.pack_default()
 
 return self
