@@ -3335,7 +3335,7 @@ CONFIG_DRM_PANEL_ORIENTATION_QUIRKS=y
 #
 # Frame buffer Devices
 #
-# CONFIG_FB is not set
+CONFIG_FB=Y
 # end of Frame buffer Devices
 
 #
