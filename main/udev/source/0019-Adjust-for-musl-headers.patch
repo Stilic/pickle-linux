@@ -335,7 +335,7 @@ diff --git a/src/network/netdev/wireguard.c b/src/network/netdev/wireguard.c
 index fed1be8d11..94b659fd23 100644
 --- a/src/network/netdev/wireguard.c
 +++ b/src/network/netdev/wireguard.c
-@@ -5,7 +5,7 @@
+@@ -6,7 +6,7 @@
  
  /* Make sure the net/if.h header is included before any linux/ one */
  #include <net/if.h>
