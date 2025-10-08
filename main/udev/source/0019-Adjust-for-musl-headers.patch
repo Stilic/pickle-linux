@@ -1,6 +1,6 @@
 diff -ura a/src/basic/linux/ethtool.h b/src/basic/linux/ethtool.h
---- a/src/basic/linux/ethtool.h	2025-10-08 16:03:25.673731581 +0000
-+++ b/src/basic/linux/ethtool.h	2025-10-08 16:03:35.839298285 +0000
+--- a/src/basic/linux/ethtool.h	2025-10-08 20:07:29.524460107 +0000
++++ b/src/basic/linux/ethtool.h	2025-10-08 20:08:02.072373394 +0000
 @@ -16,7 +16,8 @@
  
  #include <linux/const.h>
@@ -12,8 +12,8 @@ diff -ura a/src/basic/linux/ethtool.h b/src/basic/linux/ethtool.h
  #include <limits.h> /* for INT_MAX */
  
 diff -ura a/src/libsystemd-network/sd-dhcp6-client.c b/src/libsystemd-network/sd-dhcp6-client.c
---- a/src/libsystemd-network/sd-dhcp6-client.c	2025-10-08 16:03:25.705682624 +0000
-+++ b/src/libsystemd-network/sd-dhcp6-client.c	2025-10-08 16:03:35.872682624 +0000
+--- a/src/libsystemd-network/sd-dhcp6-client.c	2025-10-08 20:07:29.459254752 +0000
++++ b/src/libsystemd-network/sd-dhcp6-client.c	2025-10-08 20:08:02.073373394 +0000
 @@ -5,7 +5,7 @@
  
  #include <errno.h>
@@ -24,8 +24,8 @@ diff -ura a/src/libsystemd-network/sd-dhcp6-client.c b/src/libsystemd-network/sd
  
  #include "sd-dhcp6-client.h"
 diff -ura a/src/network/netdev/bareudp.c b/src/network/netdev/bareudp.c
---- a/src/network/netdev/bareudp.c	2025-10-08 16:03:25.720682624 +0000
-+++ b/src/network/netdev/bareudp.c	2025-10-08 16:03:35.887945564 +0000
+--- a/src/network/netdev/bareudp.c	2025-10-08 20:07:29.492816646 +0000
++++ b/src/network/netdev/bareudp.c	2025-10-08 20:08:02.073373394 +0000
 @@ -2,7 +2,7 @@
   * Copyright © 2020 VMware, Inc. */
  
@@ -36,8 +36,8 @@ diff -ura a/src/network/netdev/bareudp.c b/src/network/netdev/bareudp.c
  #include "bareudp.h"
  #include "netlink-util.h"
 diff -ura a/src/network/netdev/batadv.c b/src/network/netdev/batadv.c
---- a/src/network/netdev/batadv.c	2025-10-08 16:03:25.720354570 +0000
-+++ b/src/network/netdev/batadv.c	2025-10-08 16:03:35.887945564 +0000
+--- a/src/network/netdev/batadv.c	2025-10-08 20:07:29.492816646 +0000
++++ b/src/network/netdev/batadv.c	2025-10-08 20:08:02.074373394 +0000
 @@ -3,7 +3,7 @@
  #include <inttypes.h>
  #include <netinet/in.h>
@@ -48,8 +48,8 @@ diff -ura a/src/network/netdev/batadv.c b/src/network/netdev/batadv.c
  #include "batadv.h"
  #include "fileio.h"
 diff -ura a/src/network/netdev/bond.c b/src/network/netdev/bond.c
---- a/src/network/netdev/bond.c	2025-10-08 16:03:25.720682624 +0000
-+++ b/src/network/netdev/bond.c	2025-10-08 16:03:35.888682624 +0000
+--- a/src/network/netdev/bond.c	2025-10-08 20:07:29.492816646 +0000
++++ b/src/network/netdev/bond.c	2025-10-08 20:08:02.074373394 +0000
 @@ -1,7 +1,7 @@
  /* SPDX-License-Identifier: LGPL-2.1-or-later */
  
@@ -60,8 +60,8 @@ diff -ura a/src/network/netdev/bond.c b/src/network/netdev/bond.c
  #include "alloc-util.h"
  #include "bond.h"
 diff -ura a/src/network/netdev/bridge.c b/src/network/netdev/bridge.c
---- a/src/network/netdev/bridge.c	2025-10-08 16:03:25.720682624 +0000
-+++ b/src/network/netdev/bridge.c	2025-10-08 16:03:35.887945564 +0000
+--- a/src/network/netdev/bridge.c	2025-10-08 20:07:29.492816646 +0000
++++ b/src/network/netdev/bridge.c	2025-10-08 20:08:02.075373394 +0000
 @@ -2,7 +2,8 @@
  
  /* Make sure the net/if.h header is included before any linux/ one */
@@ -73,8 +73,8 @@ diff -ura a/src/network/netdev/bridge.c b/src/network/netdev/bridge.c
  #include <netinet/in.h>
  
 diff -ura a/src/network/netdev/dummy.c b/src/network/netdev/dummy.c
---- a/src/network/netdev/dummy.c	2025-10-08 16:03:25.720354570 +0000
-+++ b/src/network/netdev/dummy.c	2025-10-08 16:03:35.887945564 +0000
+--- a/src/network/netdev/dummy.c	2025-10-08 20:07:29.492816646 +0000
++++ b/src/network/netdev/dummy.c	2025-10-08 20:08:02.075373394 +0000
 @@ -1,6 +1,6 @@
  /* SPDX-License-Identifier: LGPL-2.1-or-later */
  
@@ -84,8 +84,8 @@ diff -ura a/src/network/netdev/dummy.c b/src/network/netdev/dummy.c
  #include "dummy.h"
  
 diff -ura a/src/network/netdev/geneve.c b/src/network/netdev/geneve.c
---- a/src/network/netdev/geneve.c	2025-10-08 16:03:25.720682624 +0000
-+++ b/src/network/netdev/geneve.c	2025-10-08 16:03:35.887945564 +0000
+--- a/src/network/netdev/geneve.c	2025-10-08 20:07:29.492816646 +0000
++++ b/src/network/netdev/geneve.c	2025-10-08 20:08:02.076373394 +0000
 @@ -2,7 +2,7 @@
  
  /* Make sure the net/if.h header is included before any linux/ one */
@@ -96,8 +96,8 @@ diff -ura a/src/network/netdev/geneve.c b/src/network/netdev/geneve.c
  
  #include "alloc-util.h"
 diff -ura a/src/network/netdev/ifb.c b/src/network/netdev/ifb.c
---- a/src/network/netdev/ifb.c	2025-10-08 16:03:25.720682624 +0000
-+++ b/src/network/netdev/ifb.c	2025-10-08 16:03:35.888682624 +0000
+--- a/src/network/netdev/ifb.c	2025-10-08 20:07:29.492816646 +0000
++++ b/src/network/netdev/ifb.c	2025-10-08 20:08:02.076373394 +0000
 @@ -1,7 +1,7 @@
  /* SPDX-License-Identifier: LGPL-2.1-or-later
   * Copyright © 2019 VMware, Inc. */
@@ -108,8 +108,8 @@ diff -ura a/src/network/netdev/ifb.c b/src/network/netdev/ifb.c
  #include "ifb.h"
  
 diff -ura a/src/network/netdev/ipoib.c b/src/network/netdev/ipoib.c
---- a/src/network/netdev/ipoib.c	2025-10-08 16:03:25.720682624 +0000
-+++ b/src/network/netdev/ipoib.c	2025-10-08 16:03:35.888682624 +0000
+--- a/src/network/netdev/ipoib.c	2025-10-08 20:07:29.492816646 +0000
++++ b/src/network/netdev/ipoib.c	2025-10-08 20:08:02.077373394 +0000
 @@ -1,6 +1,6 @@
  /* SPDX-License-Identifier: LGPL-2.1-or-later */
  
@@ -119,8 +119,8 @@ diff -ura a/src/network/netdev/ipoib.c b/src/network/netdev/ipoib.c
  
  #include "ipoib.h"
 diff -ura a/src/network/netdev/ipvlan.c b/src/network/netdev/ipvlan.c
---- a/src/network/netdev/ipvlan.c	2025-10-08 16:03:25.720682624 +0000
-+++ b/src/network/netdev/ipvlan.c	2025-10-08 16:03:35.887945564 +0000
+--- a/src/network/netdev/ipvlan.c	2025-10-08 20:07:29.492816646 +0000
++++ b/src/network/netdev/ipvlan.c	2025-10-08 20:08:02.077373394 +0000
 @@ -3,7 +3,7 @@
  /* Make sure the net/if.h header is included before any linux/ one */
  #include <net/if.h>
@@ -131,8 +131,8 @@ diff -ura a/src/network/netdev/ipvlan.c b/src/network/netdev/ipvlan.c
  #include "conf-parser.h"
  #include "ipvlan.h"
 diff -ura a/src/network/netdev/macsec.c b/src/network/netdev/macsec.c
---- a/src/network/netdev/macsec.c	2025-10-08 16:03:25.720354570 +0000
-+++ b/src/network/netdev/macsec.c	2025-10-08 16:03:35.887945564 +0000
+--- a/src/network/netdev/macsec.c	2025-10-08 20:07:29.492816646 +0000
++++ b/src/network/netdev/macsec.c	2025-10-08 20:08:02.078373394 +0000
 @@ -1,7 +1,7 @@
  /* SPDX-License-Identifier: LGPL-2.1-or-later */
  
@@ -143,8 +143,8 @@ diff -ura a/src/network/netdev/macsec.c b/src/network/netdev/macsec.c
  #include <linux/if_macsec.h>
  #include <linux/genetlink.h>
 diff -ura a/src/network/netdev/macvlan.c b/src/network/netdev/macvlan.c
---- a/src/network/netdev/macvlan.c	2025-10-08 16:03:25.720354570 +0000
-+++ b/src/network/netdev/macvlan.c	2025-10-08 16:03:35.887945564 +0000
+--- a/src/network/netdev/macvlan.c	2025-10-08 20:07:29.492816646 +0000
++++ b/src/network/netdev/macvlan.c	2025-10-08 20:08:02.078373394 +0000
 @@ -3,7 +3,7 @@
  /* Make sure the net/if.h header is included before any linux/ one */
  #include <net/if.h>
@@ -155,8 +155,8 @@ diff -ura a/src/network/netdev/macvlan.c b/src/network/netdev/macvlan.c
  #include "conf-parser.h"
  #include "macvlan.h"
 diff -ura a/src/network/netdev/netdev.c b/src/network/netdev/netdev.c
---- a/src/network/netdev/netdev.c	2025-10-08 16:03:25.720354570 +0000
-+++ b/src/network/netdev/netdev.c	2025-10-08 16:03:35.887945564 +0000
+--- a/src/network/netdev/netdev.c	2025-10-08 20:07:29.492816646 +0000
++++ b/src/network/netdev/netdev.c	2025-10-08 20:08:02.079373394 +0000
 @@ -3,7 +3,7 @@
  /* Make sure the net/if.h header is included before any linux/ one */
  #include <net/if.h>
@@ -167,8 +167,8 @@ diff -ura a/src/network/netdev/netdev.c b/src/network/netdev/netdev.c
  
  #include "alloc-util.h"
 diff -ura a/src/network/netdev/netdevsim.c b/src/network/netdev/netdevsim.c
---- a/src/network/netdev/netdevsim.c	2025-10-08 16:03:25.720682624 +0000
-+++ b/src/network/netdev/netdevsim.c	2025-10-08 16:03:35.887945564 +0000
+--- a/src/network/netdev/netdevsim.c	2025-10-08 20:07:29.492816646 +0000
++++ b/src/network/netdev/netdevsim.c	2025-10-08 20:08:02.079373394 +0000
 @@ -1,6 +1,6 @@
  /* SPDX-License-Identifier: LGPL-2.1-or-later */
  
@@ -178,8 +178,8 @@ diff -ura a/src/network/netdev/netdevsim.c b/src/network/netdev/netdevsim.c
  #include "netdevsim.h"
  
 diff -ura a/src/network/netdev/nlmon.c b/src/network/netdev/nlmon.c
---- a/src/network/netdev/nlmon.c	2025-10-08 16:03:25.720682624 +0000
-+++ b/src/network/netdev/nlmon.c	2025-10-08 16:03:35.887945564 +0000
+--- a/src/network/netdev/nlmon.c	2025-10-08 20:07:29.492816646 +0000
++++ b/src/network/netdev/nlmon.c	2025-10-08 20:08:02.080373394 +0000
 @@ -1,6 +1,6 @@
  /* SPDX-License-Identifier: LGPL-2.1-or-later */
  
@@ -189,8 +189,8 @@ diff -ura a/src/network/netdev/nlmon.c b/src/network/netdev/nlmon.c
  #include "nlmon.h"
  
 diff -ura a/src/network/netdev/tunnel.c b/src/network/netdev/tunnel.c
---- a/src/network/netdev/tunnel.c	2025-10-08 16:03:25.720682624 +0000
-+++ b/src/network/netdev/tunnel.c	2025-10-08 16:03:35.888682624 +0000
+--- a/src/network/netdev/tunnel.c	2025-10-08 20:07:29.492816646 +0000
++++ b/src/network/netdev/tunnel.c	2025-10-08 20:08:02.080373394 +0000
 @@ -2,7 +2,7 @@
  
  #include <netinet/in.h>
@@ -201,8 +201,8 @@ diff -ura a/src/network/netdev/tunnel.c b/src/network/netdev/tunnel.c
  #include <linux/ip.h>
  #include <linux/ip6_tunnel.h>
 diff -ura a/src/network/netdev/vcan.c b/src/network/netdev/vcan.c
---- a/src/network/netdev/vcan.c	2025-10-08 16:03:25.720682624 +0000
-+++ b/src/network/netdev/vcan.c	2025-10-08 16:03:35.888682624 +0000
+--- a/src/network/netdev/vcan.c	2025-10-08 20:07:29.492816646 +0000
++++ b/src/network/netdev/vcan.c	2025-10-08 20:08:02.081373394 +0000
 @@ -1,6 +1,6 @@
  /* SPDX-License-Identifier: LGPL-2.1-or-later */
  
@@ -212,8 +212,8 @@ diff -ura a/src/network/netdev/vcan.c b/src/network/netdev/vcan.c
  #include "vcan.h"
  
 diff -ura a/src/network/netdev/veth.c b/src/network/netdev/veth.c
---- a/src/network/netdev/veth.c	2025-10-08 16:03:25.720354570 +0000
-+++ b/src/network/netdev/veth.c	2025-10-08 16:03:35.887945564 +0000
+--- a/src/network/netdev/veth.c	2025-10-08 20:07:29.492816646 +0000
++++ b/src/network/netdev/veth.c	2025-10-08 20:08:02.081373394 +0000
 @@ -3,7 +3,7 @@
  /* Make sure the net/if.h header is included before any linux/ one */
  #include <net/if.h>
@@ -224,8 +224,8 @@ diff -ura a/src/network/netdev/veth.c b/src/network/netdev/veth.c
  #include <netinet/in.h>
  
 diff -ura a/src/network/netdev/vlan.c b/src/network/netdev/vlan.c
---- a/src/network/netdev/vlan.c	2025-10-08 16:03:25.720682624 +0000
-+++ b/src/network/netdev/vlan.c	2025-10-08 16:03:35.888682624 +0000
+--- a/src/network/netdev/vlan.c	2025-10-08 20:07:29.493373394 +0000
++++ b/src/network/netdev/vlan.c	2025-10-08 20:08:02.082373394 +0000
 @@ -3,7 +3,7 @@
  /* Make sure the net/if.h header is included before any linux/ one */
  #include <net/if.h>
@@ -236,8 +236,8 @@ diff -ura a/src/network/netdev/vlan.c b/src/network/netdev/vlan.c
  
  #include "parse-util.h"
 diff -ura a/src/network/netdev/vrf.c b/src/network/netdev/vrf.c
---- a/src/network/netdev/vrf.c	2025-10-08 16:03:25.720682624 +0000
-+++ b/src/network/netdev/vrf.c	2025-10-08 16:03:35.887945564 +0000
+--- a/src/network/netdev/vrf.c	2025-10-08 20:07:29.492816646 +0000
++++ b/src/network/netdev/vrf.c	2025-10-08 20:08:02.082373394 +0000
 @@ -2,8 +2,8 @@
  
  /* Make sure the net/if.h header is included before any linux/ one */
@@ -249,8 +249,8 @@ diff -ura a/src/network/netdev/vrf.c b/src/network/netdev/vrf.c
  #include "vrf.h"
  
 diff -ura a/src/network/netdev/vxcan.c b/src/network/netdev/vxcan.c
---- a/src/network/netdev/vxcan.c	2025-10-08 16:03:25.720682624 +0000
-+++ b/src/network/netdev/vxcan.c	2025-10-08 16:03:35.888682624 +0000
+--- a/src/network/netdev/vxcan.c	2025-10-08 20:07:29.492816646 +0000
++++ b/src/network/netdev/vxcan.c	2025-10-08 20:08:02.083373394 +0000
 @@ -1,7 +1,7 @@
  /* SPDX-License-Identifier: LGPL-2.1-or-later */
  
@@ -261,8 +261,8 @@ diff -ura a/src/network/netdev/vxcan.c b/src/network/netdev/vxcan.c
  #include "vxcan.h"
  
 diff -ura a/src/network/netdev/vxlan.c b/src/network/netdev/vxlan.c
---- a/src/network/netdev/vxlan.c	2025-10-08 16:03:25.720682624 +0000
-+++ b/src/network/netdev/vxlan.c	2025-10-08 16:03:35.888682624 +0000
+--- a/src/network/netdev/vxlan.c	2025-10-08 20:07:29.492816646 +0000
++++ b/src/network/netdev/vxlan.c	2025-10-08 20:08:02.083373394 +0000
 @@ -3,7 +3,7 @@
  /* Make sure the net/if.h header is included before any linux/ one */
  #include <net/if.h>
@@ -273,20 +273,20 @@ diff -ura a/src/network/netdev/vxlan.c b/src/network/netdev/vxlan.c
  #include "conf-parser.h"
  #include "alloc-util.h"
 diff -ura a/src/network/netdev/wireguard.c b/src/network/netdev/wireguard.c
---- a/src/network/netdev/wireguard.c	2025-10-08 16:03:25.720682624 +0000
-+++ b/src/network/netdev/wireguard.c	2025-10-08 16:06:34.699682624 +0000
-@@ -6,7 +6,7 @@
+--- a/src/network/netdev/wireguard.c	2025-10-08 20:07:29.492816646 +0000
++++ b/src/network/netdev/wireguard.c	2025-10-08 20:08:58.880373394 +0000
+@@ -5,7 +5,7 @@
+ 
  /* Make sure the net/if.h header is included before any linux/ one */
  #include <net/if.h>
- #include <netinet/in.h>
 -#include <linux/if_arp.h>
 +//#include <linux/if_arp.h>
  #include <linux/ipv6_route.h>
+ #include <netinet/in.h>
  #include <sys/ioctl.h>
- 
 diff -ura a/src/network/netdev/xfrm.c b/src/network/netdev/xfrm.c
---- a/src/network/netdev/xfrm.c	2025-10-08 16:03:25.720354570 +0000
-+++ b/src/network/netdev/xfrm.c	2025-10-08 16:03:35.887945564 +0000
+--- a/src/network/netdev/xfrm.c	2025-10-08 20:07:29.492816646 +0000
++++ b/src/network/netdev/xfrm.c	2025-10-08 20:08:02.110373394 +0000
 @@ -1,6 +1,6 @@
  /* SPDX-License-Identifier: LGPL-2.1-or-later */
  
@@ -296,8 +296,8 @@ diff -ura a/src/network/netdev/xfrm.c b/src/network/netdev/xfrm.c
  #include "missing_network.h"
  #include "xfrm.h"
 diff -ura a/src/network/networkd-dhcp-common.c b/src/network/networkd-dhcp-common.c
---- a/src/network/networkd-dhcp-common.c	2025-10-08 16:03:25.718682624 +0000
-+++ b/src/network/networkd-dhcp-common.c	2025-10-08 16:03:35.886682624 +0000
+--- a/src/network/networkd-dhcp-common.c	2025-10-08 20:07:29.492297699 +0000
++++ b/src/network/networkd-dhcp-common.c	2025-10-08 20:08:02.111373394 +0000
 @@ -1,7 +1,8 @@
  /* SPDX-License-Identifier: LGPL-2.1-or-later */
  
@@ -309,8 +309,8 @@ diff -ura a/src/network/networkd-dhcp-common.c b/src/network/networkd-dhcp-commo
  #include "bus-error.h"
  #include "bus-locator.h"
 diff -ura a/src/network/networkd-dhcp-prefix-delegation.c b/src/network/networkd-dhcp-prefix-delegation.c
---- a/src/network/networkd-dhcp-prefix-delegation.c	2025-10-08 16:03:25.722682624 +0000
-+++ b/src/network/networkd-dhcp-prefix-delegation.c	2025-10-08 16:03:35.889682624 +0000
+--- a/src/network/networkd-dhcp-prefix-delegation.c	2025-10-08 20:07:29.492297699 +0000
++++ b/src/network/networkd-dhcp-prefix-delegation.c	2025-10-08 20:08:02.112373394 +0000
 @@ -1,6 +1,5 @@
  /* SPDX-License-Identifier: LGPL-2.1-or-later */
  
@@ -328,8 +328,8 @@ diff -ura a/src/network/networkd-dhcp-prefix-delegation.c b/src/network/networkd
          assert(link);
  
 diff -ura a/src/network/networkd-dhcp-server.c b/src/network/networkd-dhcp-server.c
---- a/src/network/networkd-dhcp-server.c	2025-10-08 16:03:25.723682624 +0000
-+++ b/src/network/networkd-dhcp-server.c	2025-10-08 16:03:35.890682624 +0000
+--- a/src/network/networkd-dhcp-server.c	2025-10-08 20:07:29.493373394 +0000
++++ b/src/network/networkd-dhcp-server.c	2025-10-08 20:08:02.112373394 +0000
 @@ -1,7 +1,7 @@
  /* SPDX-License-Identifier: LGPL-2.1-or-later */
  
@@ -340,8 +340,8 @@ diff -ura a/src/network/networkd-dhcp-server.c b/src/network/networkd-dhcp-serve
  
  #include "sd-dhcp-server.h"
 diff -ura a/src/network/networkd-dhcp4.c b/src/network/networkd-dhcp4.c
---- a/src/network/networkd-dhcp4.c	2025-10-08 16:03:25.721682624 +0000
-+++ b/src/network/networkd-dhcp4.c	2025-10-08 16:03:35.888682624 +0000
+--- a/src/network/networkd-dhcp4.c	2025-10-08 20:07:29.493373394 +0000
++++ b/src/network/networkd-dhcp4.c	2025-10-08 20:08:02.113373394 +0000
 @@ -3,7 +3,7 @@
  #include <netinet/in.h>
  #include <netinet/ip.h>
@@ -352,8 +352,8 @@ diff -ura a/src/network/networkd-dhcp4.c b/src/network/networkd-dhcp4.c
  #include "alloc-util.h"
  #include "dhcp-client-internal.h"
 diff -ura a/src/network/networkd-ipv6ll.c b/src/network/networkd-ipv6ll.c
---- a/src/network/networkd-ipv6ll.c	2025-10-08 16:03:25.723682624 +0000
-+++ b/src/network/networkd-ipv6ll.c	2025-10-08 16:03:35.890682624 +0000
+--- a/src/network/networkd-ipv6ll.c	2025-10-08 20:07:29.498400205 +0000
++++ b/src/network/networkd-ipv6ll.c	2025-10-08 20:08:02.113373394 +0000
 @@ -1,7 +1,7 @@
  /* SPDX-License-Identifier: LGPL-2.1-or-later */
  
@@ -364,8 +364,8 @@ diff -ura a/src/network/networkd-ipv6ll.c b/src/network/networkd-ipv6ll.c
  #include "in-addr-util.h"
  #include "networkd-address.h"
 diff -ura a/src/network/networkd-link.c b/src/network/networkd-link.c
---- a/src/network/networkd-link.c	2025-10-08 16:03:25.717214630 +0000
-+++ b/src/network/networkd-link.c	2025-10-08 16:03:35.884726610 +0000
+--- a/src/network/networkd-link.c	2025-10-08 20:07:29.495373394 +0000
++++ b/src/network/networkd-link.c	2025-10-08 20:08:02.114373394 +0000
 @@ -4,7 +4,7 @@
  #include <net/if.h>
  #include <netinet/in.h>
@@ -376,8 +376,8 @@ diff -ura a/src/network/networkd-link.c b/src/network/networkd-link.c
  #include <linux/netdevice.h>
  #include <sys/socket.h>
 diff -ura a/src/network/networkd-ndisc.c b/src/network/networkd-ndisc.c
---- a/src/network/networkd-ndisc.c	2025-10-08 16:03:25.719682624 +0000
-+++ b/src/network/networkd-ndisc.c	2025-10-08 16:03:35.886682624 +0000
+--- a/src/network/networkd-ndisc.c	2025-10-08 20:07:29.493373394 +0000
++++ b/src/network/networkd-ndisc.c	2025-10-08 20:08:02.115373394 +0000
 @@ -6,7 +6,7 @@
  #include <arpa/inet.h>
  #include <netinet/icmp6.h>
@@ -388,8 +388,8 @@ diff -ura a/src/network/networkd-ndisc.c b/src/network/networkd-ndisc.c
  #include "sd-ndisc.h"
  
 diff -ura a/src/network/networkd-setlink.c b/src/network/networkd-setlink.c
---- a/src/network/networkd-setlink.c	2025-10-08 16:03:25.718682624 +0000
-+++ b/src/network/networkd-setlink.c	2025-10-08 16:03:35.886682624 +0000
+--- a/src/network/networkd-setlink.c	2025-10-08 20:07:29.492297699 +0000
++++ b/src/network/networkd-setlink.c	2025-10-08 20:08:02.115373394 +0000
 @@ -2,7 +2,7 @@
  
  #include <netinet/in.h>
@@ -400,8 +400,8 @@ diff -ura a/src/network/networkd-setlink.c b/src/network/networkd-setlink.c
  
  #include "missing_network.h"
 diff -ura a/src/network/networkd-sysctl.c b/src/network/networkd-sysctl.c
---- a/src/network/networkd-sysctl.c	2025-10-08 16:03:25.721682624 +0000
-+++ b/src/network/networkd-sysctl.c	2025-10-08 16:03:35.888682624 +0000
+--- a/src/network/networkd-sysctl.c	2025-10-08 20:07:29.492297699 +0000
++++ b/src/network/networkd-sysctl.c	2025-10-08 20:08:02.116373394 +0000
 @@ -2,7 +2,7 @@
  
  #include <netinet/in.h>
@@ -412,8 +412,8 @@ diff -ura a/src/network/networkd-sysctl.c b/src/network/networkd-sysctl.c
  #include "af-list.h"
  #include "missing_network.h"
 diff -ura a/src/shared/netif-util.c b/src/shared/netif-util.c
---- a/src/shared/netif-util.c	2025-10-08 16:03:25.738682624 +0000
-+++ b/src/shared/netif-util.c	2025-10-08 16:03:35.907682624 +0000
+--- a/src/shared/netif-util.c	2025-10-08 20:07:29.449373394 +0000
++++ b/src/shared/netif-util.c	2025-10-08 20:08:02.116373394 +0000
 @@ -1,7 +1,7 @@
  /* SPDX-License-Identifier: LGPL-2.1-or-later */
  
@@ -424,8 +424,8 @@ diff -ura a/src/shared/netif-util.c b/src/shared/netif-util.c
  #include "arphrd-util.h"
  #include "device-util.h"
 diff -ura a/src/udev/udev-builtin-net_id.c b/src/udev/udev-builtin-net_id.c
---- a/src/udev/udev-builtin-net_id.c	2025-10-08 16:03:25.660938089 +0000
-+++ b/src/udev/udev-builtin-net_id.c	2025-10-08 16:03:35.826126503 +0000
+--- a/src/udev/udev-builtin-net_id.c	2025-10-08 20:07:29.509553753 +0000
++++ b/src/udev/udev-builtin-net_id.c	2025-10-08 20:08:02.117373394 +0000
 @@ -19,7 +19,7 @@
  #include <stdarg.h>
  #include <unistd.h>
