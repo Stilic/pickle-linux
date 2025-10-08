@@ -9,7 +9,7 @@ self.sources = {
     { "source", config.gnu_site .. "/mpfr/mpfr-" .. self.version .. ".tar.xz" }
 }
 
-self.build = tools.build_gnu_configure()
-self.pack = tools.pack_default()
+self.build = tools.build_gnu_configure("--prefix=/usr")
+self.pack = tools.pack_default("source/_install/usr")
 
 return self
