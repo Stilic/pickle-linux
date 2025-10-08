@@ -4,6 +4,7 @@ local tools = require "tools"
 local self = {}
 
 self.version = "2.49.0"
+self.dependencies = { pkg "user.curl" }
 self.sources = {
     { "source", "https://www.kernel.org/pub/software/scm/git/git-" .. self.version .. ".tar.xz" }
 }
