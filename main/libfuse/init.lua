@@ -10,6 +10,11 @@ self.sources = {
 }
 
 self.build = tools.build_meson("-Ddisable-mtab=true")
-self.pack = tools.pack_default()
+function self.pack()
+    tools.pack_default()()
+
+    os.execute("mv filesystem/include/fuse3/* filesystem/include")
+    lfs.rmdir("filesystem/include/fuse3")
+end
 
 return self
