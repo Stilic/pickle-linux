@@ -4,7 +4,7 @@ local config = require "neld.config"
 local self = {}
 
 self.version = "1.3.1"
-self.dependencies = {pkg "user.gmp", pkg "user.mpfr"}
+-- self.dependencies = {pkg "user.gmp", pkg "user.mpfr"}
 self.sources = {
     { "source", config.gnu_site .. "/mpc/mpc-" .. self.version .. ".tar.gz" }
 }

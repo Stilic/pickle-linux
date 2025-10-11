@@ -6,7 +6,7 @@ local config = require "neld.config"
 local self = {}
 
 self.version = "14.2.0"
-self.dependencies = { pkg "user.gmp", pkg "user.mpfr", pkg "user.mpc" }
+-- self.dependencies = { pkg "user.gmp", pkg "user.mpfr", pkg "user.mpc" }
 self.dev_dependencies = { pkg "user.binutils" }
 self.sources = {
     { "source", config.gnu_site .. "/gcc/gcc-" .. self.version .. "/gcc-" .. self.version .. ".tar.xz" }
