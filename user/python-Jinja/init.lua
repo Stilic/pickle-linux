@@ -5,7 +5,7 @@ local self = {}
 
 self.version = "3.1.6"
 self.dependencies = { pkg "user.python-MarkupSafe" }
-self.dev_dependencies = { pkg "user.python-flit-core" }
+self.dev_dependencies = { pkg "user.python-flit-core", pkg "user.python-installer" }
 self.sources = {
     { "source", "https://github.com/pallets/jinja/archive/refs/tags/" .. self.version .. ".tar.gz" }
 }

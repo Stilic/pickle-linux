@@ -5,7 +5,7 @@ local self = {}
 
 self.version = "1.9.1"
 self.dependencies = { pkg "user.ninja" }
-self.dev_dependencies = { pkg "user.python-gpep517", pkg "user.python-setuptools" }
+self.dev_dependencies = { pkg "user.python-gpep517", pkg "user.python-setuptools", pkg "user.python-installer" }
 self.sources = {
     { "source", "https://github.com/mesonbuild/meson/releases/download/" .. self.version .. "/meson-" .. self.version .. ".tar.gz" }
 }
