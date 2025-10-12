@@ -5,6 +5,7 @@ local self = {}
 
 self.version = "80.9.0"
 self.dependencies = { pkg "user.python", pkg "user.python-packaging", pkg "user.python-installer" }
+self.dev_dependencies = { pkg "user.python-gpep517" }
 self.sources = {
     { "source", "https://github.com/pypa/setuptools/archive/refs/tags/v" .. self.version .. ".tar.gz" }
 }
