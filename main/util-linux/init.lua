@@ -3,7 +3,7 @@ local tools = require "tools"
 local self = {}
 
 self.version = "2.41"
-self.dev_dependencies = { pkg "user.meson" }
+self.dev_dependencies = { pkg "user.meson", "user.bash" }
 self.sources = {
     { "source", "https://www.kernel.org/pub/linux/utils/util-linux/v" .. self.version .. "/util-linux-" .. self.version .. ".tar.xz" }
 }
