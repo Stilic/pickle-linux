@@ -11,9 +11,9 @@ if [ "$1" != "stop" ]; then
   mkdir -m og-w /run/dbus
 
   # Configure random number generator
-  # if [ -e /var/state/random-seed ]; then
-  #   cat /var/state/random-seed > /dev/urandom;
-  # fi
+  if [ -e /var/state/random-seed ]; then
+    cat /var/state/random-seed > /dev/urandom;
+  fi
   
   # Configure network
   /sbin/ifconfig lo 127.0.0.1
@@ -26,7 +26,7 @@ else
   # The system is being shut down
   
   # echo "Saving random number seed..."
-  # POOLSIZE="$(cat /proc/sys/kernel/random/poolsize)"
-  # dd if=/dev/urandom of=/var/state/random-seed bs="$POOLSIZE" count=1 2> /dev/null
+  POOLSIZE="$(cat /proc/sys/kernel/random/poolsize)"
+  dd if=/dev/urandom of=/var/state/random-seed bs="$POOLSIZE" count=1 2> /dev/null
 
 fi;
