@@ -4,6 +4,7 @@ local tools = require "tools"
 local self = {}
 
 self.version = "2.14.2"
+self.dev_dependencies = { pkg "user.python" }
 self.sources = {
     { "source", "https://download.gnome.org/sources/libxml2/" .. self.version:sub(1, 4) .. "/libxml2-" .. self.version .. ".tar.xz" }
 }
