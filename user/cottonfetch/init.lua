@@ -3,6 +3,7 @@ local lfs = require "lfs"
 local self = {}
 
 self.version = "1.8.0.0.1"
+self.dependencies = { pkg "user.bash" }
 self.sources = {
     { "source", "https://github.com/servalx4/cottonfetch/archive/refs/tags/i-hate-github.tar.gz" }
 }
