@@ -4,11 +4,13 @@ local tools = require "tools"
 local self = {}
 
 self.version = "0.8.12"
+self.dev_dependencies = { pkg "user.bash" }
 self.sources = {
     { "source", "https://landley.net/toybox/downloads/toybox-" .. self.version .. ".tar.gz" }
 }
 
 function self.build()
+    os.execute("find source -type f -exec sed -i 's|^#!/bin/bash|#!/usr/bin/bash|' {} +")
     tools.build_kconfig()()
     os.execute("make install")
 end
