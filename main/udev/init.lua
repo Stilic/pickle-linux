@@ -4,10 +4,7 @@ local tools = require "tools"
 local self = {}
 
 self.version = "256.17"
-self.dev_dependencies = {
-    pkg "user.meson", pkg "user.pkgconf", pkg "user.perl",
-    pkg "user.python-Jinja"
-}
+self.dev_dependencies = { pkg "user.bash", pkg "user.meson", pkg "user.pkgconf", pkg "user.perl", pkg "user.python-Jinja"}
 self.sources = {
     { "source", "https://github.com/systemd/systemd/archive/refs/tags/v" .. self.version .. ".tar.gz" }
 }
