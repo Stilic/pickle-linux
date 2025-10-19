@@ -11,7 +11,7 @@ function self.build()
     lfs.chdir("source")
 
     os.execute("cp ../../pconfig.h .")
-    os.execute("gcc -o oksh -D_GNU_SOURCE -DEMACS -DVI -DSMALL *.c")
+    os.execute("gcc -o oksh -D_GNU_SOURCE -DEMACS -DVI *.c")
 end
 
 function self.pack()
