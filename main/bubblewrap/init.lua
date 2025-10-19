@@ -8,7 +8,7 @@ self.sources = {
     { "source", "https://github.com/containers/bubblewrap/releases/download/v" .. self.version .. "/bubblewrap-" .. self.version .. ".tar.xz" }
 }
 
-self.build = tools.build_meson()
+self.build = tools.build_meson("-Dtests=false")
 self.pack = tools.pack_default()
 
 return self
