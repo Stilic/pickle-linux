@@ -3,13 +3,13 @@ local tools = require "tools"
 local self = {}
 
 self.version = "2.41"
-self.dev_dependencies = { pkg "user.meson" }
+self.dev_dependencies = { pkg "user.meson", pkg "user.bash" }
 self.sources = {
     { "source", "https://www.kernel.org/pub/linux/utils/util-linux/v" .. self.version .. "/util-linux-" .. self.version .. ".tar.xz" }
 }
 
 function self.build()
-    os.execute("find source -type f -exec sed -i 's|^#!/bin/bash|#!/bin/sh|' {} +")
+    os.execute("find source -type f -exec sed -i 's|^#!/bin/bash|#!/usr/bin/bash|' {} +")
     tools.build_meson(
         "-Dbuild-newgrp=disabled -Dbuild-more=disabled -Dbuild-kill=disabled -Dbuild-nologin=disabled -Dbuild-liblastlog2=disabled -Dbuild-pam-lastlog2=disabled")()
 end
