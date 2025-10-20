@@ -9,14 +9,13 @@ self.sources = {
 
 function self.build()
     lfs.chdir("source")
-
     os.execute("cp ../../pconfig.h .")
-    os.execute("gcc -o oksh -D_GNU_SOURCE -DEMACS -DVI *.c")
+    os.execute("gcc -o sh -D_GNU_SOURCE -DEMACS -DVI *.c")
 end
 
 function self.pack()
     lfs.mkdir("filesystem/bin")
-    os.execute("cp source/oksh filesystem/bin/sh")
+    os.execute("cp source/sh filesystem/bin")
 end
 
 return self
