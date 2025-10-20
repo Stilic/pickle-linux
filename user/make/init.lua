@@ -1,20 +1,14 @@
-local lfs = require "lfs"
+local tools = require "tools"
+local config = require "neld.config"
 
 local self = {}
 
-self.version = "2.0.3"
+self.version = "4.4.1"
 self.sources = {
-    { "source", "https://frippery.org/make/pdpmake-" .. self.version .. ".tgz" }
+    { "source", config.gnu_site .. "/make/make-" .. self.version .. ".tar.gz" }
 }
 
-function self.build()
-    lfs.chdir("source")
-    os.execute("gcc -o make *.c")
-end
-
-function self.pack()
-    lfs.mkdir("filesystem/bin")
-    os.execute("cp source/make filesystem/bin")
-end
+self.build = tools.build_gnu_configure()
+self.pack = tools.pack_default()
 
 return self
