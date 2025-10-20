@@ -9,6 +9,9 @@ self.sources = {
 }
 
 self.build = tools.build_gnu_configure("--prefix=/usr")
-self.pack = tools.pack_default("source/_install/usr")
+function self.pack()
+    tools.pack_default("source/_install/usr")()
+    os.remove("source/_install/usr/bin/yacc")
+end
 
 return self
