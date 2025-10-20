@@ -5,6 +5,7 @@ local config = require "neld.config"
 local self = {}
 
 self.version = "5.2.37"
+self.dev_dependencies = { pkg "user.bison" }
 self.sources = {
     { "source", config.gnu_site .. "/bash/bash-" .. self.version .. ".tar.gz" }
 }
