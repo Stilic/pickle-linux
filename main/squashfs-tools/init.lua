@@ -16,7 +16,7 @@ function self.build()
     lfs.mkdir("_install")
     lfs.chdir("squashfs-tools")
 
-    os.execute("make" .. system.get_make_jobs() .. " XATTR_SUPPORT=1 XZ_SUPPORT=1 LZO_SUPPORT=1 ZSTD_SUPPORT=1")
+    tools.make("XATTR_SUPPORT=1 XZ_SUPPORT=1 LZO_SUPPORT=1 ZSTD_SUPPORT=1")
 
     os.execute('make install INSTALL_MANPAGES_DIR="' ..
         source_dir .. '/share/man/man1" INSTALL_PREFIX="' .. source_dir .. '/_install"')

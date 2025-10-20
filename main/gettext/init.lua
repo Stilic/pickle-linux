@@ -1,17 +1,19 @@
+local lfs = require "lfs"
 local tools = require "tools"
-local config = require "neld.config"
 
 local self = {}
 
-self.version = "0.24"
+self.version = "0.3.2"
 self.sources = {
-    { "source", config.gnu_site .. "/gettext/gettext-" .. self.version .. ".tar.gz" }
+    { "source", "http://ftp.barfooze.de/pub/sabotage/tarballs/gettext-tiny-" .. self.version .. ".tar.xz" }
 }
 
-self.build = tools.build_gnu_configure()
-function self.pack()
-    tools.pack_default()()
-    os.remove("filesystem/lib/GNU.Gettext.dll")
+function self.build()
+    tools.make("LIBINTL=MUSL")
+    lfs.mkdir("_install")
+    os.execute('make install prefix=/ LIBINTL=MUSL DESTDIR="' .. lfs.currentdir() .. '/_install"')
 end
+
+self.pack = tools.pack_default()
 
 return self

@@ -1,14 +1,20 @@
-local tools = require "tools"
-local config = require "neld.config"
+local lfs = require "lfs"
 
 local self = {}
 
-self.version = "4.9"
+self.version = "1.0.0"
 self.sources = {
-    { "source", config.gnu_site .. "/sed/sed-" .. self.version .. ".tar.xz" }
+    { "source", "https://github.com/Stilic/sed/archive/refs/tags/v" .. self.version .. ".tar.gz" }
 }
 
-self.build = tools.build_gnu_configure()
-self.pack = tools.pack_default()
+function self.build()
+    lfs.chdir("source")
+    os.execute("gcc -o sed -std=c11 -include linux_compat.h *.c")
+end
+
+function self.pack()
+    lfs.mkdir("filesystem/bin")
+    os.execute("cp source/sed filesystem/bin")
+end
 
 return self
