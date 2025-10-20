@@ -9,7 +9,10 @@ self.sources = {
 }
 
 function self.build()
+    lfs.chdir("source")
+
     tools.make("LIBINTL=MUSL")
+
     lfs.mkdir("_install")
     os.execute('make install prefix=/ LIBINTL=MUSL DESTDIR="' .. lfs.currentdir() .. '/_install"')
 end
