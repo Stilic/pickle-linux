@@ -1,7 +1,7 @@
 #define __dead __attribute__((__noreturn__))
 #define HAVE_ASPRINTF
 #define HAVE_CONFSTR
-#define HAVE_CURSES
+#define NO_CURSES
 #define HAVE_ISSETUGID
 #define HAVE_REALLOCARRAY
 #define HAVE_SETRESGID
