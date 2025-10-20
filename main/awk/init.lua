@@ -3,9 +3,9 @@ local tools = require "tools"
 
 local self = {}
 
-self.version = "2.0.3"
+self.version = "20250116"
 self.sources = {
-    { "source", "https://frippery.org/make/pdpmake-" .. self.version .. ".tgz" }
+    { "source", "https://github.com/onetrueawk/awk/archive/refs/tags/" .. self.version .. ".tar.gz" }
 }
 
 function self.build()
