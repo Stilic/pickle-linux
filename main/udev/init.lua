@@ -30,7 +30,7 @@ function self.pack()
     os.execute("cp -a ../source/_install/lib/pkgconfig/udev.pc lib/pkgconfig")
 
     os.execute("mkdir -p share/bash-completion/completions")
-    os.execute("cp -a ../source/_install/share/bash-completion/completions/udevadm share/bash-completion/completions")
+    os.execute("cp -a ../source/_install/lib/bash-completion/completions/udevadm share/bash-completion/completions")
 
     -- TODO: add tmpfiles
     os.execute("cp -a ../../80-net-name-slot.rules lib/udev/rules.d")
