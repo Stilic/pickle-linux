@@ -1,14 +1,12 @@
 local tools = require "tools"
 
-local self = {}
 
-self.version = "8.13.0"
-self.dependencies = { pkg "user.nghttp2", pkg "user.libidn2", pkg "user.libpsl" }
-self.sources = {
-    { "source", "https://curl.se/download/curl-" .. self.version .. ".tar.xz" }
+version = "8.13.0"
+dependencies = { pkg "user.nghttp2", pkg "user.libidn2", pkg "user.libpsl" }
+sources = {
+    { "source", "https://curl.se/download/curl-" .. version .. ".tar.xz" }
 }
 
-self.build = tools.build_gnu_configure("--with-openssl")
-self.pack = tools.pack_default()
+build = tools.build_gnu_configure("--with-openssl")
+pack = tools.pack_default()
 
-return self

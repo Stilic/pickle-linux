@@ -1,14 +1,12 @@
 local tools = require "tools"
 
-local self = {}
 
-self.version = "1.1.43"
-self.dev_dependencies = { pkg "user.python" }
-self.sources = {
-    { "source", "https://download.gnome.org/sources/libxslt/" .. self.version:sub(1, 3) .. "/libxslt-" .. self.version .. ".tar.xz" }
+version = "1.1.43"
+dev_dependencies = { pkg "user.python" }
+sources = {
+    { "source", "https://download.gnome.org/sources/libxslt/" .. version:sub(1, 3) .. "/libxslt-" .. version .. ".tar.xz" }
 }
 
-self.build = tools.build_gnu_configure("--enable-static")
-self.pack = tools.pack_default()
+build = tools.build_gnu_configure("--enable-static")
+pack = tools.pack_default()
 
-return self

@@ -2,14 +2,13 @@ local lfs = require "lfs"
 local system = require "system"
 local tools = require "tools"
 
-local self = {}
 
-self.version = "6.0"
-self.sources = {
-    { "source", "https://github.com/thejoshwolfe/info-zip-unzip/archive/refs/tags/" .. self.version .. ".tar.gz" }
+version = "6.0"
+sources = {
+    { "source", "https://github.com/thejoshwolfe/info-zip-unzip/archive/refs/tags/" .. version .. ".tar.gz" }
 }
 
-function self.build()
+function build()
     lfs.chdir("source")
 
     os.execute("make" .. system.get_make_jobs() ..
@@ -22,6 +21,5 @@ function self.build()
         current_dir .. '/share/man/man1" prefix="' .. current_dir .. '/_install" install')
 end
 
-self.pack = tools.pack_default()
+pack = tools.pack_default()
 
-return self

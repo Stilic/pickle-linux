@@ -1,16 +1,14 @@
 local lfs = require "lfs"
 local tools = require "tools"
 
-local self = {}
 
-self.version = "1.9.1"
-self.dependencies = { pkg "user.ninja" }
-self.dev_dependencies = { pkg "user.python-gpep517", pkg "user.python-setuptools", pkg "user.python-installer" }
-self.sources = {
-    { "source", "https://github.com/mesonbuild/meson/releases/download/" .. self.version .. "/meson-" .. self.version .. ".tar.gz" }
+version = "1.9.1"
+dependencies = { pkg "user.ninja" }
+dev_dependencies = { pkg "user.python-gpep517", pkg "user.python-setuptools", pkg "user.python-installer" }
+sources = {
+    { "source", "https://github.com/mesonbuild/meson/releases/download/" .. version .. "/meson-" .. version .. ".tar.gz" }
 }
 
-self.build = tools.build_python()
-self.pack = tools.pack_python()
+build = tools.build_python()
+pack = tools.pack_python()
 
-return self

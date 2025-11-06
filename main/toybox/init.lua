@@ -1,23 +1,21 @@
 local lfs = require "lfs"
 local tools = require "tools"
 
-local self = {}
 
-self.version = "0.8.12"
-self.dev_dependencies = { pkg "user.bash" }
-self.sources = {
-    { "source", "https://landley.net/toybox/downloads/toybox-" .. self.version .. ".tar.gz" }
+version = "0.8.12"
+dev_dependencies = { pkg "user.bash" }
+sources = {
+    { "source", "https://landley.net/toybox/downloads/toybox-" .. version .. ".tar.gz" }
 }
 
-function self.build()
+function build()
     os.execute("find source -type f -exec sed -i 's|^#!/bin/bash|#!/usr/bin/bash|' {} +")
     tools.build_kconfig()()
     os.execute("make install")
 end
 
-function self.pack()
+function pack()
     os.execute("cp -ra source/install/bin source/install/sbin filesystem")
     os.execute("cp -ra source/install/usr/bin source/install/usr/sbin filesystem")
 end
 
-return self

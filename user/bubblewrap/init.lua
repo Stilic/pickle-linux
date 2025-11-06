@@ -1,14 +1,12 @@
 local tools = require "tools"
 
-local self = {}
 
-self.version = "0.11.0"
-self.dev_dependencies = { pkg "user.meson", pkg "user.pkgconf", pkg "user.docbook-xsl" }
-self.sources = {
-    { "source", "https://github.com/containers/bubblewrap/releases/download/v" .. self.version .. "/bubblewrap-" .. self.version .. ".tar.xz" }
+version = "0.11.0"
+dev_dependencies = { pkg "user.meson", pkg "user.pkgconf", pkg "user.docbook-xsl" }
+sources = {
+    { "source", "https://github.com/containers/bubblewrap/releases/download/v" .. version .. "/bubblewrap-" .. version .. ".tar.xz" }
 }
 
-self.build = tools.build_meson("-Dtests=false")
-self.pack = tools.pack_default()
+build = tools.build_meson("-Dtests=false")
+pack = tools.pack_default()
 
-return self

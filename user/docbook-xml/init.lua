@@ -1,21 +1,20 @@
 local lfs = require "lfs"
 
-local self = {}
 
-self.version = "4.5"
-self.sources = {
-    { self.version, "https://www.oasis-open.org/docbook/xml/" .. self.version .. "/docbook-xml-" .. self.version .. ".zip" },
+version = "4.5"
+sources = {
+    { version, "https://www.oasis-open.org/docbook/xml/" .. version .. "/docbook-xml-" .. version .. ".zip" },
     { "4.4",        "https://www.oasis-open.org/docbook/xml/4.4/docbook-xml-4.4.zip" },
     { "4.3",        "https://www.oasis-open.org/docbook/xml/4.3/docbook-xml-4.3.zip" },
     { "4.2",        "https://www.oasis-open.org/docbook/xml/4.2/docbook-xml-4.2.zip" }
 }
 
-function self.pack()
+function pack()
     os.execute("mkdir -p filesystem/etc/xml")
     os.execute("xmlcatalog --noout --create filesystem/etc/xml/docbook-xml")
 
     os.execute("mkdir -p filesystem/share/xml/docbook")
-    for _, source in ipairs(self.sources) do
+    for _, source in ipairs(sources) do
         local dir = source[1]
 
         lfs.chdir(dir)
@@ -56,7 +55,6 @@ function self.pack()
             base_url .. " /share/xml/docbook/xml-dtd-" .. dir .. " " .. target_dir)
     end
 
-    os.execute("install -Dt filesystem/share/licenses/" .. self.name .. " -m644 ../license-from-upstream")
+    os.execute("install -Dt filesystem/share/licenses/" .. name .. " -m644 ../license-from-upstream")
 end
 
-return self

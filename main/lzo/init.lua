@@ -1,13 +1,11 @@
 local tools = require "tools"
 
-local self = {}
 
-self.version = "2.10"
-self.sources = {
-    { "source", "https://www.oberhumer.com/opensource/lzo/download/lzo-" .. self.version .. ".tar.gz" }
+version = "2.10"
+sources = {
+    { "source", "https://www.oberhumer.com/opensource/lzo/download/lzo-" .. version .. ".tar.gz" }
 }
 
-self.build = tools.build_gnu_configure("--enable-shared")
-self.pack = tools.pack_default()
+build = tools.build_gnu_configure("--enable-shared")
+pack = tools.pack_default()
 
-return self

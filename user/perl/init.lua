@@ -2,14 +2,13 @@ local lfs = require "lfs"
 local system = require "system"
 local tools = require "tools"
 
-local self = {}
 
-self.version = "5.40.2"
-self.sources = {
-    { "source", "https://www.cpan.org/src/" .. self.version:sub(1, 1) .. ".0/perl-" .. self.version .. ".tar.gz" }
+version = "5.40.2"
+sources = {
+    { "source", "https://www.cpan.org/src/" .. version:sub(1, 1) .. ".0/perl-" .. version .. ".tar.gz" }
 }
 
-function self.build()
+function build()
     lfs.chdir("source")
     os.execute(
         './Configure -des -Dprefix=/usr -Dman1ext=1p -Dman3ext=3p -Dman1dir=/usr/share/man/man1 -Dman3dir=/usr/share/man/man3 -Dccflags="' ..
@@ -18,6 +17,5 @@ function self.build()
     os.execute("make install DESTDIR='" .. lfs.currentdir() .. "/_install'")
 end
 
-self.pack = tools.pack_default("source/_install/usr")
+pack = tools.pack_default("source/_install/usr")
 
-return self

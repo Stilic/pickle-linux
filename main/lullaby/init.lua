@@ -1,14 +1,12 @@
 local tools = require "tools"
 local lua = pkg "main.lua"
 
-local self = {}
 
-self.version = "0.0.2"
-self.sources = {
-    { "source", "https://github.com/Stilic/lullaby/archive/refs/tags/v" .. self.version .. ".tar.gz" }
+version = "0.0.2"
+sources = {
+    { "source", "https://github.com/Stilic/lullaby/archive/refs/tags/v" .. version .. ".tar.gz" }
 }
 
-self.build = tools.build_gnu_configure("CC=gcc version=" .. lua.short_version)
-self.pack = tools.pack_default()
+build = tools.build_gnu_configure("CC=gcc version=" .. lua.short_version)
+pack = tools.pack_default()
 
-return self

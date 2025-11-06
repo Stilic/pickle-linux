@@ -2,21 +2,19 @@ local lfs = require "lfs"
 local tools = require "tools"
 local python = pkg "user.python"
 
-local self = {}
 
-self.version = "3.12.0"
-self.dependencies = { pkg "user.python" }
-self.sources = {
-    { "source", "https://github.com/pypa/flit/archive/refs/tags/" .. self.version .. ".tar.gz" }
+version = "3.12.0"
+dependencies = { pkg "user.python" }
+sources = {
+    { "source", "https://github.com/pypa/flit/archive/refs/tags/" .. version .. ".tar.gz" }
 }
 
-self.build = tools.build_flit("source/flit_core")
-function self.pack()
+build = tools.build_flit("source/flit_core")
+function pack()
     lfs.chdir("source/flit_core")
 
     os.execute("python bootstrap_install.py --installdir ../../filesystem/lib/python" ..
         python.short_version .. "/site-packages dist/*.whl")
-    os.execute("install -Dm644 LICENSE -t ../../filesystem/share/licenses/" .. self.name)
+    os.execute("install -Dm644 LICENSE -t ../../filesystem/share/licenses/" .. name)
 end
 
-return self

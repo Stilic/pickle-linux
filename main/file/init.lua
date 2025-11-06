@@ -1,13 +1,11 @@
 local tools = require "tools"
 
-local self = {}
 
-self.version = "5.46"
-self.sources = {
-    { "source", "https://astron.com/pub/file/file-" .. self.version .. ".tar.gz" }
+version = "5.46"
+sources = {
+    { "source", "https://astron.com/pub/file/file-" .. version .. ".tar.gz" }
 }
 
-self.build = tools.build_gnu_configure("--enable-static")
-self.pack = tools.pack_default()
+build = tools.build_gnu_configure("--enable-static")
+pack = tools.pack_default()
 
-return self

@@ -1,17 +1,16 @@
 local lfs = require "lfs"
 local tools = require "tools"
 
-local self = {}
 
-self.version = "1.16.2"
-self.dev_dependencies = { pkg "user.meson", pkg "user.pkgconf", pkg "user.xmlto" }
-self.sources = {
-    { "source", "https://dbus.freedesktop.org/releases/dbus/dbus-" .. self.version .. ".tar.xz" }
+version = "1.16.2"
+dev_dependencies = { pkg "user.meson", pkg "user.pkgconf", pkg "user.xmlto" }
+sources = {
+    { "source", "https://dbus.freedesktop.org/releases/dbus/dbus-" .. version .. ".tar.xz" }
 }
 
-self.build = tools.build_meson(
+build = tools.build_meson(
     "-Dasserts=false -Ddbus_user=dbus -Ddoxygen_docs=disabled -Depoll=enabled -Dinotify=enabled -Dselinux=disabled -Dsystem_pid_file=/run/dbus/pid -Dsystem_socket=/run/dbus/system_bus_socket -Dsystemd=disabled -Duser_session=false -Dtraditional_activation=true -Dxml_docs=disabled -Dmodular_tests=disabled")
-function self.pack()
+function pack()
     tools.pack_default()()
 
     lfs.chdir("filesystem")
@@ -25,4 +24,3 @@ function self.pack()
     -- TODO: add sysusers and tmpfiles
 end
 
-return self

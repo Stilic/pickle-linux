@@ -1,15 +1,13 @@
 local tools = require "tools"
 local config = require "neld.config"
 
-local self = {}
 
-self.version = "1.49.3"
-self.dependencies = { pkg "user.perl" }
-self.sources = {
-    { "source", config.gnu_site .. "/help2man/help2man-" .. self.version .. ".tar.xz" }
+version = "1.49.3"
+dependencies = { pkg "user.perl" }
+sources = {
+    { "source", config.gnu_site .. "/help2man/help2man-" .. version .. ".tar.xz" }
 }
 
-self.build = tools.build_gnu_configure()
-self.pack = tools.pack_default()
+build = tools.build_gnu_configure()
+pack = tools.pack_default()
 
-return self

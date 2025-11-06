@@ -1,14 +1,12 @@
 local tools = require "tools"
 
-local self = {}
 
-self.version = "1.47.1"
-self.sources = {
+version = "1.47.1"
+sources = {
     { "source", "https://mirrors.edge.kernel.org/pub/linux/kernel/people/tytso/e2fsprogs/v" ..
-    self.version .. "/e2fsprogs-" .. self.version .. ".tar.xz" }
+    version .. "/e2fsprogs-" .. version .. ".tar.xz" }
 }
 
-self.build = tools.build_gnu_configure(nil, nil, "-Wno-implicit-function-declaration")
-self.pack = tools.pack_default()
+build = tools.build_gnu_configure(nil, nil, "-Wno-implicit-function-declaration")
+pack = tools.pack_default()
 
-return self

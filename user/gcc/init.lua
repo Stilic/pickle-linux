@@ -3,16 +3,15 @@ local system = require "system"
 local tools = require "tools"
 local config = require "neld.config"
 
-local self = {}
 
-self.version = "14.2.0"
--- self.dependencies = { pkg "user.gmp", pkg "user.mpfr", pkg "user.mpc" }
-self.dev_dependencies = { pkg "user.binutils" }
-self.sources = {
-    { "source", config.gnu_site .. "/gcc/gcc-" .. self.version .. "/gcc-" .. self.version .. ".tar.xz" }
+version = "14.2.0"
+-- dependencies = { pkg "user.gmp", pkg "user.mpfr", pkg "user.mpc" }
+dev_dependencies = { pkg "user.binutils" }
+sources = {
+    { "source", config.gnu_site .. "/gcc/gcc-" .. version .. "/gcc-" .. version .. ".tar.xz" }
 }
 
-function self.build()
+function build()
     lfs.chdir("source")
 
     local install_dir = lfs.currentdir() .. "/_install"
@@ -27,13 +26,13 @@ function self.build()
     os.execute('make install-strip DESTDIR="' .. install_dir .. '"')
 end
 
-function self.pack()
+function pack()
     tools.pack_default("source/_install/usr")()
     os.execute("rm -r filesystem/include")
     lfs.link("gcc", "filesystem/bin/cc", true)
 end
 
-self.variants = {
+variants = {
     libs = {
         pack = function()
             os.execute("cp -ra source/_install/lib source/_install/usr/include filesystem-libs")
@@ -42,4 +41,3 @@ self.variants = {
     }
 }
 
-return self

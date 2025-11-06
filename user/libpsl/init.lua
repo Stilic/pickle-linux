@@ -1,14 +1,12 @@
 local tools = require "tools"
 
-local self = {}
 
-self.version = "0.21.5"
-self.dev_dependencies = { pkg "user.libidn2", pkg "user.python" }
-self.sources = {
-    { "source", "https://github.com/rockdaboot/libpsl/releases/download/" .. self.version .. "/libpsl-" .. self.version .. ".tar.gz" }
+version = "0.21.5"
+dev_dependencies = { pkg "user.libidn2", pkg "user.python" }
+sources = {
+    { "source", "https://github.com/rockdaboot/libpsl/releases/download/" .. version .. "/libpsl-" .. version .. ".tar.gz" }
 }
 
-self.build = tools.build_gnu_configure()
-self.pack = tools.pack_default()
+build = tools.build_gnu_configure()
+pack = tools.pack_default()
 
-return self

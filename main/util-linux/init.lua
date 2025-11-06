@@ -1,19 +1,17 @@
 local tools = require "tools"
 
-local self = {}
 
-self.version = "2.41"
-self.dev_dependencies = { pkg "user.meson", pkg "user.bash", pkg "user.bison" }
-self.sources = {
-    { "source", "https://www.kernel.org/pub/linux/utils/util-linux/v" .. self.version .. "/util-linux-" .. self.version .. ".tar.xz" }
+version = "2.41"
+dev_dependencies = { pkg "user.meson", pkg "user.bash", pkg "user.bison" }
+sources = {
+    { "source", "https://www.kernel.org/pub/linux/utils/util-linux/v" .. version .. "/util-linux-" .. version .. ".tar.xz" }
 }
 
-function self.build()
+function build()
     os.execute("find source -type f -exec sed -i 's|^#!/bin/bash|#!/usr/bin/bash|' {} +")
     tools.build_meson(
         "-Dbuild-newgrp=disabled -Dbuild-more=disabled -Dbuild-kill=disabled -Dbuild-nologin=disabled -Dbuild-liblastlog2=disabled -Dbuild-pam-lastlog2=disabled")()
 end
 
-self.pack = tools.pack_default()
+pack = tools.pack_default()
 
-return self

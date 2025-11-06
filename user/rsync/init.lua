@@ -1,14 +1,12 @@
 local tools = require "tools"
 
-local self = {}
 
-self.version = "3.4.1"
-self.dependencies = { pkg "user.popt" }
-self.sources = {
-    { "source", "https://download.samba.org/pub/rsync/src/rsync-" .. self.version .. ".tar.gz" }
+version = "3.4.1"
+dependencies = { pkg "user.popt" }
+sources = {
+    { "source", "https://download.samba.org/pub/rsync/src/rsync-" .. version .. ".tar.gz" }
 }
 
-self.build = tools.build_gnu_configure("--disable-xxhash --disable-lz4")
-self.pack = tools.pack_default()
+build = tools.build_gnu_configure("--disable-xxhash --disable-lz4")
+pack = tools.pack_default()
 
-return self

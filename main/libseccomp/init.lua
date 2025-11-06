@@ -1,13 +1,11 @@
 local tools = require "tools"
 
-local self = {}
 
-self.version = "2.6.0"
-self.sources = {
-    { "source", "https://github.com/seccomp/libseccomp/releases/download/v" .. self.version .. "/libseccomp-" .. self.version .. ".tar.gz" }
+version = "2.6.0"
+sources = {
+    { "source", "https://github.com/seccomp/libseccomp/releases/download/v" .. version .. "/libseccomp-" .. version .. ".tar.gz" }
 }
 
-self.build = tools.build_gnu_configure()
-self.pack = tools.pack_default()
+build = tools.build_gnu_configure()
+pack = tools.pack_default()
 
-return self

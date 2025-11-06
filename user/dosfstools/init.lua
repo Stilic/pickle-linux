@@ -1,13 +1,11 @@
 local tools = require "tools"
 
-local self = {}
 
-self.version = "4.2"
-self.sources = {
-    { "source", "https://github.com/dosfstools/dosfstools/releases/download/v" .. self.version .. "/dosfstools-" .. self.version .. ".tar.gz" }
+version = "4.2"
+sources = {
+    { "source", "https://github.com/dosfstools/dosfstools/releases/download/v" .. version .. "/dosfstools-" .. version .. ".tar.gz" }
 }
 
-self.build = tools.build_gnu_configure()
-self.pack = tools.pack_default()
+build = tools.build_gnu_configure()
+pack = tools.pack_default()
 
-return self

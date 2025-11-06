@@ -1,20 +1,19 @@
 local lfs = require "lfs"
 local tools = require "tools"
 
-local self = {}
 
-self.version = "0.3.2"
-self.sources = {
-    { "source", "http://ftp.barfooze.de/pub/sabotage/tarballs/netbsd-curses-" .. self.version .. ".tar.xz" }
+version = "0.3.2"
+sources = {
+    { "source", "http://ftp.barfooze.de/pub/sabotage/tarballs/netbsd-curses-" .. version .. ".tar.xz" }
 }
 
-function self.build()
+function build()
     lfs.chdir("source")
     lfs.mkdir("_install")
     tools.make('PREFIX= DESTDIR="' .. lfs.currentdir() .. '/_install" all install')
 end
 
-function self.pack()
+function pack()
     tools.pack_default()()
     lfs.chdir("filesystem/lib")
     lfs.link("libterminfo.so", "libtinfo.so", true)
@@ -26,4 +25,3 @@ function self.pack()
     end
 end
 
-return self

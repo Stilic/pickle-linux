@@ -2,14 +2,13 @@ local lfs = require "lfs"
 local system = require "system"
 local tools = require "tools"
 
-local self = {}
 
-self.version = "4.6.1"
-self.sources = {
-    { "source", "https://github.com/plougher/squashfs-tools/archive/refs/tags/" .. self.version .. ".tar.gz" }
+version = "4.6.1"
+sources = {
+    { "source", "https://github.com/plougher/squashfs-tools/archive/refs/tags/" .. version .. ".tar.gz" }
 }
 
-function self.build()
+function build()
     lfs.chdir("source")
     local source_dir = lfs.currentdir()
 
@@ -22,6 +21,5 @@ function self.build()
         source_dir .. '/share/man/man1" INSTALL_PREFIX="' .. source_dir .. '/_install"')
 end
 
-self.pack = tools.pack_default()
+pack = tools.pack_default()
 
-return self

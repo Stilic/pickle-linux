@@ -1,14 +1,13 @@
 local lfs = require "lfs"
 local tools = require "tools"
 
-local self = {}
 
-self.version = "1.2.76"
-self.sources = {
-    { "source", "https://git.kernel.org/pub/scm/libs/libcap/libcap.git/snapshot/libcap-" .. self.version .. ".tar.gz" }
+version = "1.2.76"
+sources = {
+    { "source", "https://git.kernel.org/pub/scm/libs/libcap/libcap.git/snapshot/libcap-" .. version .. ".tar.gz" }
 }
 
-function self.build()
+function build()
     lfs.chdir("source")
 
     tools.make("GOLANG=no")
@@ -17,11 +16,10 @@ function self.build()
         lfs.currentdir() .. '/_install"')
 end
 
-function self.pack()
+function pack()
     tools.pack_default()()
 
     os.execute("mv filesystem/usr/* filesystem")
     os.execute("rm -r filesystem/usr")
 end
 
-return self
