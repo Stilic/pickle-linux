@@ -1,6 +1,4 @@
-local lfs = require "lfs"
 local tools = require "tools"
-
 
 version = "80.9.0"
 dependencies = { pkg "user.python", pkg "user.python-packaging", pkg "user.python-installer" }
@@ -11,5 +9,5 @@ sources = {
 
 build = tools.build_python(nil,
     "SETUPTOOLS_INSTALL_WINDOWS_SPECIFIC_FILES=0 SETUPTOOLS_DISABLE_VERSIONED_EASY_INSTALL_SCRIPT=1")
-pack = tools.pack_python()
 
+pack = tools.pack_python()

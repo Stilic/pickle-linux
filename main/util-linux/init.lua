@@ -1,6 +1,5 @@
 local tools = require "tools"
 
-
 version = "2.41"
 dev_dependencies = { pkg "user.meson", pkg "user.bash", pkg "user.bison" }
 sources = {
@@ -14,4 +13,3 @@ function build()
 end
 
 pack = tools.pack_default()
-

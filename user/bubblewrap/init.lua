@@ -1,6 +1,5 @@
 local tools = require "tools"
 
-
 version = "0.11.0"
 dev_dependencies = { pkg "user.meson", pkg "user.pkgconf", pkg "user.docbook-xsl" }
 sources = {
@@ -8,5 +7,5 @@ sources = {
 }
 
 build = tools.build_meson("-Dtests=false")
-pack = tools.pack_default()
 
+pack = tools.pack_default()

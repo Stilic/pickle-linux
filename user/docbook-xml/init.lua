@@ -1,12 +1,11 @@
 local lfs = require "lfs"
 
-
 version = "4.5"
 sources = {
     { version, "https://www.oasis-open.org/docbook/xml/" .. version .. "/docbook-xml-" .. version .. ".zip" },
-    { "4.4",        "https://www.oasis-open.org/docbook/xml/4.4/docbook-xml-4.4.zip" },
-    { "4.3",        "https://www.oasis-open.org/docbook/xml/4.3/docbook-xml-4.3.zip" },
-    { "4.2",        "https://www.oasis-open.org/docbook/xml/4.2/docbook-xml-4.2.zip" }
+    { "4.4",   "https://www.oasis-open.org/docbook/xml/4.4/docbook-xml-4.4.zip" },
+    { "4.3",   "https://www.oasis-open.org/docbook/xml/4.3/docbook-xml-4.3.zip" },
+    { "4.2",   "https://www.oasis-open.org/docbook/xml/4.2/docbook-xml-4.2.zip" }
 }
 
 function pack()
@@ -57,4 +56,3 @@ function pack()
 
     os.execute("install -Dt filesystem/share/licenses/" .. name .. " -m644 ../license-from-upstream")
 end
-

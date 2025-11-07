@@ -2,7 +2,6 @@ local lfs = require "lfs"
 local system = require "system"
 local tools = require "tools"
 
-
 version = "1.0.8"
 sources = {
     { "source", "https://sourceware.org/pub/bzip2/bzip2-" .. version .. ".tar.gz" }
@@ -31,4 +30,3 @@ function pack()
         lfs.link("libbz2.so." .. version, path, true)
     end
 end
-

@@ -1,7 +1,6 @@
 local lfs = require "lfs"
 local tools = require "tools"
 
-
 version = "2.49.0"
 dependencies = { pkg "user.curl" }
 sources = {
@@ -15,4 +14,3 @@ function build()
 end
 
 pack = tools.pack_default("source/_install/usr")
-

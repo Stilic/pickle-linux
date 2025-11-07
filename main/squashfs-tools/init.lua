@@ -1,7 +1,5 @@
 local lfs = require "lfs"
-local system = require "system"
 local tools = require "tools"
-
 
 version = "4.6.1"
 sources = {
@@ -22,4 +20,3 @@ function build()
 end
 
 pack = tools.pack_default()
-

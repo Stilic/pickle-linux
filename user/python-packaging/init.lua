@@ -1,6 +1,5 @@
 local tools = require "tools"
 
-
 version = "25.0"
 dependencies = { pkg "user.python-pyparsing" }
 dev_dependencies = { pkg "user.python-flit-core", pkg "user.python-installer" }
@@ -9,5 +8,5 @@ sources = {
 }
 
 build = tools.build_flit()
-pack = tools.pack_python()
 
+pack = tools.pack_python()

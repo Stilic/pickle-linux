@@ -2,7 +2,6 @@ local lfs = require "lfs"
 local tools = require "tools"
 local python = pkg "user.python"
 
-
 version = "3.12.0"
 dependencies = { pkg "user.python" }
 sources = {
@@ -10,6 +9,7 @@ sources = {
 }
 
 build = tools.build_flit("source/flit_core")
+
 function pack()
     lfs.chdir("source/flit_core")
 
@@ -17,4 +17,3 @@ function pack()
         python.short_version .. "/site-packages dist/*.whl")
     os.execute("install -Dm644 LICENSE -t ../../filesystem/share/licenses/" .. name)
 end
-

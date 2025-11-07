@@ -1,6 +1,4 @@
-local lfs = require "lfs"
 local python = pkg "user.python"
-
 
 version = "0.7.0"
 dependencies = { pkg "user.python" }
@@ -14,4 +12,3 @@ function pack()
     os.execute("cp -ra source/gpep517 " .. install_dir)
     os.execute("python3 -m compileall " .. install_dir)
 end
-

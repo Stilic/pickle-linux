@@ -1,6 +1,5 @@
 local lfs = require "lfs"
 
-
 version = "7.7"
 sources = {
     { "source", "https://github.com/ibara/oksh/releases/download/oksh-" .. version .. "/oksh-" .. version .. ".tar.gz" }
@@ -16,4 +15,3 @@ function pack()
     lfs.mkdir("filesystem/bin")
     os.execute("cp source/sh filesystem/bin")
 end
-

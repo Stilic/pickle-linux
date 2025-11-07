@@ -1,7 +1,6 @@
 local lfs = require "lfs"
 local tools = require "tools"
 
-
 version = "0.3.2"
 sources = {
     { "source", "http://ftp.barfooze.de/pub/sabotage/tarballs/netbsd-curses-" .. version .. ".tar.xz" }
@@ -24,4 +23,3 @@ function pack()
         end
     end
 end
-

@@ -1,6 +1,5 @@
 local lfs = require "lfs"
 
-
 version = "1.79.2"
 sources = {
     { "source", "https://github.com/docbook/xslt10-stylesheets/releases/download/release%2F" .. version .. "/docbook-xsl-" .. version .. ".tar.bz2" },
@@ -38,4 +37,3 @@ function pack()
 
     os.execute("install -Dm644 source/COPYING -t filesystem/share/licenses/" .. name)
 end
-

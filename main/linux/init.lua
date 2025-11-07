@@ -2,7 +2,6 @@ local lfs = require "lfs"
 local system = require "system"
 local tools = require "tools"
 
-
 version = "6.14.2"
 dev_dependencies = { pkg "user.flex", pkg "user.bison", pkg "user.elfutils", pkg "user.dosfstools" }
 sources = {
@@ -30,4 +29,3 @@ function pack()
     os.execute("rm -r ../filesystem/include/drm")
     os.execute("find ../filesystem/include ! -name *.h -type f -delete")
 end
-

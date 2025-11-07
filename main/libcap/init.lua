@@ -1,7 +1,6 @@
 local lfs = require "lfs"
 local tools = require "tools"
 
-
 version = "1.2.76"
 sources = {
     { "source", "https://git.kernel.org/pub/scm/libs/libcap/libcap.git/snapshot/libcap-" .. version .. ".tar.gz" }
@@ -22,4 +21,3 @@ function pack()
     os.execute("mv filesystem/usr/* filesystem")
     os.execute("rm -r filesystem/usr")
 end
-

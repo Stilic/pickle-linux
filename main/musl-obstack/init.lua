@@ -1,6 +1,5 @@
 local tools = require "tools"
 
-
 version = "1.2.7-mk1"
 dev_dependencies = { pkg "user.meson" }
 sources = {
@@ -8,5 +7,5 @@ sources = {
 }
 
 build = tools.build_meson()
-pack = tools.pack_default()
 
+pack = tools.pack_default()

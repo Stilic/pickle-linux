@@ -1,6 +1,5 @@
 local tools = require "tools"
 
-
 version = "1.1.43"
 dev_dependencies = { pkg "user.python" }
 sources = {
@@ -8,5 +7,5 @@ sources = {
 }
 
 build = tools.build_gnu_configure("--enable-static")
-pack = tools.pack_default()
 
+pack = tools.pack_default()

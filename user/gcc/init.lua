@@ -3,9 +3,7 @@ local system = require "system"
 local tools = require "tools"
 local config = require "neld.config"
 
-
 version = "14.2.0"
--- dependencies = { pkg "user.gmp", pkg "user.mpfr", pkg "user.mpc" }
 dev_dependencies = { pkg "user.binutils" }
 sources = {
     { "source", config.gnu_site .. "/gcc/gcc-" .. version .. "/gcc-" .. version .. ".tar.xz" }
@@ -40,4 +38,3 @@ variants = {
         end
     }
 }
-

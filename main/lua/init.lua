@@ -2,7 +2,6 @@ local lfs = require "lfs"
 local system = require "system"
 local tools = require "tools"
 
-
 version = "5.4.7"
 short_version = version:sub(1, version:find(".", version:find(".", 1, true) + 1, true) - 1)
 sources = {
@@ -23,4 +22,3 @@ function pack()
     tools.pack_default("source/install")()
     lfs.link("lua", "filesystem/bin/lua" .. short_version, true)
 end
-

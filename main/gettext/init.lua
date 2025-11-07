@@ -1,7 +1,6 @@
 local lfs = require "lfs"
 local tools = require "tools"
 
-
 version = "0.3.2"
 sources = {
     { "source", "http://ftp.barfooze.de/pub/sabotage/tarballs/gettext-tiny-" .. version .. ".tar.xz" }
@@ -17,4 +16,3 @@ function build()
 end
 
 pack = tools.pack_default()
-

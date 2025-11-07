@@ -1,6 +1,5 @@
 local tools = require "tools"
 
-
 version = "1.36.1"
 sources = {
     { "source", "https://busybox.net/downloads/busybox-" .. version .. ".tar.bz2" }
@@ -12,4 +11,3 @@ function build()
 end
 
 pack = tools.pack_default()
-

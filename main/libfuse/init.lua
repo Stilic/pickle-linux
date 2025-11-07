@@ -1,7 +1,6 @@
 local lfs = require "lfs"
 local tools = require "tools"
 
-
 version = "3.17.4"
 dev_dependencies = { pkg "user.meson", pkg "user.pkgconf" }
 sources = {
@@ -15,4 +14,3 @@ function pack()
     os.execute("mv filesystem/include/fuse3/* filesystem/include")
     lfs.rmdir("filesystem/include/fuse3")
 end
-

@@ -1,6 +1,5 @@
 local tools = require "tools"
 
-
 version = "3.4.1"
 dependencies = { pkg "user.popt" }
 sources = {
@@ -8,5 +7,5 @@ sources = {
 }
 
 build = tools.build_gnu_configure("--disable-xxhash --disable-lz4")
-pack = tools.pack_default()
 
+pack = tools.pack_default()

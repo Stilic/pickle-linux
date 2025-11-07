@@ -1,6 +1,4 @@
-local lfs = require "lfs"
 local tools = require "tools"
-
 
 version = "3.0.2"
 dependencies = { pkg "user.python" }
@@ -10,5 +8,5 @@ sources = {
 }
 
 build = tools.build_python()
-pack = tools.pack_python()
 
+pack = tools.pack_python()

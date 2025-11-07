@@ -1,7 +1,6 @@
 local lfs = require "lfs"
 local tools = require "tools"
 
-
 version = "2.14.2"
 dev_dependencies = { pkg "user.meson", pkg "user.python", pkg "user.git" }
 sources = {
@@ -9,6 +8,7 @@ sources = {
 }
 
 build = tools.build_meson("-Dzlib=enabled")
+
 function pack()
     tools.pack_default()()
 
@@ -16,4 +16,3 @@ function pack()
     lfs.link(file, "filesystem/lib/libxml2.so." .. version:sub(1, 1), true)
     lfs.link(file, "filesystem/lib/libxml2.so." .. version, true)
 end
-

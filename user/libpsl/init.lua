@@ -1,6 +1,5 @@
 local tools = require "tools"
 
-
 version = "0.21.5"
 dev_dependencies = { pkg "user.libidn2", pkg "user.python" }
 sources = {
@@ -8,5 +7,5 @@ sources = {
 }
 
 build = tools.build_gnu_configure()
-pack = tools.pack_default()
 
+pack = tools.pack_default()

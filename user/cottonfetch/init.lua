@@ -1,6 +1,5 @@
 local lfs = require "lfs"
 
-
 version = "1.8.0.0.1"
 dependencies = { pkg "user.bash" }
 sources = {
@@ -12,4 +11,3 @@ function pack()
     os.execute("cp source/cottonfetch filesystem/bin")
     os.execute("chmod +x filesystem/bin/*")
 end
-

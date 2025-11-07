@@ -1,7 +1,6 @@
 local lfs = require "lfs"
 local tools = require "tools"
 
-
 version = "3.13.3"
 short_version = version:sub(1, version:find(".", version:find(".", 1, true) + 1, true) - 1)
 dev_dependencies = { pkg "user.perl" }
@@ -10,6 +9,7 @@ sources = {
 }
 
 build = tools.build_gnu_configure("--prefix=/ --enable-shared --with-system-expat --without-ensurepip")
+
 function pack()
     tools.pack_default()()
 
@@ -22,4 +22,3 @@ function pack()
     lfs.link("python" .. major_version .. "-config", "filesystem/bin/python-config", true)
     lfs.link("python" .. major_version .. ".1", "filesystem/share/man/man1/python.1", true)
 end
-

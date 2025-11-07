@@ -1,7 +1,6 @@
 local tools = require "tools"
 local config = require "neld.config"
 
-
 version = "2.5.4"
 dev_dependencies = { pkg "user.help2man" }
 sources = {
@@ -9,5 +8,5 @@ sources = {
 }
 
 build = tools.build_gnu_configure()
-pack = tools.pack_default()
 
+pack = tools.pack_default()

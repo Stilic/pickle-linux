@@ -2,7 +2,6 @@ local lfs = require "lfs"
 local system = require "system"
 local tools = require "tools"
 
-
 version = "5.40.2"
 sources = {
     { "source", "https://www.cpan.org/src/" .. version:sub(1, 1) .. ".0/perl-" .. version .. ".tar.gz" }
@@ -18,4 +17,3 @@ function build()
 end
 
 pack = tools.pack_default("source/_install/usr")
-

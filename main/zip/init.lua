@@ -2,7 +2,6 @@ local lfs = require "lfs"
 local system = require "system"
 local tools = require "tools"
 
-
 version = "3.0"
 sources = {
     { "source", "https://github.com/thejoshwolfe/info-zip-zip/archive/refs/tags/" .. version .. ".tar.gz" }
@@ -19,4 +18,3 @@ function build()
 end
 
 pack = tools.pack_default()
-

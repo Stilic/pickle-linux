@@ -1,6 +1,5 @@
 local tools = require "tools"
 
-
 version = "1.15"
 dev_dependencies = { pkg "user.automake", pkg "user.flex" }
 sources = {
@@ -8,5 +7,5 @@ sources = {
 }
 
 build = tools.build_autotools()
-pack = tools.pack_default()
 
+pack = tools.pack_default()

@@ -1,7 +1,6 @@
 local lfs = require "lfs"
 local tools = require "tools"
 
-
 version = "1.16.2"
 dev_dependencies = { pkg "user.meson", pkg "user.pkgconf", pkg "user.xmlto" }
 sources = {
@@ -10,6 +9,8 @@ sources = {
 
 build = tools.build_meson(
     "-Dasserts=false -Ddbus_user=dbus -Ddoxygen_docs=disabled -Depoll=enabled -Dinotify=enabled -Dselinux=disabled -Dsystem_pid_file=/run/dbus/pid -Dsystem_socket=/run/dbus/system_bus_socket -Dsystemd=disabled -Duser_session=false -Dtraditional_activation=true -Dxml_docs=disabled -Dmodular_tests=disabled")
+
+-- TODO: add sysusers and tmpfiles
 function pack()
     tools.pack_default()()
 
@@ -20,7 +21,4 @@ function pack()
 
     os.execute("mkdir -p etc/X11/Xsession.d")
     os.execute("cp ../../01dbus-env etc/X11/Xsession.d")
-
-    -- TODO: add sysusers and tmpfiles
 end
-
