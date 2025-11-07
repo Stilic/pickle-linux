@@ -1,0 +1,12 @@
+diff -ura a/src/luaconf.h b/src/luaconf.h
+--- a/src/luaconf.h	2025-09-28 20:03:21.908727892 +0000
++++ b/src/luaconf.h	2025-09-28 20:05:24.070727892 +0000
+@@ -223,7 +223,7 @@
+ 
+ #else			/* }{ */
+ 
+-#define LUA_ROOT	"/usr/local/"
++#define LUA_ROOT	"/"
+ #define LUA_LDIR	LUA_ROOT "share/lua/" LUA_VDIR "/"
+ #define LUA_CDIR	LUA_ROOT "lib/lua/" LUA_VDIR "/"
+ 
