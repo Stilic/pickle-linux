@@ -1,5 +1,0 @@
-type = process
-command = /bin/turnstiled
-logfile = /var/log/turnstiled.log
-
-depends-on: rcboot
