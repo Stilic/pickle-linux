@@ -3,7 +3,7 @@ local system = require "system"
 local tools = require "tools"
 local config = require "neld.config"
 
-version = "13.1.0"
+version = "14.2.0"
 sources = {
     { "source", config.gnu_site .. "/gcc/gcc-" .. version .. "/gcc-" .. version .. ".tar.xz" }
 }
