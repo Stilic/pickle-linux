@@ -1,7 +1,6 @@
 local lfs = require "lfs"
 local system = require "system"
 local tools = require "tools"
-local gcc = pkg "gcc"
 
 version = "4.2.0"
 sources = {
@@ -11,9 +10,8 @@ sources = {
 function build()
     lfs.chdir("source")
 
-    local bootstrap_cmd = './bootstrap CPLUS_INCLUDE_PATH=/usr/include/c++/' .. gcc.version .. ' CFLAGS="' ..
-        tools.DEFAULT_CFLAGS ..
-        '" --prefix=/usr --mandir=/share/man --datadir=/share/' .. name .. ' --docdir=/share/doc/' .. name
+    local bootstrap_cmd = "./bootstrap --prefix=/usr --mandir=/share/man --datadir=/share/" ..
+        name .. " --docdir=/share/doc/" .. name
     if system.build_cores ~= 1 then
         bootstrap_cmd = bootstrap_cmd .. " --parallel=" .. system.build_cores
     end
