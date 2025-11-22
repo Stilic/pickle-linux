@@ -11,7 +11,7 @@ sources = {
 function build()
     lfs.chdir("source")
 
-    local bootstrap_cmd = "./bootstrap --prefix=/usr --mandir=/share/man --datadir=/share/" ..
+    local bootstrap_cmd = "./bootstrap --prefix=/ --mandir=/share/man --datadir=/share/" ..
         name .. " --docdir=/share/doc/" .. name
     if system.build_cores ~= 1 then
         bootstrap_cmd = bootstrap_cmd .. " --parallel=" .. system.build_cores
