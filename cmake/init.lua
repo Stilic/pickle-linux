@@ -17,7 +17,7 @@ function build()
     end
     os.execute(bootstrap_cmd)
 
-    os.execute("CMAKE_SYSROOT=/usr make" .. system.get_make_jobs())
+    os.execute("make" .. system.get_make_jobs())
 
     lfs.mkdir("_install")
     os.execute('make install DESTDIR="' .. lfs.currentdir() .. '/_install"')
