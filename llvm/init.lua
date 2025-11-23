@@ -6,6 +6,6 @@ sources = {
     { "source", "https://github.com/llvm/llvm-project/releases/download/llvmorg-" .. version .. "/llvm-project-" .. version .. ".src.tar.xz" }
 }
 
-build = tools.build_cmake()
+build = tools.build_cmake(nil, nil, "llvm")
 
 pack = tools.pack_default()
