@@ -3,7 +3,6 @@ local system = require "system"
 local tools = require "tools"
 
 version = "4.2.0"
-dependencies = { pkg "ninja" }
 sources = {
     { "source", "https://github.com/Kitware/CMake/releases/download/v" .. version .. "/cmake-" .. version .. ".tar.gz" }
 }
