@@ -7,7 +7,7 @@ sources = {
     { "source", "https://github.com/llvm/llvm-project/releases/download/llvmorg-" .. version .. "/llvm-project-" .. version .. ".src.tar.xz" }
 }
 
-local arch
+local arch = ""
 if buildmode then
     if system.architecture == "x86_64" then
         arch = "X86"
