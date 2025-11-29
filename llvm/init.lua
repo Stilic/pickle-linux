@@ -8,18 +8,20 @@ sources = {
 }
 
 local arch
-if system.architecture == "x86_64" then
-    arch = "X86"
-elseif system.architecture == "aarch64" then
-    arch = "AArch64"
-elseif system.architecture == "ppc64le" or system.architecture == "ppc64" or system.architecture == "ppc" then
-    arch = "PowerPC"
-elseif system.architecture == "riscv64" then
-    arch = "RISCV64"
-elseif system.architecture == "armv7l" or system.architecture == "armv7" or system.architecture == "armhf" then
-    arch = "ARM"
-elseif system.architecture == "loongarch64" or system.architecture == "loongarch32" then
-    arch = "LoongArch"
+if buildmode then
+    if system.architecture == "x86_64" then
+        arch = "X86"
+    elseif system.architecture == "aarch64" then
+        arch = "AArch64"
+    elseif system.architecture == "ppc64le" or system.architecture == "ppc64" or system.architecture == "ppc" then
+        arch = "PowerPC"
+    elseif system.architecture == "riscv64" then
+        arch = "RISCV64"
+    elseif system.architecture == "armv7l" or system.architecture == "armv7" or system.architecture == "armhf" then
+        arch = "ARM"
+    elseif system.architecture == "loongarch64" or system.architecture == "loongarch32" then
+        arch = "LoongArch"
+    end
 end
 local function gen_build(projects, runtimes)
     local projects_command = ""
