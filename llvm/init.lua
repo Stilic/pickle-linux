@@ -24,7 +24,7 @@ if buildmode then
         arch = "LoongArch"
     end
 end
-local function gen_build(project, projects, runtimes)
+local function gen_build(external_llvm, projects, runtimes)
     local projects_command = ""
     if projects then
         projects_command = " -DLLVM_ENABLE_PROJECTS=" .. projects .. " "
@@ -37,7 +37,7 @@ local function gen_build(project, projects, runtimes)
 
     return function()
         local external_command = ""
-        if project ~= "llvm" then
+        if external_llvm then
             local build_dir = lfs.currentdir()
             external_command = "-DLLVM_EXTERNAL_LIT=" ..
                 build_dir .. "/source/build-llvm/utils/lit -DLLVM_ROOT=" .. build_dir .. "/filesystem "
@@ -46,16 +46,16 @@ local function gen_build(project, projects, runtimes)
             "-DLLVM_PARALLEL_LINK_JOBS=2 -DLLVM_INSTALL_TOOLCHAIN_ONLY=ON -DLLVM_INCLUDE_TESTS=OFF -DLLVM_TARGETS_TO_BUILD=" ..
             arch .. projects_command .. runtimes_command ..
             "-DCOMPILER_RT_USE_BUILTINS_LIBRARY=ON -DCOMPILER_RT_DEFAULT_TARGET_ONLY=ON -DCOMPILER_RT_BUILD_GWP_ASAN=OFF -DLIBCXX_CXX_ABI=libcxxabi -DLIBCXX_USE_COMPILER_RT=ON -DLIBCXX_ENABLE_STATIC_ABI_LIBRARY=OFF -DLIBCXX_HAS_MUSL_LIBC=ON -DLIBCXX_HARDENING_MODE=fast -DLIBCXXABI_USE_LLVM_UNWINDER=ON -DLIBCXXABI_ENABLE_STATIC_UNWINDER=OFF -DLIBCXXABI_USE_COMPILER_RT=ON -DLLVM_INSTALL_UTILS=ON -DLLVM_BUILD_LLVM_DYLIB=ON -DLLVM_LINK_LLVM_DYLIB=ON -DLLVM_ENABLE_RTTI=ON -DLLVM_ENABLE_PER_TARGET_RUNTIME_DIR=ON -DCLANG_DEFAULT_RTLIB=compiler-rt -DCLANG_DEFAULT_UNWINDLIB=libunwind -DCLANG_DEFAULT_CXX_STDLIB=libc++ -DLLVM_ENABLE_LIBXML2=OFF -DLLVM_ENABLE_LIBCXX=ON -DLIBUNWIND_ENABLE_ASSERTIONS=OFF -DLIBUNWIND_USE_COMPILER_RT=ON",
-            nil, project)()
+            nil, "llvm")()
     end
 end
 
-build = gen_build("llvm", "clang;clang-tools-extra;lld;mlir")
+build = gen_build(false, "clang;clang-tools-extra;lld;mlir")
 
 pack = tools.pack_default()
 
 variants = {
     libs = {
-        build = gen_build("clang", nil, "compiler-rt;libcxx;libcxxabi;libunwind")
+        build = gen_build(true, nil, "compiler-rt;libcxx;libcxxabi;libunwind")
     }
 }
