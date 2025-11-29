@@ -66,6 +66,6 @@ pack = tools.pack_default()
 
 variants = {
     libs = {
-        build = gen_build(true, nil, "compiler-rt;libcxx;libcxxabi;libunwind")
+        build = gen_build(true, "clang", "compiler-rt;libcxx;libcxxabi;libunwind")
     }
 }
