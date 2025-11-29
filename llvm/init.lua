@@ -62,7 +62,7 @@ local function gen_build(external_llvm, projects, runtimes)
             external_command = "-DLLVM_EXTERNAL_LIT=" ..
                 build_dir .. "/source/build-llvm/utils/lit -DLLVM_ROOT=" .. build_dir .. "/filesystem "
 
-            targets = { "clang-resource-headers" }
+            targets = {}
             for _, runtime in ipairs(runtimes) do
                 table.insert(targets, "install-" .. runtime)
             end
