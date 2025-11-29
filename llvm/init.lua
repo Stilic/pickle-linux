@@ -32,7 +32,7 @@ local function gen_build(projects, runtimes)
         projects_command = " -DLLVM_ENABLE_PROJECTS=" .. projects .. " "
     end
 
-    local runtimes_command = " -DLLVM_ENABLE_RUNTIMES= "
+    local runtimes_command = ""
     if runtimes then
         runtimes_command = " -DLLVM_ENABLE_RUNTIMES=" .. runtimes .. " "
     end
