@@ -39,9 +39,11 @@ local function gen_build(external_llvm, projects, runtimes)
         local external_command, targets = ""
         if external_llvm then
             local build_dir = lfs.currentdir()
-            external_command = "-DCLANG_ENABLE_BOOTSTRAP=OFF -DLLVM_EXTERNAL_LIT=" ..
+            external_command =
+                "-DCLANG_ENABLE_BOOTSTRAP=OFF -DLLVM_DISTRIBUTION_COMPONENTS= -DLLVM_RUNTIME_DISTRIBUTION_COMPONENTS=" ..
+                runtimes .. " -DLLVM_EXTERNAL_LIT=" ..
                 build_dir .. "/source/build-llvm/utils/lit -DLLVM_ROOT=" .. build_dir .. "/filesystem "
-            targets = { "clang-resource-headers", "install" }
+            targets = { "clang-resource-headers", "install-distribution" }
         end
         tools.build_cmake(external_command ..
             "-DLLVM_PARALLEL_LINK_JOBS=2 -DLLVM_INSTALL_TOOLCHAIN_ONLY=ON -DLLVM_INCLUDE_TESTS=OFF -DLLVM_TARGETS_TO_BUILD=" ..
