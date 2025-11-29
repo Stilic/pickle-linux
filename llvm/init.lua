@@ -41,7 +41,7 @@ local function gen_build(projects, runtimes)
         local external_command = ""
         if has_external_llvm then
             local build_dir = lfs.currentdir()
-            external_command = "-DLLVM_EXTERNAL_LIT=" ..
+            external_command = "-DCMAKE_CXX_FLAGS=-stdlib=libstdc++ -DLLVM_EXTERNAL_LIT=" ..
                 build_dir .. "/source/build-llvm/utils/lit -DLLVM_ROOT=" .. build_dir .. "/filesystem "
         end
         tools.build_cmake(external_command ..
