@@ -1,5 +1,6 @@
 local system = require "system"
 local tools = require "tools"
+local lfs = require "lfs"
 
 version = "21.1.6"
 dev_dependencies = { pkg "cmake", pkg "python" }
@@ -24,6 +25,8 @@ if buildmode then
     end
 end
 local function gen_build(projects, runtimes)
+    local external_command = ""
+
     local projects_command = ""
     if projects then
         projects_command = " -DLLVM_ENABLE_PROJECTS=" .. projects .. " "
@@ -32,9 +35,15 @@ local function gen_build(projects, runtimes)
     local runtimes_command = ""
     if runtimes then
         runtimes_command = " -DLLVM_ENABLE_RUNTIMES=" .. runtimes .. " "
+
+        if buildmode and not projects then
+            local build_dir = lfs.currentdir()
+            external_command = "-DLLVM_EXTERNAL_LIT=" ..
+                build_dir .. "/source/build-llvm/utils/lit -DLLVM_ROOT=" .. build_dir .. "/filesystem "
+        end
     end
 
-    return tools.build_cmake(
+    return tools.build_cmake(external_command ..
         "-DLLVM_PARALLEL_LINK_JOBS=2 -DLLVM_TARGETS_TO_BUILD=" ..
         arch .. projects_command .. runtimes_command ..
         "-DCOMPILER_RT_USE_BUILTINS_LIBRARY=ON -DCOMPILER_RT_DEFAULT_TARGET_ONLY=ON -DCOMPILER_RT_BUILD_GWP_ASAN=OFF -DLIBCXX_CXX_ABI=libcxxabi -DLIBCXX_USE_COMPILER_RT=ON -DLIBCXX_ENABLE_STATIC_ABI_LIBRARY=OFF -DLIBCXX_HAS_MUSL_LIBC=ON -DLIBCXX_HARDENING_MODE=fast -DLIBCXXABI_USE_LLVM_UNWINDER=ON -DLIBCXXABI_ENABLE_STATIC_UNWINDER=OFF -DLIBCXXABI_USE_COMPILER_RT=ON -DLLVM_INSTALL_UTILS=ON -DLLVM_BUILD_LLVM_DYLIB=ON -DLLVM_LINK_LLVM_DYLIB=ON -DLLVM_ENABLE_RTTI=ON -DLLVM_ENABLE_PER_TARGET_RUNTIME_DIR=ON -DCLANG_DEFAULT_RTLIB=compiler-rt -DCLANG_DEFAULT_UNWINDLIB=libunwind -DCLANG_DEFAULT_CXX_STDLIB=libc++ -DLLVM_ENABLE_LIBXML2=OFF -DLLVM_ENABLE_LIBCXX=ON -DLIBUNWIND_ENABLE_ASSERTIONS=OFF -DLIBUNWIND_USE_COMPILER_RT=ON",
