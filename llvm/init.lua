@@ -27,7 +27,7 @@ end
 local function gen_build(projects, runtimes)
     local has_external_llvm = buildmode and not projects
 
-    local projects_command = " -DLLVM_ENABLE_PROJECTS= "
+    local projects_command = ""
     if projects then
         projects_command = " -DLLVM_ENABLE_PROJECTS=" .. projects .. " "
     end
