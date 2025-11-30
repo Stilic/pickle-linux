@@ -88,6 +88,6 @@ pack = tools.pack_default()
 
 variants = {
     libs = {
-        build = gen_build(true, { "clang" }, { "compiler-rt" })
+        build = gen_build(true, nil, { "compiler-rt" })
     }
 }
