@@ -1,13 +1,12 @@
 local system = require "system"
 local tools = require "tools"
--- local lfs = require "lfs"
+local lfs = require "lfs"
 
 version = "21.1.6"
 dev_dependencies = { pkg "cmake", pkg "python" }
 sources = {
     { "source", "https://github.com/llvm/llvm-project/releases/download/llvmorg-" .. version .. "/llvm-project-" .. version .. ".src.tar.xz" }
 }
-variants_first = true
 
 local arch, triplet = "", ""
 if buildmode then
@@ -60,23 +59,19 @@ local function gen_build(part, projects, runtimes)
 
     return function()
         local external_command, compiler_flags = "", ""
-        -- if part ~= "llvm" then
-        --     local build_dir = lfs.currentdir()
-        --     local bin_dir = build_dir .. "/filesystem"
-        --     external_command = "-DLLVM_EXTERNAL_LIT=" ..
-        --         build_dir .. "/source/build-llvm/utils/lit -DLLVM_ROOT=" .. bin_dir .. " "
-        --     bin_dir = bin_dir .. "/bin/"
-        --     external_command = external_command ..
-        --         "-DCMAKE_C_COMPILER=" .. bin_dir .. "clang -DCMAKE_CXX_COMPILER=" .. bin_dir .. "clang++"
+        if part ~= "llvm" then
+            local build_dir = lfs.currentdir()
+            local bin_dir = build_dir .. "/filesystem"
+            external_command = "-DLLVM_EXTERNAL_LIT=" ..
+                build_dir .. "/source/build-llvm/utils/lit -DLLVM_ROOT=" .. bin_dir .. " "
+            bin_dir = bin_dir .. "/bin/"
+            external_command = external_command ..
+                "-DCMAKE_C_COMPILER=" .. bin_dir .. "clang -DCMAKE_CXX_COMPILER=" .. bin_dir .. "clang++"
 
-        --     -- https://wiki.debian.org/toolchain/BootstrapIssues#stdc-predef.h_not_found
-        --     lfs.mkdir("include")
-        --     os.execute("touch include/stdc-predef.h")
-        --     compiler_flags = "-I" .. build_dir .. "/include"
-        -- end
-        if part == "llvm" then
-            external_command =
-            "-DCOMPILER_RT_CXX_LIBRARY=libcxx -DCOMPILER_RT_SUPPORTED_CXX_LIBRARIES=libcxx -DCOMPILER_RT_USE_BUILTINS_LIBRARY=ON -DCOMPILER_RT_USE_LLVM_UNWINDER=ON -DLIBCXX_USE_COMPILER_RT=ON -DLIBCXXABI_USE_COMPILER_RT=ON -DLIBUNWIND_USE_COMPILER_RT=ON "
+            -- https://wiki.debian.org/toolchain/BootstrapIssues#stdc-predef.h_not_found
+            lfs.mkdir("include")
+            os.execute("touch include/stdc-predef.h")
+            compiler_flags = "-I" .. build_dir .. "/include"
         end
         tools.build_cmake(external_command ..
             "-DLLVM_TARGET_ARCH=" ..
