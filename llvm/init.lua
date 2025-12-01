@@ -1,5 +1,6 @@
 local system = require "system"
 local tools = require "tools"
+local lfs = require "lfs"
 
 version = "21.1.6"
 dev_dependencies = { pkg "cmake", pkg "python" }
@@ -70,7 +71,12 @@ end
 
 build = gen_build("llvm", { "clang", "clang-tools-extra", "lld", "mlir" })
 
-pack = tools.pack_default()
+function pack()
+    tools.pack_default()()
+
+    lfs.link("clang", "filesystem/bin/cc", true)
+    lfs.link("clang++", "filesystem/bin/c++", true)
+end
 
 variants = {
     libs = {

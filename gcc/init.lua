@@ -26,7 +26,6 @@ end
 function pack()
     tools.pack_default("source/_install/usr")()
     os.execute("rm -r filesystem/include")
-    lfs.link("gcc", "filesystem/bin/cc", true)
 end
 
 variants = {
