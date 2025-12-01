@@ -27,5 +27,5 @@ function pack()
     os.execute("make headers")
     os.execute("cp -ra usr/include ../filesystem")
     os.execute("rm -r ../filesystem/include/drm")
-    os.execute("find ../filesystem/include ! -name *.h -type f -delete")
+    os.execute([[find ../filesystem/include \! -name *.h -type f -exec rm {} \;]])
 end
