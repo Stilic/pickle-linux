@@ -64,9 +64,9 @@ local function gen_build(part, projects, runtimes)
             local bin_dir = build_dir .. "/filesystem"
             external_command = "-DLLVM_EXTERNAL_LIT=" ..
                 build_dir .. "/source/build-llvm/utils/lit -DLLVM_ROOT=" .. bin_dir .. " "
-            bin_dir = bin_dir .. "/bin/"
-            external_command = external_command ..
-                "-DCMAKE_C_COMPILER=" .. bin_dir .. "clang -DCMAKE_CXX_COMPILER=" .. bin_dir .. "clang++"
+            -- bin_dir = bin_dir .. "/bin/"
+            -- external_command = external_command ..
+            --     "-DCMAKE_C_COMPILER=" .. bin_dir .. "clang -DCMAKE_CXX_COMPILER=" .. bin_dir .. "clang++"
         end
         tools.build_cmake(external_command ..
             "-DLLVM_TARGET_ARCH=" ..
