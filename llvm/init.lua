@@ -62,7 +62,7 @@ local function gen_build(part, projects, runtimes)
         if part ~= "llvm" then
             local build_dir = lfs.currentdir()
             local bin_dir = build_dir .. "/filesystem"
-            external_command = "--stdlib=libstdc++ --rtlib=libgcc --unwindlib=libgcc -DLLVM_EXTERNAL_LIT=" ..
+            external_command = "-stdlib=libstdc++ -rtlib=libgcc -unwindlib=libgcc -DLLVM_EXTERNAL_LIT=" ..
                 build_dir .. "/source/build-llvm/utils/lit -DLLVM_ROOT=" .. bin_dir .. " "
             bin_dir = bin_dir .. "/bin/"
             external_command = external_command ..
