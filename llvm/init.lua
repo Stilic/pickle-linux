@@ -58,15 +58,16 @@ local function gen_build(part, projects, runtimes)
     end
 
     return function()
-        local external_command = ""
+        local external_command, compiler_flags = "", ""
         if part ~= "llvm" then
             local build_dir = lfs.currentdir()
-            local bin_dir = build_dir .. "/filesystem"
             external_command = "-DLLVM_EXTERNAL_LIT=" ..
-                build_dir .. "/source/build-llvm/utils/lit -DLLVM_ROOT=" .. bin_dir .. " "
-            -- bin_dir = bin_dir .. "/bin/"
-            -- external_command = external_command ..
-            --     "-DCMAKE_C_COMPILER=" .. bin_dir .. "clang -DCMAKE_CXX_COMPILER=" .. bin_dir .. "clang++"
+                build_dir .. "/source/build-llvm/utils/lit -DLLVM_ROOT=" .. build_dir .. "/filesystem"
+
+            -- https://wiki.debian.org/toolchain/BootstrapIssues#stdc-predef.h_not_found
+            lfs.mkdir("include")
+            lfs.touch("include/stdc-predef.h")
+            compiler_flags = "-I" .. build_dir .. "/workaround"
         end
         tools.build_cmake(external_command ..
             "-DLLVM_TARGET_ARCH=" ..
