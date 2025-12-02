@@ -58,7 +58,7 @@ local function gen_build(part, projects, runtimes)
     end
 
     return function()
-        if part ~= "llvm" then
+        if not hostfs and part ~= "llvm" then
             local build_dir = lfs.currentdir()
             local bin_dir = build_dir .. "/filesystem"
             additional_command = additional_command .. "-DLLVM_EXTERNAL_LIT=" ..
