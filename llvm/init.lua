@@ -58,14 +58,16 @@ local function gen_build(part, projects, runtimes)
     end
 
     return function()
-        if not hostfs and part ~= "llvm" then
+        if part ~= "llvm" then
             local build_dir = lfs.currentdir()
             local bin_dir = build_dir .. "/filesystem"
             additional_command = additional_command .. "-DLLVM_EXTERNAL_LIT=" ..
                 build_dir .. "/source/build-llvm/utils/lit -DLLVM_ROOT=" .. bin_dir .. " "
-            bin_dir = bin_dir .. "/bin/"
-            additional_command = additional_command ..
-                "-DCMAKE_C_COMPILER=" .. bin_dir .. "clang -DCMAKE_CXX_COMPILER=" .. bin_dir .. "clang++ "
+            if not hostfs then
+                bin_dir = bin_dir .. "/bin/"
+                additional_command = additional_command ..
+                    "-DCMAKE_C_COMPILER=" .. bin_dir .. "clang -DCMAKE_CXX_COMPILER=" .. bin_dir .. "clang++ "
+            end
         end
 
         tools.build_cmake(additional_command .. "-DLLVM_TARGET_ARCH=" ..
@@ -81,7 +83,19 @@ local function gen_build(part, projects, runtimes)
     end
 end
 
-build = gen_build("llvm", { "clang", "clang-tools-extra", "lld", "mlir" })
+local runtimes = { "compiler-rt", "libunwind", "libcxx", "libcxxabi" }
+
+if not hostfs then
+    variants = {
+        libs = {
+            build = gen_build("runtimes", nil, runtimes),
+            pack = tools.pack_default()
+        }
+    }
+    runtimes = nil
+end
+
+build = gen_build("llvm", { "clang", "clang-tools-extra", "lld", "mlir" }, runtimes)
 
 function pack()
     tools.pack_default()()
@@ -89,10 +103,3 @@ function pack()
     lfs.link("clang", "filesystem/bin/cc", true)
     lfs.link("clang++", "filesystem/bin/c++", true)
 end
-
-variants = {
-    libs = {
-        build = gen_build("compiler-rt"),
-        pack = tools.pack_default()
-    }
-}
