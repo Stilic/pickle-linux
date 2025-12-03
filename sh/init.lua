@@ -8,7 +8,7 @@ sources = {
 function build()
     lfs.chdir("source")
     os.execute("cp ../../pconfig.h .")
-    os.execute("gcc -o sh -D_GNU_SOURCE -DEMACS -DVI *.c")
+    os.execute("cc -o sh -D_GNU_SOURCE -DEMACS -DVI *.c")
 end
 
 function pack()

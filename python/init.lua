@@ -3,7 +3,7 @@ local tools = require "tools"
 
 version = "3.13.3"
 short_version = version:sub(1, version:find(".", version:find(".", 1, true) + 1, true) - 1)
-dev_dependencies = { pkg "perl" }
+dev_dependencies = { pkg "perl", pkg "expat" }
 sources = {
     { "source", "https://www.python.org/ftp/python/" .. version .. "/Python-" .. version .. ".tar.xz" }
 }

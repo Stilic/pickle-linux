@@ -85,7 +85,7 @@ if not hostfs then
     variants = {
         libs = {
             build = gen_build("runtimes", nil, runtimes),
-            pack = tools.pack_default()
+            pack = tools.pack_default(nil, "libs")
         }
     }
     runtimes = nil
@@ -95,6 +95,9 @@ build = gen_build("llvm", { "clang", "clang-tools-extra", "lld", "mlir" }, runti
 
 function pack()
     tools.pack_default()()
+    if hostfs then
+        os.execute("cp -ra /gcc/* filesystem/lib")
+    end
 
     lfs.link("clang", "filesystem/bin/cc", true)
     lfs.link("clang++", "filesystem/bin/c++", true)

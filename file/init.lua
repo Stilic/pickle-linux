@@ -1,6 +1,7 @@
 local tools = require "tools"
 
 version = "5.46"
+dependencies = { pkg "libseccomp", pkg "zstd" }
 sources = {
     { "source", "https://astron.com/pub/file/file-" .. version .. ".tar.gz" }
 }
