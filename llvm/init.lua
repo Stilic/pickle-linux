@@ -3,6 +3,7 @@ local tools = require "tools"
 local lfs = require "lfs"
 
 version = "21.1.6"
+dependencies = { pkg "zstd" }
 dev_dependencies = { pkg "cmake", pkg "python" }
 sources = {
     { "source", "https://github.com/llvm/llvm-project/releases/download/llvmorg-" .. version .. "/llvm-project-" .. version .. ".src.tar.xz" }

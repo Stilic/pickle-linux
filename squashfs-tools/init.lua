@@ -2,6 +2,7 @@ local lfs = require "lfs"
 local tools = require "tools"
 
 version = "4.6.1"
+dependencies = { pkg "lzo" }
 sources = {
     { "source", "https://github.com/plougher/squashfs-tools/archive/refs/tags/" .. version .. ".tar.gz" }
 }
