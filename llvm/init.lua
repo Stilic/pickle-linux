@@ -27,7 +27,7 @@ if buildmode then
 
     triplet = system.architecture .. "-pc-linux-musl"
 end
-local function gen_build(part, projects, runtimes)
+local function gen_build(part, projects, runtimes, host)
     local options = ""
 
     if projects then
@@ -59,49 +59,48 @@ local function gen_build(part, projects, runtimes)
     end
 
     return function()
-        if part ~= "llvm" then
+        if not host then
             local build_dir = lfs.currentdir()
             local bin_dir = build_dir .. "/filesystem"
             options = options .. "-DLLVM_EXTERNAL_LIT=" ..
                 build_dir .. "/source/build-llvm/utils/lit -DLLVM_ROOT=" .. bin_dir .. " "
-            if not hostfs then
-                bin_dir = bin_dir .. "/bin/"
-                options = options ..
-                    "-DCMAKE_C_COMPILER=" .. bin_dir .. "clang -DCMAKE_CXX_COMPILER=" .. bin_dir .. "clang++ "
-            end
+            bin_dir = bin_dir .. "/bin/"
+            options = options ..
+                "-DCMAKE_C_COMPILER=" .. bin_dir .. "clang -DCMAKE_CXX_COMPILER=" .. bin_dir .. "clang++ "
         end
 
         tools.build_cmake(
             options ..
-            (hostfs and ("-DLLVM_LIBGCC_EXPLICIT_OPT_IN=ON -DLLVM_ENABLE_LIBEDIT=OFF -DLLVM_ENABLE_LIBPFM=OFF -DCOMPILER_RT_BUILD_SANITIZERS=OFF -DCOMPILER_RT_BUILD_XRAY=OFF -DCOMPILER_RT_BUILD_LIBFUZZER=OFF -DCOMPILER_RT_BUILD_PROFILE=OFF -DCOMPILER_RT_BUILD_MEMPROF=OFF -DCOMPILER_RT_BUILD_CTX_PROFILE=OFF -LLVM_TARGETS_TO_BUILD=" .. arch .. " ") or "") ..
+            (hostfs and ("-DLLVM_TARGETS_TO_BUILD=" .. arch .. " ") or "") ..
             "-DLLVM_TARGET_ARCH=" .. arch ..
             " -DLLVM_HOST_TRIPLE=" .. triplet ..
             " -DLLVM_DEFAULT_TARGET_TRIPLE=" .. triplet ..
-            " -DENABLE_LINKER_BUILD_ID=ON -DLLVM_INSTALL_BINUTILS_SYMLINKS=ON -DLLVM_INSTALL_UTILS=ON -DLLVM_BUILD_LLVM_DYLIB=ON -DLLVM_LINK_LLVM_DYLIB=ON -DLLVM_ENABLE_RTTI=ON -DLLVM_ENABLE_PER_TARGET_RUNTIME_DIR=ON -DLLVM_ENABLE_LIBXML2=OFF -DMLIR_INSTALL_AGGREGATE_OBJECTS=OFF -DCOMPILER_RT_BUILD_GWP_ASAN=OFF -DLIBCXX_CXX_ABI=libcxxabi -DLIBCXX_ENABLE_STATIC_ABI_LIBRARY=OFF -DLIBCXX_HAS_MUSL_LIBC=ON -DLIBCXX_HARDENING_MODE=fast -DLIBCXXABI_ENABLE_STATIC_UNWINDER=OFF -DLIBUNWIND_ENABLE_ASSERTIONS=OFF -DLIBUNWIND_HAS_NODEFAULTLIBS_FLAG=OFF -DCOMPILER_RT_SCUDO_STANDALONE_BUILD_SHARED=OFF -DCOMPILER_RT_DEFAULT_TARGET_ONLY=ON -DCLANG_DEFAULT_RTLIB=compiler-rt -DCLANG_DEFAULT_UNWINDLIB=libunwind -DCLANG_DEFAULT_CXX_STDLIB=libc++ -DLLVM_ENABLE_LIBCXX=ON",
+            " -DENABLE_LINKER_BUILD_ID=ON -DLLVM_INSTALL_BINUTILS_SYMLINKS=ON -DLLVM_INSTALL_UTILS=ON -DLLVM_BUILD_LLVM_DYLIB=ON -DLLVM_LINK_LLVM_DYLIB=ON -DLLVM_ENABLE_RTTI=ON -DLLVM_ENABLE_PER_TARGET_RUNTIME_DIR=ON -DLLVM_ENABLE_LIBXML2=OFF -DMLIR_INSTALL_AGGREGATE_OBJECTS=OFF -DCOMPILER_RT_BUILD_GWP_ASAN=OFF -DLIBCXX_CXX_ABI=libcxxabi -DLIBCXX_ENABLE_STATIC_ABI_LIBRARY=OFF -DLIBCXX_HAS_MUSL_LIBC=ON -DLIBCXX_HARDENING_MODE=fast -DLIBCXXABI_ENABLE_STATIC_UNWINDER=OFF -DLIBUNWIND_ENABLE_ASSERTIONS=OFF -DLIBUNWIND_HAS_NODEFAULTLIBS_FLAG=OFF -DCOMPILER_RT_SCUDO_STANDALONE_BUILD_SHARED=OFF -DCOMPILER_RT_DEFAULT_TARGET_ONLY=ON -DCLANG_DEFAULT_RTLIB=compiler-rt -DCLANG_DEFAULT_CXX_STDLIB=libc++ -DLLVM_ENABLE_LIBCXX=ON",
             nil, part)()
     end
 end
 
-local runtimes = { "compiler-rt", "libunwind", "libcxx", "libcxxabi" }
+variants = {
+    libs = {
+        build = gen_build("runtimes", nil, { "compiler-rt", "libcxx", "libcxxabi" }),
+        pack = function()
+            function pack()
+                tools.pack_default(nil, "libs")()
+                if hostfs then
+                    os.execute("cp -ra /gcc/* filesystem/lib")
+                end
 
-if not hostfs then
-    variants = {
-        libs = {
-            build = gen_build("runtimes", nil, runtimes),
-            pack = tools.pack_default(nil, "libs")
-        }
+                lfs.link("clang", "filesystem/bin/cc", true)
+                lfs.link("clang++", "filesystem/bin/c++", true)
+            end
+        end
+    },
+    lld = {
+        build = gen_build("lld"),
+        pack = tools.pack_default(nil, "lld")
     }
-    runtimes = nil
-end
+}
 
-build = gen_build("llvm", { "clang", "clang-tools-extra", "lld", "mlir" }, runtimes)
+build = gen_build("llvm", { "clang" }, nil, true)
 
-function pack()
-    tools.pack_default()()
-    if hostfs then
-        os.execute("cp -ra /gcc/* filesystem/lib")
-    end
-
-    lfs.link("clang", "filesystem/bin/cc", true)
-    lfs.link("clang++", "filesystem/bin/c++", true)
-end
+pack = tools.pack_default()
