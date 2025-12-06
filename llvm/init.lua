@@ -98,9 +98,9 @@ build = gen_build("llvm", { "clang", "clang-tools-extra", "lld", "mlir" }, runti
 
 function pack()
     tools.pack_default()()
-    -- if hostfs then
-    --     os.execute("cp -ra /gcc/* filesystem/lib")
-    -- end
+    if hostfs then
+        os.execute("cp -ra /gcc/* filesystem/lib")
+    end
 
     lfs.link("clang", "filesystem/bin/cc", true)
     lfs.link("clang++", "filesystem/bin/c++", true)
