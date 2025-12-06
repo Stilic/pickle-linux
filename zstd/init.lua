@@ -2,7 +2,7 @@ local tools = require "tools"
 
 version = "1.5.7"
 sources = {
-    { "source", "https://github.com/facebook/zstd/releases/download/v" .. version .. "/zstd-" .. version .. ".tar.zst" }
+    { "source", "https://github.com/facebook/zstd/releases/download/v" .. version .. "/zstd-" .. version .. ".tar.gz" }
 }
 
 -- weird build system, using defaults is fine
