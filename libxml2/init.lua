@@ -2,7 +2,7 @@ local lfs = require "lfs"
 local tools = require "tools"
 
 version = "2.14.2"
-dev_dependencies = { pkg "meson", pkg "python", pkg "git" }
+dev_dependencies = { pkg "meson", pkg "python" }
 sources = {
     { "source", "https://download.gnome.org/sources/libxml2/" .. version:sub(1, 4) .. "/libxml2-" .. version .. ".tar.xz" }
 }
