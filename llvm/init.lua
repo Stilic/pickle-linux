@@ -84,14 +84,14 @@ local runtimes = { "compiler-rt", "libcxx", "libcxxabi" }
 if hostfs then
     variants = {
         libs = {
-            build = gen_build("runtimes", nil, runtimes),
+            build = gen_build("runtimes", nil, { "libunwind" }),
             pack = tools.pack_default(nil, "libs")
         }
     }
 else
     variants = {
-        unwind = {
-            build = gen_build("runtimes", nil, { "libunwind" }),
+        libs = {
+            build = gen_build("runtimes", nil, runtimes),
             pack = tools.pack_default(nil, "libs")
         }
     }
