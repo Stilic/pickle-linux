@@ -89,7 +89,7 @@ if hostfs then
     variants = {
         bootstrap = {
             build = gen_build(false, "runtimes", nil, { "libunwind" }),
-            pack = tools.pack_default()
+            pack = tools.pack_default(nil, "bootstrap")
         },
         libs = {
             build = gen_build(true, "runtimes", nil, runtimes),
