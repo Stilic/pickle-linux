@@ -7,7 +7,7 @@ sources = {
 }
 
 function build()
-    os.execute("find source -type f -exec sed -i 's|^#!/bin/bash|#!/usr/bin/bash|' {} +")
+    os.execute("find source -type f -exec sed -i '' 's|^#!/bin/bash|#!/usr/bin/bash|' {} +")
     tools.build_meson(
         "-Dbuild-newgrp=disabled -Dbuild-more=disabled -Dbuild-kill=disabled -Dbuild-nologin=disabled -Dbuild-liblastlog2=disabled -Dbuild-pam-lastlog2=disabled")()
 end

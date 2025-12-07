@@ -7,7 +7,7 @@ sources = {
 }
 
 function build()
-    os.execute("find source -type f -exec sed -i 's|^#!/bin/bash|#!/usr/bin/bash|' {} +")
+    os.execute("find /path/to/directory -type f -exec sed -i '' 's|#!/usr/bin/bash|#!/bin/bash|g' {} +")
     tools.build_kconfig()()
     os.execute("make install")
 end

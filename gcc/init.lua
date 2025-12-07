@@ -35,7 +35,7 @@ variants = {
             os.execute("cp -ra source/_install/lib64/* filesystem-libs/lib")
 
             -- https://git.yoctoproject.org/poky/commit/?id=483143a38ec0ac7b12b9cdf3cd5ce79d8f20cb2f
-            os.execute("find filesystem-libs -type f -exec sed -i 's/#include_next/#include/g' {} +")
+            os.execute("find filesystem-libs -type f -exec sed -i '' 's/#include_next/#include/g' {} +")
         end
     }
 }
