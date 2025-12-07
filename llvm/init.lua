@@ -27,7 +27,7 @@ if buildmode then
 
     triplet = system.architecture .. "-pc-linux-musl"
 end
-local function gen_build(part, projects, runtimes)
+local function gen_build(external_compiler, part, projects, runtimes)
     local options = ""
 
     if projects then
@@ -59,14 +59,16 @@ local function gen_build(part, projects, runtimes)
     end
 
     return function()
-        if part ~= "llvm" then
+        if external_compiler then
             local build_dir = lfs.currentdir()
             local bin_dir = build_dir .. "/filesystem"
             options = options .. "-DLLVM_EXTERNAL_LIT=" ..
                 build_dir .. "/source/build-llvm/utils/lit -DLLVM_ROOT=" .. bin_dir .. " "
             bin_dir = bin_dir .. "/bin/"
             options = options ..
-                "-DCMAKE_C_COMPILER=" .. bin_dir .. "clang -DCMAKE_CXX_COMPILER=" .. bin_dir .. "clang++ "
+                "-DCMAKE_C_COMPILER=" ..
+                (hostfs and "gcc" or (bin_dir .. "clang")) ..
+                " -DCMAKE_CXX_COMPILER=" .. (hostfs and "g++" or (bin_dir .. "clang++")) .. " "
         end
 
         tools.build_cmake(
@@ -83,21 +85,29 @@ end
 local runtimes = { "compiler-rt", "libcxx", "libcxxabi" }
 if hostfs then
     variants = {
+        bootstrap = {
+            build = gen_build(false, "runtimes", nil, { "libunwind" }),
+            pack = function()
+                os.execute("rm -rf filesystem-bootstrap/")
+                lfs.link("filesystem", "filesystem-bootstrap", true)
+                tools.pack_default(nil, "bootstrap")
+            end
+        },
         libs = {
-            build = gen_build("runtimes", nil, { "libunwind" }),
+            build = gen_build(true, "runtimes", nil, runtimes),
             pack = tools.pack_default(nil, "libs")
         }
     }
 else
     variants = {
         libs = {
-            build = gen_build("runtimes", nil, runtimes),
+            build = gen_build(true, "runtimes", nil, runtimes),
             pack = tools.pack_default(nil, "libs")
         }
     }
 end
 
-build = gen_build("llvm", { "clang", "lld" })
+build = gen_build(false, "llvm", { "clang", "lld" })
 
 function pack()
     tools.pack_default()()
