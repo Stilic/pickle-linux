@@ -89,11 +89,7 @@ if hostfs then
     variants = {
         bootstrap = {
             build = gen_build(false, "runtimes", nil, { "libunwind" }),
-            pack = function()
-                os.execute("rm -rf filesystem-bootstrap/")
-                lfs.link("filesystem", "filesystem-bootstrap", true)
-                tools.pack_default(nil, "bootstrap")
-            end
+            pack = tools.pack_default()
         },
         libs = {
             build = gen_build(true, "runtimes", nil, runtimes),
