@@ -27,7 +27,7 @@ if buildmode then
 
     triplet = system.architecture .. "-pc-linux-musl"
 end
-local function gen_build(part, projects, runtimes, host)
+local function gen_build(part, projects, runtimes)
     local options = ""
 
     if projects then
@@ -59,7 +59,7 @@ local function gen_build(part, projects, runtimes, host)
     end
 
     return function()
-        if not host then
+        if part ~= "llvm" then
             local build_dir = lfs.currentdir()
             local bin_dir = build_dir .. "/filesystem"
             options = options .. "-DLLVM_EXTERNAL_LIT=" ..
@@ -71,7 +71,7 @@ local function gen_build(part, projects, runtimes, host)
 
         tools.build_cmake(
             options ..
-            (hostfs and ("-DLLVM_TARGETS_TO_BUILD=" .. arch .. " -DLIBCXXABI_USE_LLVM_UNWINDER=OFF -DCOMPILER_RT_USE_LLVM_UNWINDER=OFF") or "") ..
+            (hostfs and ("-DLLVM_TARGETS_TO_BUILD=" .. arch .. " ") or "") ..
             "-DLLVM_TARGET_ARCH=" .. arch ..
             " -DLLVM_HOST_TRIPLE=" .. triplet ..
             " -DLLVM_DEFAULT_TARGET_TRIPLE=" .. triplet ..
@@ -81,17 +81,23 @@ local function gen_build(part, projects, runtimes, host)
 end
 
 local runtimes = { "compiler-rt", "libcxx", "libcxxabi" }
-if not hostfs then
+if hostfs then
     variants = {
         libs = {
             build = gen_build("runtimes", nil, runtimes),
             pack = tools.pack_default(nil, "libs")
         }
     }
-    runtimes = nil
+else
+    variants = {
+        unwind = {
+            build = gen_build("runtimes", nil, { "libunwind" }),
+            pack = tools.pack_default(nil, "libs")
+        }
+    }
 end
 
-build = gen_build("llvm", { "clang", "clang-tools-extra", "lld" }, runtimes, true)
+build = gen_build("llvm", { "clang", "lld" })
 
 function pack()
     tools.pack_default()()
