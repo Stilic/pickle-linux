@@ -77,7 +77,7 @@ local function gen_build(part, projects, runtimes)
         local compiler_flags = "-I" .. build_dir .. "/filesystem-unwind/include"
         tools.build_cmake(
             options ..
-            (hostfs and ("-DLLVM_TARGETS_TO_BUILD=" .. arch .. " ") or "") ..
+            (hostfs and ("-DLLVM_TARGETS_TO_BUILD=" .. arch .. " -DCOMPILER_RT_BUILD_SANITIZERS=OFF ") or "") ..
             "-DLLVM_TARGET_ARCH=" .. arch ..
             " -DLLVM_HOST_TRIPLE=" .. triplet ..
             " -DLLVM_DEFAULT_TARGET_TRIPLE=" .. triplet ..
