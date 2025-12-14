@@ -27,7 +27,7 @@ if buildmode then
 
     triplet = system.architecture .. "-pc-linux-musl"
 end
-local function gen_build(external_compiler, part, projects, runtimes)
+local function gen_build(part, projects, runtimes)
     local options = ""
 
     if projects then
