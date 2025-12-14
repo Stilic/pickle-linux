@@ -74,7 +74,7 @@ local function gen_build(external_compiler, part, projects, runtimes)
                 " -DCMAKE_CXX_COMPILER=" .. (hostfs and "g++" or (bin_dir .. "clang++")) .. " "
         end
 
-        local compiler_flags = "-I" .. build_dir .. "/filesystem-bootstrap/include"
+        local compiler_flags = "-I" .. build_dir .. "/filesystem-unwind/include"
         tools.build_cmake(
             options ..
             (hostfs and ("-DLLVM_TARGETS_TO_BUILD=" .. arch .. " ") or "") ..
@@ -82,7 +82,7 @@ local function gen_build(external_compiler, part, projects, runtimes)
             " -DLLVM_HOST_TRIPLE=" .. triplet ..
             " -DLLVM_DEFAULT_TARGET_TRIPLE=" .. triplet ..
             " -DENABLE_LINKER_BUILD_ID=ON -DLLVM_INSTALL_BINUTILS_SYMLINKS=ON -DLLVM_INSTALL_UTILS=ON -DLLVM_BUILD_LLVM_DYLIB=ON -DLLVM_LINK_LLVM_DYLIB=ON -DLLVM_ENABLE_RTTI=ON -DLLVM_ENABLE_PER_TARGET_RUNTIME_DIR=ON -DLLVM_ENABLE_LIBXML2=OFF -DMLIR_INSTALL_AGGREGATE_OBJECTS=OFF -DCOMPILER_RT_BUILD_LIBFUZZER=OFF -DCOMPILER_RT_BUILD_GWP_ASAN=OFF -DLIBCXX_CXX_ABI=libcxxabi -DLIBCXX_ENABLE_STATIC_ABI_LIBRARY=OFF -DLIBCXX_HAS_MUSL_LIBC=ON -DLIBCXX_HARDENING_MODE=fast -DLIBCXXABI_ENABLE_STATIC_UNWINDER=OFF -DLIBUNWIND_ENABLE_ASSERTIONS=OFF -DLIBUNWIND_HAS_NODEFAULTLIBS_FLAG=OFF -DCOMPILER_RT_SCUDO_STANDALONE_BUILD_SHARED=OFF -DCLANG_DEFAULT_RTLIB=compiler-rt -DCLANG_DEFAULT_CXX_STDLIB=libc++ -DLLVM_ENABLE_LIBCXX=ON",
-            nil, part, nil, compiler_flags, compiler_flags, "-L" .. build_dir .. "/filesystem-bootstrap/lib")()
+            nil, part, nil, compiler_flags, compiler_flags, "-L" .. build_dir .. "/filesystem-unwind/lib")()
     end
 end
 
