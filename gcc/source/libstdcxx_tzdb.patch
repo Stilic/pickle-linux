@@ -1,0 +1,29 @@
+diff -ura a/libstdc++-v3/src/c++20/tzdb.cc b/libstdc++-v3/src/c++20/tzdb.cc
+--- a/libstdc++-v3/src/c++20/tzdb.cc	2025-12-14 23:59:11.140788756 +0100
++++ b/libstdc++-v3/src/c++20/tzdb.cc	2025-12-15 00:20:19.150689336 +0100
+@@ -35,6 +35,9 @@
+ #include <atomic>     // atomic<T*>, atomic<int>
+ #include <memory>     // atomic<shared_ptr<T>>
+ #include <mutex>      // mutex
++#if defined __GTHREADS && ! defined _GLIBCXX_HAS_GHTREADS
++# include <ext/concurrence.h> // __gnu_cxx::__mutex
++#endif
+ #include <filesystem> // filesystem::read_symlink
+ 
+ #ifndef _AIX
+@@ -101,11 +104,14 @@
+ {
+   namespace
+   {
+-#if ! USE_ATOMIC_SHARED_PTR
+ #ifndef __GTHREADS
+     // Dummy no-op mutex type for single-threaded targets.
+     struct mutex { void lock() { } void unlock() { } };
++#elif ! defined _GLIBCXX_HAS_GHTREADS
++    using mutex = __gnu_cxx::__mutex;
+ #endif
++
++#if ! USE_ATOMIC_SHARED_PTR
+     /// XXX std::mutex::mutex() not constexpr on Windows, so can't be constinit
+     constinit mutex list_mutex;
+ #endif
