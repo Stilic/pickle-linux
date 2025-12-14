@@ -61,7 +61,7 @@ local function gen_build(external_compiler, part, projects, runtimes)
     return function()
         local build_dir = lfs.currentdir()
 
-        if external_compiler then
+        if part ~= "llvm" and not hostfs then
             os.execute("rm -rf source/build-" .. part)
 
             local bin_dir = build_dir .. "/filesystem"
@@ -90,24 +90,24 @@ local runtimes = { "compiler-rt", "libcxx", "libcxxabi" }
 if hostfs then
     variants = {
         unwind = {
-            build = gen_build(false, "runtimes", nil, { "libunwind" }),
+            build = gen_build("runtimes", nil, { "libunwind" }),
             pack = tools.pack_default(nil, "unwind")
         },
         libs = {
-            build = gen_build(true, "runtimes", nil, runtimes),
+            build = gen_build("runtimes", nil, runtimes),
             pack = tools.pack_default(nil, "libs")
         }
     }
 else
     variants = {
         libs = {
-            build = gen_build(true, "runtimes", nil, runtimes),
+            build = gen_build("runtimes", nil, runtimes),
             pack = tools.pack_default(nil, "libs")
         }
     }
 end
 
-build = gen_build(false, "llvm", { "clang", "lld" })
+build = gen_build("llvm", { "clang", "lld" })
 
 function pack()
     tools.pack_default()()
