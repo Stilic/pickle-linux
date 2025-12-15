@@ -7,6 +7,7 @@ version = "13.1.0"
 sources = {
     { "source", config.gnu_site .. "/gcc/gcc-" .. version .. "/gcc-" .. version .. ".tar.xz" }
 }
+dependencies = { pkg "isl", pkg "mpc", pkg "mpfr", pkg "gmp" }
 
 -- TODO: figure out how to remove duplicate files
 function build()
