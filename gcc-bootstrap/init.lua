@@ -28,9 +28,7 @@ function build()
     os.execute('make install DESTDIR="' .. install_dir .. '"')
 
     os.execute(tools.get_flags() ..
-        " ../configure --prefix=/usr --libdir=/lib --with-system-zlib --disable-multilib --disable-nls --enable-default-pie --enable-default-ssp --enable-host-pie --enable-languages=c,c++" ..
-        (hostfs and " --disable-bootstrap" or ""))
-
+        " ../configure --prefix=/usr --libdir=/lib --with-native-system-header-dir=/include --with-system-zlib --disable-bootstrap --disable-multilib --disable-nls --enable-default-pie --enable-default-ssp --enable-host-pie --enable-languages=c,c++")
     os.execute("CPATH=/include:/usr/include make all-target-libgcc" .. system.get_make_jobs())
     os.execute('make install-target-libgcc DESTDIR="' .. install_dir .. '"')
 
