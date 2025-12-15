@@ -8,6 +8,7 @@ sources = {
     { "source", config.gnu_site .. "/gcc/gcc-" .. version .. "/gcc-" .. version .. ".tar.xz" }
 }
 
+-- TODO: figure out how to remove duplicate files
 function build()
     lfs.chdir("source")
 
@@ -17,10 +18,20 @@ function build()
     lfs.chdir("build")
 
     os.execute(tools.get_flags() ..
-        " ../configure --prefix=/usr --libdir=/lib --with-system-zlib --disable-multilib --disable-nls --enable-default-pie --enable-default-ssp --enable-host-pie --enable-languages=c,c++")
-    os.execute("CPATH=/usr/include make" .. system.get_make_jobs())
+        " ../libstdc++-v3/configure --prefix=/usr --libdir=/lib --disable-multilib --disable-nls")
 
-    os.execute('make install-strip DESTDIR="' .. install_dir .. '"')
+    os.execute("CPATH=/usr/include make" .. system.get_make_jobs())
+    os.execute('make install DESTDIR="' .. install_dir .. '"')
+
+    os.execute(tools.get_flags() ..
+        " ../configure --prefix=/usr --libdir=/lib --with-system-zlib --disable-multilib --disable-nls --enable-default-pie --enable-default-ssp --enable-host-pie --enable-languages=c,c++" ..
+        (hostfs and " --disable-bootstrap" or ""))
+
+    os.execute("CPATH=/usr/include make all-target-libgcc" .. system.get_make_jobs())
+    os.execute('make install-target-libgcc DESTDIR="' .. install_dir .. '"')
+
+    os.execute("CPATH=/usr/include make all-gcc " .. system.get_make_jobs())
+    os.execute('make install-gcc DESTDIR="' .. install_dir .. '"')
 end
 
 function pack()
