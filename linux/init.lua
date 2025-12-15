@@ -3,7 +3,7 @@ local system = require "system"
 local tools = require "tools"
 
 version = "6.14.2"
-dev_dependencies = { pkg "flex", pkg "bison", pkg "elfutils", pkg "dosfstools" }
+dev_dependencies = { pkg "flex", pkg "bison", pkg "elfutils", pkg "dosfstools", pkg "libidn2" }
 sources = {
     { "source", "https://cdn.kernel.org/pub/linux/kernel/v"
     .. version:sub(1, version:find(".", 1, true) - 1)

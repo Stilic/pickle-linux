@@ -1,0 +1,4 @@
+prefix = /usr
+NO_TCLTK = Yes
+ICONV_OMITS_BOM = Yes
+NO_REGEX = NeedsStartEnd
