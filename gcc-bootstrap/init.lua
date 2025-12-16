@@ -8,7 +8,7 @@ sources = {
     { "source", config.gnu_site .. "/gcc/gcc-" .. version .. "/gcc-" .. version .. ".tar.xz" }
 }
 dependencies = { pkg "isl", pkg "mpc", pkg "mpfr" }
-if not hostfs then
+if stage ~= 0 then
     table.insert(dependencies, pkg "gmp")
 end
 

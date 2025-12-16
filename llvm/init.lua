@@ -61,7 +61,7 @@ local function gen_build(part, projects, runtimes)
     return function()
         local build_dir = lfs.currentdir()
 
-        if part ~= "llvm" and not hostfs then
+        if stage ~= 0 and part ~= "llvm" then
             os.execute("rm -rf source/build-" .. part)
 
             local bin_dir = build_dir .. "/filesystem"
@@ -77,7 +77,7 @@ local function gen_build(part, projects, runtimes)
         local compiler_flags = "-I" .. build_dir .. "/filesystem-unwind/include"
         tools.build_cmake(
             options ..
-            (hostfs and ("-DLLVM_TARGETS_TO_BUILD=" .. arch .. " -DLIBCXX_USE_COMPILER_RT=OFF -DLIBCXX_USE_STATIC_ABI_LIBRARY=OFF ") or "") ..
+            (stage == 0 and ("-DLLVM_TARGETS_TO_BUILD=" .. arch .. " -DLIBCXX_USE_COMPILER_RT=OFF -DLIBCXX_USE_STATIC_ABI_LIBRARY=OFF ") or "") ..
             "-DLLVM_TARGET_ARCH=" .. arch ..
             " -DLLVM_HOST_TRIPLE=" .. triplet ..
             " -DLLVM_DEFAULT_TARGET_TRIPLE=" .. triplet ..
@@ -86,7 +86,7 @@ local function gen_build(part, projects, runtimes)
     end
 end
 
-if hostfs then
+if stage == 0 then
     variants = {
         unwind = {
             build = gen_build("runtimes", nil, { "libunwind" }),
