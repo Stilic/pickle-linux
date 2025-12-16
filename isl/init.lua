@@ -20,7 +20,7 @@ function build()
         " ../configure --prefix=/usr --libdir=/lib --with-system-zlib --disable-multilib --disable-nls --enable-default-pie --enable-default-ssp --enable-host-pie --enable-languages=c,c++" ..
         (hostfs and " --disable-bootstrap" or ""))
 
-    os.execute("CPATH=/include:/usr/include make" .. system.get_make_jobs())
+    os.execute("make" .. system.get_make_jobs())
     os.execute('make install DESTDIR="' .. install_dir .. '"')
 end
 

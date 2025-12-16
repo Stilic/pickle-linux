@@ -1,7 +1,7 @@
 local tools = require "tools"
 
 version = "1.9.1"
-dependencies = { pkg "ninja" }
+dependencies = { pkg "samurai" }
 dev_dependencies = { pkg "python-gpep517", pkg "python-setuptools", pkg "python-installer" }
 sources = {
     { "source", "https://github.com/mesonbuild/meson/releases/download/" .. version .. "/meson-" .. version .. ".tar.gz" }
