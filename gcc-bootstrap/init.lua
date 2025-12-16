@@ -39,6 +39,9 @@ end
 function pack()
     tools.pack_default("source/_install/usr")()
 
+    os.execute("mv filesystem/lib64/* filesystem/lib")
+    os.execute("rm -r filesystem/lib64")
+
     os.execute("find filesystem/lib filesystem/include -type f -exec sed -i 's/#include_next/#include/g' {} +")
 
     lfs.link("gcc", "filesystem/bin/cc", true)
