@@ -45,6 +45,9 @@ function pack()
     os.execute("mv filesystem/lib64/* filesystem/lib")
     os.execute("rm -r filesystem/lib64")
 
+    os.execute("mv filesystem/lib/gcc/*/*/* filesystem/lib")
+    os.execute("rm -r filesystem/lib/gcc")
+
     os.execute("find filesystem/lib filesystem/include -type f -exec sed -i 's/#include_next/#include/g' {} +")
 
     lfs.link("gcc", "filesystem/bin/cc", true)
