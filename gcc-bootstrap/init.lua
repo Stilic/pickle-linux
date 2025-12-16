@@ -39,20 +39,8 @@ end
 function pack()
     tools.pack_default("source/_install/usr")()
 
-    os.execute("rm -r filesystem/include filesystem/lib")
+    os.execute("find filesystem/lib filesystem/include -type f -exec sed -i 's/#include_next/#include/g' {} +")
 
     lfs.link("gcc", "filesystem/bin/cc", true)
     lfs.link("g++", "filesystem/bin/c++", true)
 end
-
-variants = {
-    libs = {
-        pack = function()
-            os.execute("cp -ra source/_install/usr/lib source/_install/usr/include filesystem-libs")
-            os.execute("cp -ra source/_install/usr/lib64/* filesystem-libs/lib")
-
-            -- https://git.yoctoproject.org/poky/commit/?id=483143a38ec0ac7b12b9cdf3cd5ce79d8f20cb2f
-            os.execute("find filesystem-libs -type f -exec sed -i 's/#include_next/#include/g' {} +")
-        end
-    }
-}
