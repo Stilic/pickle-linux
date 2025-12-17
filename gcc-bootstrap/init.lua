@@ -7,10 +7,8 @@ version = "13.1.0"
 sources = {
     { "source", config.gnu_site .. "/gcc/gcc-" .. version .. "/gcc-" .. version .. ".tar.xz" }
 }
+-- gmp is excluded as only the host one works
 dependencies = { pkg "isl", pkg "mpc", pkg "mpfr" }
-if stage ~= 0 then
-    table.insert(dependencies, pkg "gmp")
-end
 
 -- TODO: figure out how to remove duplicate files
 function build()
@@ -41,7 +39,6 @@ function pack()
 
     os.execute("mv filesystem/lib64/* filesystem/lib")
     os.execute("rm -r filesystem/lib64")
-
     os.execute("find filesystem/lib filesystem/include -type f -exec sed -i 's/#include_next/#include/g' {} +")
 
     lfs.link("gcc", "filesystem/bin/cc", true)
