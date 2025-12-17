@@ -11,17 +11,18 @@ sources = {
 function build()
     lfs.chdir("source")
 
-    local bootstrap_cmd = tools.get_flags() .. " ./bootstrap --prefix=/ --mandir=/share/man --datadir=/share/" ..
+    local bootstrap_cmd = tools.get_flags() ..
+        " ./bootstrap --prefix=/ --generator=Ninja --mandir=/share/man --datadir=/share/" ..
         name .. " --docdir=/share/doc/" .. name
     if system.build_cores ~= 1 then
         bootstrap_cmd = bootstrap_cmd .. " --parallel=" .. system.build_cores
     end
     os.execute(bootstrap_cmd)
 
-    os.execute("make" .. system.get_make_jobs())
+    os.execute("ninja" .. system.get_make_jobs())
 
     lfs.mkdir("_install")
-    os.execute('make install DESTDIR="' .. lfs.currentdir() .. '/_install"')
+    os.execute('DESTDIR="' .. lfs.currentdir() .. '/_install" ninja install')
 end
 
 pack = tools.pack_default()

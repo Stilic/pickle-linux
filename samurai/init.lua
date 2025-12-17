@@ -1,3 +1,4 @@
+local lfs = require "lfs"
 local tools = require "tools"
 
 version = "1.2"
@@ -7,4 +8,7 @@ sources = {
 
 build = tools.build_gnu_configure()
 
-pack = tools.pack_default("source/_install/usr/local")
+function pack()
+    tools.pack_default("source/_install/usr/local")()
+    lfs.link("samu", "filesystem/bin/ninja", true)
+end
