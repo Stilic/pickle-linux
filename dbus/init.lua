@@ -2,7 +2,7 @@ local lfs = require "lfs"
 local tools = require "tools"
 
 version = "1.16.2"
-dev_dependencies = { pkg "meson", pkg "pkgconf", pkg "xmlto" }
+dev_dependencies = { pkg "meson", pkg "xmlto" }
 sources = {
     { "source", "https://dbus.freedesktop.org/releases/dbus/dbus-" .. version .. ".tar.xz" }
 }

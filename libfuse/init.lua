@@ -2,7 +2,7 @@ local lfs = require "lfs"
 local tools = require "tools"
 
 version = "3.16.2"
-dev_dependencies = { pkg "meson", pkg "pkgconf" }
+dev_dependencies = { pkg "meson" }
 sources = {
     { "source", "https://github.com/libfuse/libfuse/releases/download/fuse-" .. version .. "/fuse-" .. version .. ".tar.gz" }
 }

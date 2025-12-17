@@ -3,7 +3,7 @@ local lfs = require "lfs"
 local tools = require "tools"
 
 version = "0.1.10"
-dev_dependencies = { pkg "meson", pkg "pkgconf" }
+dev_dependencies = { pkg "meson" }
 sources = {
     { "source", "https://github.com/chimera-linux/turnstile/archive/refs/tags/v" .. version .. ".tar.gz" }
 }
