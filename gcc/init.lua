@@ -18,11 +18,18 @@ function build()
     lfs.chdir("build")
 
     os.execute(tools.get_flags() ..
-        " ../configure --prefix=/usr --with-system-zlib --disable-multilib --disable-nls --enable-default-pie --enable-default-ssp --enable-host-pie --enable-languages=c,c++" ..
-        (stage == 1 and (" --disable-bootstrap --target=" .. system.target) or ""))
-    os.execute("make" .. system.get_make_jobs())
+        " ../libstdc++-v3/configure --prefix= --disable-multilib --disable-nls --enable-host-pie")
 
-    os.execute('make install-strip DESTDIR="' .. install_dir .. '"')
+    os.execute("make" .. system.get_make_jobs())
+    os.execute('make install DESTDIR="' .. install_dir .. '"')
+
+    os.execute(tools.get_flags() ..
+        " ../configure --prefix= --with-system-zlib --disable-bootstrap --disable-multilib --disable-nls --enable-default-pie --enable-default-ssp --enable-host-pie --enable-languages=c,c++")
+    os.execute("make all-target-libgcc" .. system.get_make_jobs())
+    os.execute('make install-target-libgcc DESTDIR="' .. install_dir .. '"')
+
+    os.execute("make all-gcc " .. system.get_make_jobs())
+    os.execute('make install-gcc DESTDIR="' .. install_dir .. '"')
 end
 
 function pack()
