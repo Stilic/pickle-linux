@@ -101,8 +101,6 @@ build = gen_build("llvm", { "clang", "lld" })
 function pack()
     tools.pack_default()()
 
-    if stage == 1 then
-        lfs.link("clang", "filesystem/bin/cc", true)
-        lfs.link("clang++", "filesystem/bin/c++", true)
-    end
+    -- lfs.link("clang", "filesystem/bin/cc", true)
+    -- lfs.link("clang++", "filesystem/bin/c++", true)
 end
