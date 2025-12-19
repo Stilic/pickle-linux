@@ -18,13 +18,14 @@ function build()
     lfs.chdir("build")
 
     os.execute(tools.get_flags() ..
-        " ../libstdc++-v3/configure --prefix= --disable-multilib --disable-nls")
+        " ../libstdc++-v3/configure --prefix=/usr --disable-multilib --disable-nls")
 
     os.execute("make" .. system.get_make_jobs())
     os.execute('make install DESTDIR="' .. install_dir .. '"')
 
     os.execute(tools.get_flags() ..
-        " ../configure --prefix= --with-system-zlib --disable-bootstrap --disable-multilib --disable-nls --enable-default-pie --enable-default-ssp --enable-host-pie --enable-languages=c,c++")
+        " ../configure --prefix=/usr --with-system-zlib --disable-multilib --disable-nls --enable-default-pie --enable-default-ssp --enable-host-pie --enable-languages=c,c++" ..
+        (stage == 1 and " --disable-bootstrap" or ""))
     os.execute("make all-target-libgcc" .. system.get_make_jobs())
     os.execute('make install-target-libgcc DESTDIR="' .. install_dir .. '"')
 
