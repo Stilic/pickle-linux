@@ -3,7 +3,7 @@ local system = require "system"
 local tools = require "tools"
 local config = require "neld.config"
 
-version = "14.3.0"
+version = "13.1.0"
 dependencies = { pkg "mpc", pkg "mpfr", pkg "gmp" }
 sources = {
     { "source", config.gnu_site .. "/gcc/gcc-" .. version .. "/gcc-" .. version .. ".tar.xz" }
@@ -23,14 +23,10 @@ function build()
     os.execute(tools.get_flags() .. " ../libstdc++-v3/configure" .. flags)
 
     os.execute("CPATH=/include/c++:/include make" .. system.get_make_jobs())
-    os.execute('make install DESTDIR="' .. install_dir .. '"')
 
     os.execute(tools.get_flags() ..
         " ../configure --enable-default-pie --enable-default-ssp --enable-host-pie --enable-languages=c,c++" ..
         (stage == 2 and " --disable-bootstrap" or "") .. flags)
-
-    os.execute("CPATH=/include/c++:/include make all-target-libgcc" .. system.get_make_jobs())
-    os.execute('make install-target-libgcc DESTDIR="' .. install_dir .. '"')
 
     os.execute("CPATH=/include/c++:/include make all-gcc " .. system.get_make_jobs())
     os.execute('make install-gcc DESTDIR="' .. install_dir .. '"')
