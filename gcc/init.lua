@@ -17,7 +17,7 @@ function build()
     lfs.mkdir("build")
     lfs.chdir("build")
 
-    local flags = " --prefix=/usr --disable-multilib --disable-nls --host=" ..
+    local flags = " --prefix=/usr --libdir=/lib --disable-multilib --disable-nls --host=" ..
         system.target .. " --build=" .. system.target .. (stage == 1 and " --disable-bootstrap" or "")
 
     os.execute(tools.get_flags() .. " ../libstdc++-v3/configure" .. flags)
