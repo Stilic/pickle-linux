@@ -27,7 +27,7 @@ function build()
 
     os.execute(tools.get_flags() ..
         " ../configure --enable-default-pie --enable-default-ssp --enable-host-pie --enable-languages=c,c++" ..
-        (stage == 1 and " --disable-bootstrap" or "") .. flags)
+        (stage == 2 and " --disable-bootstrap" or "") .. flags)
 
     os.execute("CPATH=/include/c++:/include make all-target-libgcc" .. system.get_make_jobs())
     os.execute('make install-target-libgcc DESTDIR="' .. install_dir .. '"')

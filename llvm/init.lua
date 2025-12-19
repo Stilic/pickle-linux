@@ -59,7 +59,7 @@ local function gen_build(part, projects, runtimes, targets)
     return function()
         local build_dir, cc, cxx = lfs.currentdir()
 
-        if stage ~= 0 and part ~= "llvm" then
+        if stage ~= 1 and part ~= "llvm" then
             os.execute("rm -rf source/build-" .. part)
 
             local bin_dir = build_dir .. "/filesystem"
@@ -74,7 +74,7 @@ local function gen_build(part, projects, runtimes, targets)
         local compiler_flags = "-I" .. build_dir .. "/filesystem-unwind/include"
         tools.build_cmake(
             options ..
-            (stage == 0 and ("-DLLVM_TARGETS_TO_BUILD=" .. arch .. " ") or "") ..
+            (stage == 1 and ("-DLLVM_TARGETS_TO_BUILD=" .. arch .. " ") or "") ..
             "-DLLVM_TARGET_ARCH=" .. arch ..
             " -DLLVM_HOST_TRIPLE=" .. system.target ..
             " -DLLVM_DEFAULT_TARGET_TRIPLE=" .. system.target ..
@@ -83,7 +83,7 @@ local function gen_build(part, projects, runtimes, targets)
     end
 end
 
-if stage ~= 0 then
+if stage ~= 1 then
     variants = {
         unwind = {
             build = gen_build("runtimes", nil, { "libunwind" }),
@@ -101,7 +101,7 @@ build = gen_build("llvm", { "clang", "lld" })
 function pack()
     tools.pack_default()()
 
-    if stage == 0 then
+    if stage == 1 then
         lfs.link("clang", "filesystem/bin/cc", true)
         lfs.link("clang++", "filesystem/bin/c++", true)
     end
