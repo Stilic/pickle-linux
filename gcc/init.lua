@@ -3,7 +3,7 @@ local system = require "system"
 local tools = require "tools"
 local config = require "neld.config"
 
-version = "13.1.0"
+version = "14.3.0"
 dependencies = { pkg "mpc", pkg "mpfr", pkg "gmp" }
 sources = {
     { "source", config.gnu_site .. "/gcc/gcc-" .. version .. "/gcc-" .. version .. ".tar.xz" }
@@ -17,12 +17,23 @@ function build()
     lfs.mkdir("build")
     lfs.chdir("build")
 
-    os.execute(tools.get_flags() ..
-        " ../configure --prefix=/usr --libdir=/lib --with-system-zlib --disable-multilib --disable-nls --enable-default-pie --enable-default-ssp --enable-host-pie --enable-languages=c,c++ --host=" ..
-        system.target .. " --build=" .. system.target .. (stage == 1 and " --disable-bootstrap" or ""))
-    os.execute("make" .. system.get_make_jobs())
+    local flags = " --prefix=/usr --libdir=/lib --disable-multilib --disable-nls --host=" ..
+        system.target .. " --build=" .. system.target
 
-    os.execute('make install-strip DESTDIR="' .. install_dir .. '"')
+    os.execute(tools.get_flags() .. " ../libstdc++-v3/configure" .. flags)
+
+    os.execute("CPATH=/include/c++:/include make" .. system.get_make_jobs())
+    os.execute('make install DESTDIR="' .. install_dir .. '"')
+
+    os.execute(tools.get_flags() ..
+        " ../configure --enable-default-pie --enable-default-ssp --enable-host-pie --enable-languages=c,c++" ..
+        (stage == 1 and " --disable-bootstrap" or "") .. flags)
+
+    os.execute("CPATH=/include/c++:/include make all-target-libgcc" .. system.get_make_jobs())
+    os.execute('make install-target-libgcc DESTDIR="' .. install_dir .. '"')
+
+    os.execute("CPATH=/include/c++:/include make all-gcc " .. system.get_make_jobs())
+    os.execute('make install-gcc DESTDIR="' .. install_dir .. '"')
 end
 
 function pack()
