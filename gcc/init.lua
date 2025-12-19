@@ -18,7 +18,7 @@ function build()
     lfs.chdir("build")
 
     os.execute(tools.get_flags() ..
-        " ../libstdc++-v3/configure --prefix= --disable-multilib --disable-nls --enable-host-pie")
+        " ../libstdc++-v3/configure --prefix= --disable-multilib --disable-nls")
 
     os.execute("make" .. system.get_make_jobs())
     os.execute('make install DESTDIR="' .. install_dir .. '"')
