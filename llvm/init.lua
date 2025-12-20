@@ -83,24 +83,22 @@ local function gen_build(part, projects, runtimes, targets)
     end
 end
 
-if stage ~= 1 then
-    variants = {
-        unwind = {
-            build = gen_build("runtimes", nil, { "libunwind" }),
-            pack = tools.pack_default(nil, "unwind")
-        },
-        libs = {
-            build = gen_build("compiler-rt", nil, { "compiler-rt", "libcxx", "libcxxabi" }),
-            pack = tools.pack_default(nil, "libs")
-        }
-    }
-end
+-- variants = {
+--     unwind = {
+--         build = gen_build("runtimes", nil, { "libunwind" }),
+--         pack = tools.pack_default(nil, "unwind")
+--     },
+--     libs = {
+--         build = gen_build("compiler-rt", nil, { "compiler-rt", "libcxx", "libcxxabi" }),
+--         pack = tools.pack_default(nil, "libs")
+--     }
+-- }
 
 build = gen_build("llvm", { "clang", "lld" })
 
 function pack()
     tools.pack_default()()
 
-    -- lfs.link("clang", "filesystem/bin/cc", true)
-    -- lfs.link("clang++", "filesystem/bin/c++", true)
+    lfs.link("clang", "filesystem/bin/cc", true)
+    lfs.link("clang++", "filesystem/bin/c++", true)
 end
