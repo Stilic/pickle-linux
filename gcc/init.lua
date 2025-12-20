@@ -21,12 +21,17 @@ function build()
         system.target .. " --build=" .. system.target
 
     os.execute(tools.get_flags() .. " ../libstdc++-v3/configure" .. flags)
+
     os.execute("make" .. system.get_make_jobs())
     os.execute('make install DESTDIR="' .. install_dir .. '"')
 
     os.execute(tools.get_flags() ..
         " ../configure --enable-default-pie --enable-default-ssp --enable-host-pie --enable-languages=c,c++" ..
         flags .. (stage == 1 and " --disable-bootstrap" or ""))
+
+    os.execute("make all-target-libgcc" .. system.get_make_jobs())
+    os.execute('make install-target-libgcc DESTDIR="' .. install_dir .. '"')
+
     os.execute("make all-gcc " .. system.get_make_jobs())
     os.execute('make install-gcc DESTDIR="' .. install_dir .. '"')
 end
