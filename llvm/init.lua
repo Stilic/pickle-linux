@@ -97,8 +97,4 @@ function pack()
 
     lfs.link("clang", "filesystem/bin/cc", true)
     lfs.link("clang++", "filesystem/bin/c++", true)
-
-    -- TODO: maybe remove this once linux is setup to build with clang?
-    lfs.link("clang", "filesystem/bin/gcc", true)
-    lfs.link("clang++", "filesystem/bin/g++", true)
 end

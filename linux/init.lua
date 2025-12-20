@@ -11,7 +11,7 @@ sources = {
 }
 
 -- TODO: add config for other architectures than x86_64
-build = tools.build_kconfig()
+build = tools.build_kconfig(stage == 1 and nil or "LLVM=1")
 
 function pack()
     lfs.chdir("source")
