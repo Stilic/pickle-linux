@@ -4,7 +4,7 @@ local tools = require "tools"
 local config = require "neld.config"
 
 version = "13.1.0"
-dependencies = { pkg "binutils", pkg "isl", pkg "mpc", pkg "mpfr", pkg "gmp" }
+dependencies = { pkg "binutils", pkg "mpc", pkg "mpfr", pkg "gmp" }
 sources = {
     { "source", config.gnu_site .. "/gcc/gcc-" .. version .. "/gcc-" .. version .. ".tar.xz" }
 }
@@ -17,20 +17,27 @@ function build()
     lfs.mkdir("build")
     lfs.chdir("build")
 
-    local flags = " --prefix=/usr --libdir=/lib --disable-multilib --disable-nls --host=" ..
-        system.target .. " --build=" .. system.target
+    local flags = " --prefix= --disable-multilib --disable-nls --host=" .. system.target .. " --build=" .. system.target
 
-    os.execute(tools.get_flags() .. " ../libstdc++-v3/configure" .. flags)
+    if stage == 1 then
+        os.execute(tools.get_flags() .. " ../libstdc++-v3/configure" .. flags)
 
-    os.execute("make" .. system.get_make_jobs())
-    os.execute('make install DESTDIR="' .. install_dir .. '"')
+        os.execute("make" .. system.get_make_jobs())
+        os.execute('make install DESTDIR="' .. install_dir .. '"')
+    end
 
     os.execute(tools.get_flags() ..
-        " ../configure --enable-default-pie --enable-default-ssp --enable-host-pie --enable-languages=c,c++" ..
-        flags .. (stage == 1 and " --disable-bootstrap" or ""))
+        " ../configure --disable-bootstrap --enable-default-pie --enable-default-ssp --enable-host-pie --enable-languages=c,c++" ..
+        flags)
 
     os.execute("make all-target-libgcc" .. system.get_make_jobs())
+    if stage ~= 1 then
+        os.execute("make all-target-libstdc++-v3" .. system.get_make_jobs())
+    end
     os.execute('make install-target-libgcc DESTDIR="' .. install_dir .. '"')
+    if stage ~= 1 then
+        os.execute('make install-target-libstdc++-v3 DESTDIR="' .. install_dir .. '"')
+    end
 end
 
 function pack()
