@@ -4,7 +4,10 @@ local lfs = require "lfs"
 
 version = "21.1.6"
 dependencies = { pkg "zstd" }
-dev_dependencies = { pkg "cmake", pkg "python" }
+dev_dependencies = { pkg "python" }
+if stage ~= 2 then
+    table.insert(dev_dependencies, pkg "cmake")
+end
 sources = {
     { "source", "https://github.com/llvm/llvm-project/releases/download/llvmorg-" .. version .. "/llvm-project-" .. version .. ".src.tar.xz" }
 }
