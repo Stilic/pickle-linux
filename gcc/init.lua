@@ -17,7 +17,8 @@ function build()
     lfs.mkdir("build")
     lfs.chdir("build")
 
-    local flags = " --prefix= --with-gxx-include-dir=/include/c++ --disable-multilib --disable-nls --host=" ..
+    local flags =
+        " --prefix=/usr --libdir=/lib --with-gxx-include-dir=/include/c++ --disable-multilib --disable-nls --host=" ..
         system.target .. " --build=" .. system.target
 
     if stage == 1 then
@@ -36,26 +37,36 @@ function build()
     if stage ~= 1 then
         os.execute("make all-target-libstdc++-v3" .. system.get_make_jobs())
     end
+    if stage > 2 then
+        os.execute("make all-gcc" .. system.get_make_jobs())
+    end
+
     os.execute('make install-target-libgcc DESTDIR="' .. install_dir .. '"')
     os.execute('make install-target-libatomic DESTDIR="' .. install_dir .. '"')
     if stage ~= 1 then
         os.execute('make install-target-libstdc++-v3 DESTDIR="' .. install_dir .. '"')
     end
-end
-
-function pack()
-    tools.pack_default()()
-
-    os.execute("mv filesystem/lib64/* filesystem/lib")
-    os.execute("rm -r filesystem/lib64")
-
-    if stage ~= 1 then
-        os.execute("mv filesystem/lib/gcc/*/*/include/* filesystem/include")
-        os.execute("mv filesystem/lib/gcc/*/*/* filesystem/lib")
-        os.execute("rm -r filesystem/lib/gcc")
+    os.execute('make install-target-libatomic DESTDIR="' .. install_dir .. '"')
+    if stage > 2 then
+        os.execute('make install-gcc DESTDIR="' .. install_dir .. '"')
     end
-
-    os.execute("rm -r filesystem/share")
-
-    os.execute("find filesystem -type f -exec sed -i 's/#include_next/#include/g' {} +")
 end
+
+pack = tools.pack_default("source/_install/usr")
+
+variants = {
+    libs = {
+        pack = function()
+            os.execute("cp -ra source/_install/lib source/_install/include filesystem-libs")
+            os.execute("cp -ra source/_install/lib64/* filesystem-libs/lib")
+
+            if stage ~= 1 then
+                os.execute("mv filesystem-libs/lib/gcc/*/*/include/* filesystem-libs/include")
+                os.execute("mv filesystem-libs/lib/gcc/*/*/* filesystem-libs/lib")
+                os.execute("rm -r filesystem-libs/lib/gcc")
+            end
+
+            os.execute("find filesystem-libs -type f -exec sed -i 's/#include_next/#include/g' {} +")
+        end
+    }
+}

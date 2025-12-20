@@ -4,6 +4,9 @@ local tools = require "tools"
 
 version = "6.14.2"
 dev_dependencies = { pkg "flex", pkg "bison", pkg "elfutils", pkg "dosfstools", pkg "libidn2" }
+if stage ~= 1 then
+    table.insert(dev_dependencies, pkg "gcc")
+end
 sources = {
     { "source", "https://cdn.kernel.org/pub/linux/kernel/v"
     .. version:sub(1, version:find(".", 1, true) - 1)
@@ -11,7 +14,7 @@ sources = {
 }
 
 -- TODO: add config for other architectures than x86_64
-build = tools.build_kconfig(stage == 1 and nil or "LLVM=1")
+build = tools.build_kconfig()
 
 function pack()
     lfs.chdir("source")
