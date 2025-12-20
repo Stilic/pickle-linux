@@ -39,7 +39,7 @@ end
 function pack()
     tools.pack_default("source/_install/usr")()
 
-    os.execute("rm -r filesystem/include")
+    os.execute("find filesystem/include -type f -exec sed -i 's/#include_next/#include/g' {} +")
 
     lfs.link("gcc", "filesystem/bin/cc", true)
     lfs.link("g++", "filesystem/bin/c++", true)
@@ -48,7 +48,7 @@ end
 variants = {
     libs = {
         pack = function()
-            os.execute("cp -ra source/_install/lib source/_install/usr/include filesystem-libs")
+            os.execute("cp -ra source/_install/lib filesystem-libs")
             os.execute("cp -ra source/_install/lib64/* filesystem-libs/lib")
 
             os.execute("find filesystem-libs -type f -exec sed -i 's/#include_next/#include/g' {} +")
