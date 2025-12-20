@@ -69,9 +69,6 @@ local function gen_build(part, projects, runtimes)
             "-DLLVM_TARGET_ARCH=" .. arch ..
             " -DLLVM_HOST_TRIPLE=" .. system.target ..
             " -DLLVM_DEFAULT_TARGET_TRIPLE=" .. system.target ..
-            " -DCMAKE_ASM_COMPILER_TARGET=" .. system.target ..
-            " -DCMAKE_C_COMPILER_TARGET=" .. system.target ..
-            " -DCMAKE_CXX_COMPILER_TARGET=" .. system.target ..
             " -DLLVM_ENABLE_ZSTD=OFF -DLLVM_ENABLE_LIBXML2=OFF -DENABLE_LINKER_BUILD_ID=ON -DLLVM_INSTALL_BINUTILS_SYMLINKS=ON -DLLVM_INSTALL_UTILS=ON -DLLVM_INCLUDE_TESTS=OFF -DCOMPILER_RT_INCLUDE_TESTS=OFF -DLIBUNWIND_ENABLE_ASSERTIONS=OFF"
             .. options
             ,
