@@ -4,7 +4,7 @@ local tools = require "tools"
 local config = require "neld.config"
 
 version = "13.1.0"
-dependencies = { pkg "binutils", pkg "mpc", pkg "mpfr", pkg "gmp" }
+dependencies = { pkg "binutils", pkg "isl", pkg "mpc", pkg "mpfr", pkg "gmp" }
 sources = {
     { "source", config.gnu_site .. "/gcc/gcc-" .. version .. "/gcc-" .. version .. ".tar.xz" }
 }
