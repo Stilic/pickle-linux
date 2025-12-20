@@ -31,27 +31,13 @@ function build()
 
     os.execute("make all-target-libgcc" .. system.get_make_jobs())
     os.execute('make install-target-libgcc DESTDIR="' .. install_dir .. '"')
-
-    os.execute("make all-gcc " .. system.get_make_jobs())
-    os.execute('make install-gcc DESTDIR="' .. install_dir .. '"')
 end
 
 function pack()
-    tools.pack_default("source/_install/usr")()
+    tools.pack_default()()
 
-    os.execute("find filesystem/include -type f -exec sed -i 's/#include_next/#include/g' {} +")
+    os.execute("mv filesystem/lib64/* filesystem/lib")
+    os.execute("rm -r filesystem/lib64")
 
-    lfs.link("gcc", "filesystem/bin/cc", true)
-    lfs.link("g++", "filesystem/bin/c++", true)
+    os.execute("find filesystem -type f -exec sed -i 's/#include_next/#include/g' {} +")
 end
-
-variants = {
-    libs = {
-        pack = function()
-            os.execute("cp -ra source/_install/lib filesystem-libs")
-            os.execute("cp -ra source/_install/lib64/* filesystem-libs/lib")
-
-            os.execute("find filesystem-libs -type f -exec sed -i 's/#include_next/#include/g' {} +")
-        end
-    }
-}

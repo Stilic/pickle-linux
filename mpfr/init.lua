@@ -2,6 +2,7 @@ local tools = require "tools"
 local config = require "neld.config"
 
 version = "4.2.2"
+dependencies = { pkg "gmp" }
 sources = {
     { "source", config.gnu_site .. "/mpfr/mpfr-" .. version .. ".tar.xz" }
 }

@@ -3,11 +3,8 @@ local tools = require "tools"
 local lfs = require "lfs"
 
 version = "21.1.6"
-dependencies = { pkg "zstd" }
+dependencies = { pkg "binutils" }
 dev_dependencies = { pkg "cmake", pkg "python" }
-if stage < 3 then
-    table.insert(dependencies, pkg "binutils")
-end
 sources = {
     { "source", "https://github.com/llvm/llvm-project/releases/download/llvmorg-" .. version .. "/llvm-project-" .. version .. ".src.tar.xz" }
 }
@@ -28,11 +25,11 @@ if buildmode then
         arch = "LoongArch"
     end
 end
-local function gen_build(part, projects, runtimes, targets)
+local function gen_build(part, projects, runtimes)
     local options = ""
 
     if projects then
-        options = "-DLLVM_ENABLE_PROJECTS="
+        options = " -DLLVM_ENABLE_PROJECTS="
 
         local l = #projects
         for i, project in ipairs(projects) do
@@ -41,12 +38,10 @@ local function gen_build(part, projects, runtimes, targets)
                 options = options .. ";"
             end
         end
-
-        options = options .. " "
     end
 
     if runtimes then
-        options = options .. "-DLLVM_ENABLE_RUNTIMES="
+        options = options .. " -DLLVM_ENABLE_RUNTIMES="
 
         local l = #runtimes
         for i, runtime in ipairs(runtimes) do
@@ -55,51 +50,50 @@ local function gen_build(part, projects, runtimes, targets)
                 options = options .. ";"
             end
         end
-
-        options = options .. " "
     end
 
     return function()
-        local build_dir, cc, cxx = lfs.currentdir()
+        local build_dir = lfs.currentdir()
 
         if stage ~= 1 and part ~= "llvm" then
             os.execute("rm -rf source/build-" .. part)
 
             local bin_dir = build_dir .. "/filesystem"
-            options = options .. "-DLLVM_EXTERNAL_LIT=" ..
-                build_dir .. "/source/build-llvm/utils/lit -DLLVM_ROOT=" .. bin_dir .. " "
-
-            bin_dir = bin_dir .. "/bin/"
-            cc = bin_dir .. "clang"
-            cxx = bin_dir .. "clang++"
+            options = options .. " -DLLVM_EXTERNAL_LIT=" ..
+                build_dir .. "/source/build-llvm/utils/lit -DLLVM_ROOT=" .. bin_dir
         end
 
         local compiler_flags = "-I" .. build_dir .. "/filesystem-unwind/include"
         tools.build_cmake(
-            options ..
             (stage == 1 and ("-DLLVM_TARGETS_TO_BUILD=" .. arch .. " ") or "") ..
             "-DLLVM_TARGET_ARCH=" .. arch ..
             " -DLLVM_HOST_TRIPLE=" .. system.target ..
             " -DLLVM_DEFAULT_TARGET_TRIPLE=" .. system.target ..
-            " -DENABLE_LINKER_BUILD_ID=ON -DLLVM_INSTALL_BINUTILS_SYMLINKS=ON -DLLVM_INSTALL_UTILS=ON -DLLVM_BUILD_LLVM_DYLIB=ON -DLLVM_LINK_LLVM_DYLIB=ON -DLLVM_ENABLE_RTTI=ON -DCOMPILER_RT_BUILD_GWP_ASAN=OFF -DLIBCXX_CXX_ABI=libcxxabi -DLIBCXX_HAS_MUSL_LIBC=ON -DLIBCXX_HARDENING_MODE=fast -DLIBUNWIND_ENABLE_ASSERTIONS=OFF -DCLANG_DEFAULT_RTLIB=compiler-rt -DCLANG_DEFAULT_CXX_STDLIB=libc++ -DLLVM_ENABLE_LIBCXX=ON -DLIBCXX_USE_COMPILER_RT=ON -DLIBCXXABI_USE_COMPILER_RT=ON -DLLVM_INCLUDE_TESTS=OFF",
-            nil, part, targets, compiler_flags, compiler_flags, "-L" .. build_dir .. "/filesystem-unwind/lib", cc, cxx)()
+            " -DCMAKE_ASM_COMPILER_TARGET=" .. system.target ..
+            " -DCMAKE_C_COMPILER_TARGET=" .. system.target ..
+            " -DCMAKE_CXX_COMPILER_TARGET=" .. system.target ..
+            " -DLLVM_ENABLE_ZSTD=OFF -DLLVM_ENABLE_LIBXML2=OFF -DENABLE_LINKER_BUILD_ID=ON -DLLVM_INSTALL_BINUTILS_SYMLINKS=ON -DLLVM_INSTALL_UTILS=ON -DLLVM_INCLUDE_TESTS=OFF -DCOMPILER_RT_INCLUDE_TESTS=OFF -DLIBUNWIND_ENABLE_ASSERTIONS=OFF"
+            .. options
+            ,
+            nil, part, compiler_flags, compiler_flags, "-L" .. build_dir .. "/filesystem-unwind/lib")()
     end
 end
 
-if stage ~= 1 then
-    variants = {
-        unwind = {
-            build = gen_build("runtimes", nil, { "libunwind" }),
-            pack = tools.pack_default(nil, "unwind")
-        },
-        libs = {
-            build = gen_build("compiler-rt", nil, { "compiler-rt", "libcxx", "libcxxabi" }),
-            pack = tools.pack_default(nil, "libs")
-        }
-    }
-end
+-- if stage ~= 1 then
+--     variants = {
+--         unwind = {
+--             build = gen_build("runtimes", nil, { "libunwind" }),
+--             pack = tools.pack_default(nil, "unwind")
+--         },
+--         libs = {
+--             build = gen_build("runtimes", nil,
+--                 { "compiler-rt", "libcxx", "libcxxabi", "libunwind" }),
+--             pack = tools.pack_default(nil, "libs")
+--         }
+--     }
+-- end
 
-build = gen_build("llvm", { "clang", "lld" })
+build = gen_build("llvm", { "clang" })
 
 function pack()
     tools.pack_default()()
