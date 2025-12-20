@@ -14,7 +14,7 @@ sources = {
 }
 
 -- TODO: add config for other architectures than x86_64
-build = tools.build_kconfig()
+build = tools.build_kconfig(nil, nil, "-Wno-error", "-Wno-error")
 
 function pack()
     lfs.chdir("source")

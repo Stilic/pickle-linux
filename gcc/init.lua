@@ -36,8 +36,6 @@ function build()
     os.execute("make all-target-libatomic" .. system.get_make_jobs())
     if stage ~= 1 then
         os.execute("make all-target-libstdc++-v3" .. system.get_make_jobs())
-    end
-    if stage > 2 then
         os.execute("make all-gcc" .. system.get_make_jobs())
     end
 
@@ -45,9 +43,6 @@ function build()
     os.execute('make install-target-libatomic DESTDIR="' .. install_dir .. '"')
     if stage ~= 1 then
         os.execute('make install-target-libstdc++-v3 DESTDIR="' .. install_dir .. '"')
-    end
-    os.execute('make install-target-libatomic DESTDIR="' .. install_dir .. '"')
-    if stage > 2 then
         os.execute('make install-gcc DESTDIR="' .. install_dir .. '"')
     end
 end
