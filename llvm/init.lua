@@ -4,9 +4,9 @@ local lfs = require "lfs"
 
 version = "21.1.6"
 dependencies = { pkg "zstd" }
-dev_dependencies = { pkg "python" }
-if stage ~= 2 then
-    table.insert(dev_dependencies, pkg "cmake")
+dev_dependencies = { pkg "cmake", pkg "python" }
+if stage < 3 then
+    table.insert(dependencies, pkg "binutils")
 end
 sources = {
     { "source", "https://github.com/llvm/llvm-project/releases/download/llvmorg-" .. version .. "/llvm-project-" .. version .. ".src.tar.xz" }
@@ -86,16 +86,18 @@ local function gen_build(part, projects, runtimes, targets)
     end
 end
 
--- variants = {
---     unwind = {
---         build = gen_build("runtimes", nil, { "libunwind" }),
---         pack = tools.pack_default(nil, "unwind")
---     },
---     libs = {
---         build = gen_build("compiler-rt", nil, { "compiler-rt", "libcxx", "libcxxabi" }),
---         pack = tools.pack_default(nil, "libs")
---     }
--- }
+if stage ~= 1 then
+    variants = {
+        unwind = {
+            build = gen_build("runtimes", nil, { "libunwind" }),
+            pack = tools.pack_default(nil, "unwind")
+        },
+        libs = {
+            build = gen_build("compiler-rt", nil, { "compiler-rt", "libcxx", "libcxxabi" }),
+            pack = tools.pack_default(nil, "libs")
+        }
+    }
+end
 
 build = gen_build("llvm", { "clang", "lld" })
 
