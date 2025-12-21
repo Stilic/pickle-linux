@@ -24,16 +24,6 @@ function build()
         " ../configure --prefix=/usr --libdir=/lib --disable-multilib --disable-werror --disable-nls --enable-default-pie --enable-default-ssp --enable-host-pie --enable-languages=c,c++" ..
         " --host=" .. system.target .. " --build=" .. system.target .. (stage == 2 and " --disable-libsanitizer" or ""))
 
-    -- os.execute("make all-target-libgcc" .. system.get_make_jobs())
-    -- os.execute("make all-target-libatomic" .. system.get_make_jobs())
-    -- os.execute("make all-target-libstdc++-v3" .. system.get_make_jobs())
-    -- os.execute("make all-gcc" .. system.get_make_jobs())
-
-    -- os.execute('make install-target-libgcc DESTDIR="' .. install_dir .. '"')
-    -- os.execute('make install-target-libatomic DESTDIR="' .. install_dir .. '"')
-    -- os.execute('make install-target-libstdc++-v3 DESTDIR="' .. install_dir .. '"')
-    -- os.execute('make install-gcc DESTDIR="' .. install_dir .. '"')
-
     os.execute("make" .. system.get_make_jobs())
     os.execute('make install DESTDIR="' .. install_dir .. '"')
 end
@@ -54,6 +44,10 @@ variants = {
         pack = function()
             os.execute("cp -ra source/_install/lib filesystem-libs")
             os.execute("cp -ra source/_install/lib64/* filesystem-libs/lib")
+
+            if stage == 2 then
+                os.execute([[find filesystem-libs/lib/gcc/*/* -maxdepth 1 -type f -exec mv {} filesystem-libs/lib \;]])
+            end
 
             os.execute("find filesystem-libs -type f -exec sed -i 's/#include_next/#include/g' {} +")
         end
