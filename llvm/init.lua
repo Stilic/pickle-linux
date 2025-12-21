@@ -65,7 +65,7 @@ local function gen_build(part, projects, runtimes)
 
         local compiler_flags = "-I" .. build_dir .. "/filesystem-unwind/include"
         tools.build_cmake(
-            (stage < 3 and ("-DLLVM_TARGETS_TO_BUILD=" .. arch .. " ") or "") ..
+            (stage == 1 and ("-DLLVM_TARGETS_TO_BUILD=" .. arch .. " ") or "") ..
             "-DLLVM_TARGET_ARCH=" .. arch ..
             " -DLLVM_HOST_TRIPLE=" .. system.target ..
             " -DLLVM_DEFAULT_TARGET_TRIPLE=" .. system.target ..
