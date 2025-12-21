@@ -12,7 +12,7 @@ sources = {
 
 -- TODO: add config for other architectures than x86_64
 if stage > 2 then
-    build = tools.build_kconfig(nil, nil, "-Wno-error", "-Wno-error")
+    build = tools.build_kconfig()
 end
 
 function pack()
