@@ -3,8 +3,11 @@ local system = require "system"
 local tools = require "tools"
 local config = require "neld.config"
 
-version = "13.1.0"
+version = "14.3.0"
 dependencies = { pkg "binutils", pkg "mpc", pkg "mpfr", pkg "gmp" }
+if stage > 2 then
+    table.insert(dependencies, pkg "isl")
+end
 sources = {
     { "source", config.gnu_site .. "/gcc/gcc-" .. version .. "/gcc-" .. version .. ".tar.xz" }
 }
