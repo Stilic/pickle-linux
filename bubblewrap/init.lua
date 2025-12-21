@@ -1,6 +1,7 @@
 local tools = require "tools"
 
 version = "0.11.0"
+dependencies = { pkg "libcap" }
 dev_dependencies = { pkg "meson" }
 sources = {
     { "source", "https://github.com/containers/bubblewrap/releases/download/v" .. version .. "/bubblewrap-" .. version .. ".tar.xz" }

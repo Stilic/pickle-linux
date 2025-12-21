@@ -18,7 +18,7 @@ function build()
     lfs.chdir("build")
 
     local flags =
-        " --prefix=/usr --libdir=/lib --with-gxx-include-dir=/include/c++ --disable-multilib --disable-nls --host=" ..
+        " --prefix=/usr --libdir=/lib --disable-multilib --disable-nls --host=" ..
         system.target .. " --build=" .. system.target
 
     if stage == 1 then
@@ -47,19 +47,22 @@ function build()
     end
 end
 
-pack = tools.pack_default("source/_install/usr")
+function pack()
+    tools.pack_default("source/_install/usr")()
+
+    os.execute("find filesystem/include -type f -exec sed -i 's/#include_next/#include/g' {} +")
+
+    if stage ~= 1 then
+        lfs.link("gcc", "filesystem/bin/cc", true)
+        lfs.link("g++", "filesystem/bin/c++", true)
+    end
+end
 
 variants = {
     libs = {
         pack = function()
-            os.execute("cp -ra source/_install/lib source/_install/include filesystem-libs")
+            os.execute("cp -ra source/_install/lib filesystem-libs")
             os.execute("cp -ra source/_install/lib64/* filesystem-libs/lib")
-
-            if stage ~= 1 then
-                os.execute("mv filesystem-libs/lib/gcc/*/*/include/* filesystem-libs/include")
-                os.execute("mv filesystem-libs/lib/gcc/*/*/* filesystem-libs/lib")
-                os.execute("rm -r filesystem-libs/lib/gcc")
-            end
 
             os.execute("find filesystem-libs -type f -exec sed -i 's/#include_next/#include/g' {} +")
         end
