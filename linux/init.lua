@@ -11,7 +11,7 @@ sources = {
 }
 
 -- TODO: add config for other architectures than x86_64
-if stage > 2 then
+if stage > 3 then
     build = tools.build_kconfig()
 end
 
