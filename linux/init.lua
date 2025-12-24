@@ -2,7 +2,7 @@ local lfs = require "lfs"
 local system = require "system"
 local tools = require "tools"
 
-version = "6.14.2"
+version = "6.12.63"
 dev_dependencies = { pkg "flex", pkg "bison", pkg "elfutils", pkg "dosfstools", pkg "libidn2" }
 sources = {
     { "source", "https://cdn.kernel.org/pub/linux/kernel/v"
