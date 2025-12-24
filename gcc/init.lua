@@ -25,7 +25,7 @@ function build()
         " --host=" .. system.target .. " --build=" .. system.target .. (stage == 2 and " --disable-libsanitizer" or ""))
 
     os.execute("make" .. system.get_make_jobs())
-    os.execute('make install DESTDIR="' .. install_dir .. '"')
+    os.execute('make install-strip DESTDIR="' .. install_dir .. '"')
 end
 
 function pack()
