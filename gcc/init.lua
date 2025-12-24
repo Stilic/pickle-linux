@@ -21,9 +21,9 @@ function build()
     lfs.chdir("build")
 
     os.execute(tools.get_flags() ..
-        " ../configure --prefix=/usr --libdir=/lib --with-gxx-include-dir=/include/c++ --disable-multilib --disable-werror --disable-nls --enable-default-pie --enable-default-ssp --enable-host-pie --enable-languages=c,c++" ..
+        " ../configure --prefix=/usr --libdir=/lib --with-gxx-include-dir=/include/c++ --disable-multilib --disable-libsanitizer --disable-nls --enable-default-pie --enable-default-ssp --enable-host-pie --enable-languages=c,c++" ..
         " --host=" .. system.target ..
-        " --build=" .. system.target .. (stage == 2 and " --disable-bootstrap --disable-libsanitizer" or ""))
+        " --build=" .. system.target .. (stage == 2 and " --disable-bootstrap" or ""))
 
     os.execute("make" .. system.get_make_jobs())
     os.execute('make install-strip DESTDIR="' .. install_dir .. '"')

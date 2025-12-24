@@ -1,8 +1,8 @@
 local lfs = require "lfs"
 local tools = require "tools"
 
-version = "259"
-dev_dependencies = { pkg "bash", pkg "meson", pkg "perl", pkg "python-Jinja" }
+version = "256.17"
+dev_dependencies = { pkg "libcap", pkg "bash", pkg "meson", pkg "perl", pkg "python-Jinja" }
 sources = {
     { "source", "https://github.com/systemd/systemd/archive/refs/tags/v" .. version .. ".tar.gz" }
 }
