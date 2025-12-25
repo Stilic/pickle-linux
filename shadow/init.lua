@@ -1,6 +1,7 @@
 local tools = require "tools"
 
 version = "4.18.0"
+dependencies = { pkg "openpam", pkg "attr", pkg "acl" }
 sources = {
     { "source", "https://github.com/shadow-maint/shadow/releases/download/" .. version .. "/shadow-" .. version .. ".tar.xz" }
 }

@@ -1,8 +1,7 @@
 local tools = require "tools"
 
 version = "0.6.1"
--- TODO: install lzo/attr as a dep
-dependencies = { pkg "libfuse" }
+dependencies = { pkg "libfuse", pkg "lzo", pkg "attr" }
 sources = {
     { "source", "https://github.com/vasi/squashfuse/releases/download/" .. version .. "/squashfuse-" .. version .. ".tar.gz" }
 }

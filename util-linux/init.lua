@@ -1,6 +1,7 @@
 local tools = require "tools"
 
 version = "2.41"
+dependencies = { pkg "openpam" }
 dev_dependencies = { pkg "meson", pkg "bash", pkg "bison" }
 sources = {
     { "source", "https://www.kernel.org/pub/linux/utils/util-linux/v" .. version .. "/util-linux-" .. version .. ".tar.xz" }
