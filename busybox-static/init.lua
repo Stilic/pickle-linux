@@ -1,8 +1,9 @@
 local tools = require "tools"
 
 version = "1.36.1"
+dependencies = { pkg "bzip2" }
 sources = {
-    { "source", "https://busybox.net/downloads/busybox-" .. version .. ".tar.bz2" }
+    { "source", "https://github.com/mirror/busybox/archive/refs/tags/" .. version:gsub("%.", "_") .. ".tar.gz" }
 }
 
 function build()

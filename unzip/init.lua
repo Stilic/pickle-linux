@@ -3,6 +3,7 @@ local system = require "system"
 local tools = require "tools"
 
 version = "6.0"
+dependencies = { pkg "bzip2" }
 sources = {
     { "source", "https://github.com/thejoshwolfe/info-zip-unzip/archive/refs/tags/" .. version .. ".tar.gz" }
 }
